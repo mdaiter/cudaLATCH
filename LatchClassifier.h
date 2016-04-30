@@ -9,6 +9,7 @@ class LatchClassifier {
     public:
         LatchClassifier();
         identifyFeaturePoints();
+
         ~LatchClassifier();
     private:
         // For the main portions of our class
@@ -22,8 +23,10 @@ class LatchClassifier {
         int m_targetKP;
         int m_tolerance;
 
-        // For the metrics. Currently only adding in defects
-        double defect;
+        // For the metrics.
+        bool m_shouldBeTimed;
+        clock_t m_timer;
+        double m_defects;
 };
 
 #endif
