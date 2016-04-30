@@ -1,3 +1,6 @@
+#ifndef LATCH_H
+#define LATCH_H
+
 void latch( Mat,
             unsigned char *,
             size_t,
@@ -20,3 +23,5 @@ void initImage(    unsigned char**,
 
 void initMask(      float **,
                     float *);
+
+#endif
