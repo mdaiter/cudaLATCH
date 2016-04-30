@@ -15,17 +15,17 @@ drone.mp4:
 	mv Raw\ FPV\ Training\ Session\ -\ Dirt\ Bike\ Visit\ in\ Park-wneCezU_VQ4.mp4 drone.mp4
 
 #fast.o:
-#	nvcc -c -lineinfo -O3 -o fast.o       fast.cu       -gencode arch=compute_52,code=sm_52 -I/home/chris/cub-1.5.2/
+#	nvcc -c -lineinfo -O3 -o fast.o       fast.cu       -gencode arch=compute_30,code=sm_30 -I/home/chris/cub-1.5.2/
 
 latch.o:
-	nvcc -c -lineinfo -Xptxas -v -use_fast_math -O3 -o latch.o      latch.cu      -gencode arch=compute_52,code=sm_52
+	nvcc -c -lineinfo -Xptxas -v -use_fast_math -O3 -o latch.o      latch.cu      -gencode arch=compute_30,code=sm_30
 
 min: latch.o bitMatcher.o
-	g++ `pkg-config --cflags opencv` min.cpp latch.o bitMatcher.o -I/usr/local/cuda-7.5/include/ -L/usr/local/cuda/lib64 -lcuda -lcudart -L/usr/local/lib -lopencv_stitching -lopencv_superres -lopencv_videostab -lopencv_aruco -lopencv_bgsegm -lopencv_bioinspired -lopencv_ccalib -lopencv_dnn -lopencv_dpm -lopencv_fuzzy -lopencv_line_descriptor -lopencv_optflow -lopencv_plot -lopencv_reg -lopencv_saliency -lopencv_stereo -lopencv_structured_light -lopencv_rgbd -lopencv_surface_matching -lopencv_tracking -lopencv_datasets -lopencv_text -lopencv_face -lopencv_xfeatures2d -lopencv_shape -lopencv_video -lopencv_ximgproc -lopencv_calib3d -lopencv_features2d -lopencv_flann -lopencv_xobjdetect -lopencv_objdetect -lopencv_ml -lopencv_xphoto -lopencv_highgui -lopencv_videoio -lopencv_imgcodecs -lopencv_photo -lopencv_imgproc -lopencv_core -o min
+	g++ `pkg-config --cflags opencv` -I/opt/cuda/include -L/opt/cuda/lib min.cpp latch.o bitMatcher.o -I/usr/local/cuda-7.5/include/ -L/usr/local/cuda/lib64 -lcuda -lcudart -L/usr/local/lib -lopencv_stitching -lopencv_superres -lopencv_videostab -lopencv_aruco -lopencv_bgsegm -lopencv_bioinspired -lopencv_ccalib -lopencv_dnn -lopencv_dpm -lopencv_fuzzy -lopencv_line_descriptor -lopencv_optflow -lopencv_plot -lopencv_reg -lopencv_saliency -lopencv_stereo -lopencv_structured_light -lopencv_rgbd -lopencv_surface_matching -lopencv_tracking -lopencv_datasets -lopencv_text -lopencv_face -lopencv_xfeatures2d -lopencv_shape -lopencv_video -lopencv_ximgproc -lopencv_calib3d -lopencv_features2d -lopencv_flann -lopencv_xobjdetect -lopencv_objdetect -lopencv_ml -lopencv_xphoto -lopencv_highgui -lopencv_videoio -lopencv_imgcodecs -lopencv_photo -lopencv_imgproc -lopencv_core -o min
 	./min ob/1.png ob/2.png
 
 bitMatcher.o:
-	nvcc -c -lineinfo -Xptxas -v -use_fast_math -O3 -o bitMatcher.o bitMatcher.cu -gencode arch=compute_52,code=sm_52
+	nvcc -c -lineinfo -Xptxas -v -use_fast_math -O3 -o bitMatcher.o bitMatcher.cu -gencode arch=compute_30,code=sm_30
 
 clean:
 	rm vo; rm latch.o; rm bitMatcher.o;

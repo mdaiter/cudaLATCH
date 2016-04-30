@@ -1,4 +1,4 @@
-u#include <vector>
+#include <vector>
 #include <iostream>
 #include <time.h>
 #include "cuda.h"
