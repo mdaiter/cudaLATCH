@@ -3,6 +3,8 @@
 
 #define NUM_SM 15
 
+#include <vector>
+
 #include "cuda.h"
 #include "cuda_runtime.h"
 #include "opencv2/opencv.hpp"

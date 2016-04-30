@@ -104,7 +104,7 @@ std::vector<cv::DMatch> LatchClassifier::identifyFeaturePoints(cv::Mat& img1, cv
     latch(img2g, m_dI, m_pitch, m_hK1, m_dD1, &numKP1, m_maxKP, m_dK, &keypoints1, m_dMask, latchFinished);
 
     bitMatcher(m_dD1, m_dD2, numKP0, numKP1, m_maxKP, m_dM1, m_matchThreshold, stream1, latchFinished);
-    bitMatcher(m_dD2, m_dD1, numKP1, numKP2, m_maxKP, m_dM2, m_matchThreshold, stream2, latchFinished);
+    bitMatcher(m_dD2, m_dD1, numKP1, numKP0, m_maxKP, m_dM2, m_matchThreshold, stream2, latchFinished);
 
     // Recombine to find intersecting features
     int h_M1[m_maxKP];

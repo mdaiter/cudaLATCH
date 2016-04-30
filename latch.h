@@ -1,6 +1,10 @@
 #ifndef LATCH_H
 #define LATCH_H
 
+#include <vector>
+#include "cuda.h"
+#include "cuda_runtime.h"
+
 void latch( Mat,
             unsigned char *,
             size_t,
@@ -9,7 +13,7 @@ void latch( Mat,
             int *,
             int,
             float *,
-            vector<KeyPoint>*,
+            std::vector<KeyPoint>*,
             float*,
             cudaEvent_t);
 
