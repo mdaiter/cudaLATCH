@@ -8,6 +8,9 @@
 #include <iostream>
 #include <cuda_runtime.h>
 #include "opencv2/opencv.hpp"
+#include "opencv2/cudafeatures2d.hpp"
+#include "opencv2/core/cuda.hpp"
+
 using namespace std;
 using namespace cv;
 
@@ -384,6 +387,49 @@ void latch( Mat imgMat,
         h_K[4*i+2] = 1.0f; // (*vectorKP)[i].size);
         // h_K[4*i+3] = (*vectorKP)[i].angle;
         h_K[4*i+3] = computeGradient(h_I, width, h_K[4*i  ], h_K[4*i+1]);
+    }
+    for (int i=*keypoints; i<maxKP; i++) {
+        h_K[4*i  ] = -1.0f;
+        h_K[4*i+1] = -1.0f;
+        h_K[4*i+2] = -1.0f;
+        h_K[4*i+3] = -1.0f;
+    }
+
+    size_t sizeK = *keypoints * sizeof(float) * 4;
+    cudaMemcpyAsync(d_K, h_K, sizeK, cudaMemcpyHostToDevice);
+
+    dim3 threadsPerBlock(_warpSize, warpsPerBlock);
+    dim3 blocksPerGrid(*keypoints, 1, 1);
+    latch<<<blocksPerGrid, threadsPerBlock>>>(d_K, d_D, width, height, d_mask);
+    cudaEventRecord(latchFinished);
+}
+
+void latchGPU( cuda::GpuMat imgMat,
+            size_t pitch,
+            float* h_K,
+            unsigned int* d_D,
+            int* keypoints,
+            int maxKP,
+            float* d_K,
+            vector<KeyPoint>* vectorKP,
+            float* d_mask,
+            cudaEvent_t latchFinished) {
+    const unsigned char* d_I = imgMat.data;
+    const int height = imgMat.rows;
+    const int width = imgMat.cols;
+
+    // All of these calls are non blocking but serialized.
+    // cudaMemsetAsync(d_K, -1, maxKP * sizeof(int) * 4); // Negative one is represented by all '1' bits in both int32 and uchar8.
+    // cudaMemsetAsync(d_D,  0, maxKP * (2048 / 32) * sizeof(unsigned int));
+
+    // Only prep up to maxKP for the GPU (as that is the most we have prepared the GPU to handle)
+    *keypoints = ((*vectorKP).size() < maxKP) ? (*vectorKP).size() : maxKP;
+    for (int i=0; i<*keypoints; i+=1) {
+        h_K[4*i  ] = (*vectorKP)[i].pt.x;
+        h_K[4*i+1] = (*vectorKP)[i].pt.y;
+        h_K[4*i+2] = 1.0f; // (*vectorKP)[i].size);
+        // h_K[4*i+3] = (*vectorKP)[i].angle;
+        h_K[4*i+3] = computeGradient(d_I, width, h_K[4*i  ], h_K[4*i+1]);
     }
     for (int i=*keypoints; i<maxKP; i++) {
         h_K[4*i  ] = -1.0f;

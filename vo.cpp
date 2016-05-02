@@ -53,6 +53,17 @@ double dist2(Mat a, Mat b) {
     return s;
 }
 
+std::string outputFilenameJPGString(int i, int j, int k) {
+    std::string filenameBase = "cam(";
+    filenameBase += std::to_string(i);
+    filenameBase += ",";
+    filenameBase += std::to_string(j);
+    filenameBase += ")_";
+    filenameBase += std::to_string(k);
+    filenameBase += ".jpg";
+    return filenameBase;
+}
+
 // In general a suffix of 1 means previous frame, and 2 means current frame.
 // However, we start processing the next frame while the GPU is working on current...
 // So at a certain point frame 1 shifts down to 0, 2 shifts down to 1, and the new 2 is loaded.
@@ -79,29 +90,8 @@ int main( int argc, char** argv ) {
     const bool gnuplot = true;
     double defect = 0.0;
 
-    VideoCapture cap;
-    if (argc == 1) {
-        cap = VideoCapture(0);
-        WIDTH  = cap.get(CAP_PROP_FRAME_WIDTH);
-        HEIGHT = cap.get(CAP_PROP_FRAME_HEIGHT);
-    }
-    if (argc == 2 || argc == 3) {
-        cap = VideoCapture(argv[1]);
-        WIDTH  = cap.get(CAP_PROP_FRAME_WIDTH);
-        HEIGHT = cap.get(CAP_PROP_FRAME_HEIGHT);
-        if (argc == 3) {
-            for (int i=0; i<atoi(argv[2]); i++) {
-                cap.grab();
-            }
-        }
-    }
-    if (argc == 4) {
-        cap = VideoCapture(0);
-        WIDTH  = atoi(argv[2]);
-        HEIGHT = atoi(argv[3]);
-        cap.set(CAP_PROP_FRAME_WIDTH,  WIDTH);
-        cap.set(CAP_PROP_FRAME_HEIGHT, HEIGHT);
-    }
+    WIDTH = 4000;
+    HEIGHT = 3000;
 
     double f = 0.4;
     double data[]= {f*WIDTH,  0.0,  WIDTH*0.5,  0.0, f*HEIGHT, HEIGHT*0.5, 0.0, 0.0, 1.0};
@@ -109,8 +99,9 @@ int main( int argc, char** argv ) {
     Mat F, R, T, rod, mask;
     Mat img0, img1, img2, img1g, img2g, imgMatches, E, rodOld;
 
-    cap >> img1;
-    cap >> img2;
+	img1 = imread(outputFilenameJPGString(1, 1, 0), IMREAD_COLOR);
+	img2 = imread(outputFilenameJPGString(1, 1, 1), IMREAD_COLOR);
+
     cv::cvtColor(img1, img1g, CV_BGR2GRAY);
     cv::cvtColor(img2, img2g, CV_BGR2GRAY);
     if (showMatches) {
@@ -204,7 +195,7 @@ int main( int argc, char** argv ) {
 
     img1.copyTo(img0);
     img2.copyTo(img1);
-    cap.read(img2);
+	img2 = imread(outputFilenameJPGString(1, 1, 2), IMREAD_COLOR);
     cvtColor(img2, img2g, CV_BGR2GRAY);
 
     keypoints0 = keypoints1;
@@ -219,7 +210,9 @@ int main( int argc, char** argv ) {
 
     FAST(img2g, keypoints2, threshold);
     int loopIteration = 0;
-    for (; loopIteration < maxLoops || maxLoops == -1; loopIteration++) { // Main Loop.
+	for (size_t i = 1; i < 10; i++) {
+		for (size_t j = 1; j < 10; j++) {
+			for (size_t k = 0; k < 19; k++) {
         { // GPU code for descriptors and matching.
             cudaEventRecord(start, 0);
             latch( img2g, d_I, pitch, h_K2, d_D2, &numKP2, maxKP, d_K, &keypoints2, d_mask, latchFinished);
@@ -274,10 +267,7 @@ int main( int argc, char** argv ) {
             { // Iterate the "logical" loop (get ready to process next frame)
                 img1.copyTo(img0);
                 img2.copyTo(img1);
-                for (int i=0; i<skipFrames; i++) {
-                    cap.grab();
-                }
-                cap.read(img2);
+				img2 = imread(outputFilenameJPGString(i, j, k), IMREAD_COLOR);
                 if (img2.cols == 0) break;
                 cvtColor(img2, img2g, CV_BGR2GRAY);
 
@@ -376,6 +366,8 @@ int main( int argc, char** argv ) {
             cout << "8:" << 100*threshold << endl; // Plot current threshold for FAST.
         }
         totalMatches += p1.size();
+			}
+		}
     }
     cudaFreeArray(patchTriplets);
     cudaFree(d_K);
