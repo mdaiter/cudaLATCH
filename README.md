@@ -34,5 +34,3 @@ Approximate order of upcoming features:
 Multi-GPU support is not currently planned. Please contact me if you have a use case that requires it.
 
 This work is released under a Creative Commons Attribution-ShareAlike license. If you use this code in an academic work, please cite me by name (Christopher Parker) and link to this repository.
-
-Please email me if you have any questions: csparker.work@gmail.com
