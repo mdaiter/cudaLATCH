@@ -1,7 +1,7 @@
 #ifndef LATCH_CLASSIFIER_H
 #define LATCH_CLASSIFIER_H
 
-#define NUM_SM 1
+#define NUM_SM 5
 
 #include <tuple>
 #include <vector>
@@ -9,6 +9,8 @@
 #include "cuda.h"
 #include "cuda_runtime.h"
 #include "opencv2/opencv.hpp"
+#include "opencv2/core/cuda.hpp"
+#include "opencv2/cudafeatures2d.hpp"
 
 using namespace cv;
 
@@ -17,6 +19,7 @@ class LatchClassifier {
         LatchClassifier();
         // This *must* be called before identifyFeaturePoints is called
         void setImageSize(int, int);
+        void identifyFeaturePointsAsync(Mat&, cv::cuda::Stream::StreamCallback, void*);
         std::vector<KeyPoint> identifyFeaturePoints(Mat&);
         std::tuple<std::vector<KeyPoint>, std::vector<KeyPoint>, std::vector<DMatch>> identifyFeaturePointsBetweenImages(Mat&, Mat&);
         ~LatchClassifier();
@@ -41,11 +44,15 @@ class LatchClassifier {
         
         cudaArray* m_patchTriplets;
         cudaEvent_t m_latchFinished;
-        cudaStream_t m_stream1;
-        cudaStream_t m_stream2;
+        // Used for two image comparison
+        cv::cuda::Stream& m_stream1;
+        cv::cuda::Stream& m_stream2;
+        // Used for one image comparison
+        cv::cuda::Stream& m_stream;
 
-        /* For the FAST detector. In the future, the detector input should be able to be changed to a general OpenCV
+        /* For the FAST/ORB detector. In the future, the detector input should be able to be changed to a general OpenCV
          abstract classifier class (or at least GPU::ORB). */
+        cv::Ptr<cv::cuda::ORB> m_orbClassifier;
         int m_detectorThreshold;
         int m_detectorTargetKP;
         int m_detectorTolerance;

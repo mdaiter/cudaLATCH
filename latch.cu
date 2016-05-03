@@ -413,6 +413,7 @@ void latchGPU( cuda::GpuMat imgMat,
             float* d_K,
             vector<KeyPoint>* vectorKP,
             float* d_mask,
+            cudaStream_t stream,
             cudaEvent_t latchFinished) {
     const unsigned char* d_I = imgMat.data;
     const int height = imgMat.rows;
@@ -428,8 +429,8 @@ void latchGPU( cuda::GpuMat imgMat,
         h_K[4*i  ] = (*vectorKP)[i].pt.x;
         h_K[4*i+1] = (*vectorKP)[i].pt.y;
         h_K[4*i+2] = 1.0f; // (*vectorKP)[i].size);
-        // h_K[4*i+3] = (*vectorKP)[i].angle;
-        h_K[4*i+3] = computeGradient(d_I, width, h_K[4*i  ], h_K[4*i+1]);
+        h_K[4*i+3] = (*vectorKP)[i].angle;
+       //  h_K[4*i+3] = computeGradient(d_I, width, h_K[4*i  ], h_K[4*i+1]);
     }
     for (int i=*keypoints; i<maxKP; i++) {
         h_K[4*i  ] = -1.0f;
@@ -439,10 +440,10 @@ void latchGPU( cuda::GpuMat imgMat,
     }
 
     size_t sizeK = *keypoints * sizeof(float) * 4;
-    cudaMemcpyAsync(d_K, h_K, sizeK, cudaMemcpyHostToDevice);
+    cudaMemcpyAsync(d_K, h_K, sizeK, cudaMemcpyHostToDevice, stream);
 
     dim3 threadsPerBlock(_warpSize, warpsPerBlock);
     dim3 blocksPerGrid(*keypoints, 1, 1);
-    latch<<<blocksPerGrid, threadsPerBlock>>>(d_K, d_D, width, height, d_mask);
-    cudaEventRecord(latchFinished);
+    latch<<<blocksPerGrid, threadsPerBlock, 0, stream>>>(d_K, d_D, width, height, d_mask);
+    cudaEventRecord(latchFinished, stream);
 }

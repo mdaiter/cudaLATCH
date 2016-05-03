@@ -6,7 +6,6 @@
 #include "cuda_runtime.h"
 
 void latchGPU( cuda::GpuMat,
-            unsigned char *,
             size_t,
             float *,
             unsigned int *,
@@ -15,6 +14,7 @@ void latchGPU( cuda::GpuMat,
             float *,
             std::vector<KeyPoint>*,
             float*,
+            cudaStream_t,
             cudaEvent_t);
 
 

@@ -2,6 +2,8 @@
 
 #include <iostream>
 #include "opencv2/core/cuda.hpp"
+#include "opencv2/core/cuda_stream_accessor.hpp"
+#include "opencv2/cudaimgproc.hpp"
 
 #include "bitMatcher.h"
 #include "latch.h"
@@ -50,7 +52,10 @@ LatchClassifier::LatchClassifier() :
     m_detectorTargetKP(3000),
     m_detectorTolerance(200),
     m_shouldBeTimed(false),
-    m_defects(0.0) {
+    m_defects(0.0),
+    m_stream(cv::cuda::Stream::Null()),
+    m_stream1(cv::cuda::Stream::Null()),
+    m_stream2(cv::cuda::Stream::Null()) {
 	size_t sizeK = m_maxKP * sizeof(float) * 4; // K for keypoints
 	size_t sizeD = m_maxKP * (2048 / 32) * sizeof(unsigned int); // D for descriptor
 	size_t sizeM = m_maxKP * sizeof(int); // M for Matches
@@ -69,12 +74,12 @@ LatchClassifier::LatchClassifier() :
     // The patch triplet locations for LATCH fits in memory cache.
     loadPatchTriplets(m_patchTriplets);
 
-    cudaStreamCreate(&m_stream1);
-    cudaStreamCreate(&m_stream2);
-
     float h_mask[64];
     for (size_t i = 0; i < 64; i++) { h_mask[i] = 1.0f; }
     initMask(&m_dMask, h_mask);
+
+    m_orbClassifier = cv::cuda::ORB::create();
+    m_orbClassifier->setBlurForDescriptor(true);
 }
 
 void LatchClassifier::setImageSize(int width, int height) {
@@ -85,19 +90,49 @@ void LatchClassifier::setImageSize(int width, int height) {
 }
 
 std::vector<cv::KeyPoint> LatchClassifier::identifyFeaturePoints(cv::Mat& img) {
+    cv::cuda::GpuMat imgGpu;
+    imgGpu.upload(img, m_stream);
 
     // Convert image to grayscale
-    cv::Mat img1g;
-    
-    cv::cvtColor(img, img1g, CV_BGR2GRAY);
+    cv::cuda::GpuMat img1g;
+ 
+    cv::cuda::cvtColor(imgGpu, img1g, CV_BGR2GRAY, 0, m_stream);
     // Find features using ORB/FAST
     std::vector<cv::KeyPoint> keypoints;
-    FAST(img1g, keypoints, m_detectorThreshold);
+    cuda::GpuMat d_keypoints;
+    m_orbClassifier->detectAsync(img1g, d_keypoints, cv::noArray(), m_stream);
+    cudaStream_t copiedStream = cv::cuda::StreamAccessor::getStream(m_stream);
+    cudaStreamSynchronize(copiedStream);
+    m_orbClassifier->convert(d_keypoints, keypoints);
 
     int numKP0;
-    latch(img1g, m_dI, m_pitch, m_hK1, m_dD1, &numKP0, m_maxKP, m_dK, &keypoints, m_dMask, m_latchFinished);
-    
+    latchGPU(img1g, m_pitch, m_hK1, m_dD1, &numKP0, m_maxKP, m_dK, &keypoints, m_dMask, copiedStream, m_latchFinished);
+    m_stream.waitForCompletion();
     return keypoints;
+}
+
+void LatchClassifier::identifyFeaturePointsAsync(cv::Mat& img, 
+                                                 cv::cuda::Stream::StreamCallback callback, 
+                                                  void* userData) {
+    cv::cuda::Stream& stream = cv::cuda::Stream::Null();
+    cv::cuda::GpuMat imgGpu;
+    imgGpu.upload(img, stream);
+
+    // Convert image to grayscale
+    cv::cuda::GpuMat img1g;
+ 
+    cv::cuda::cvtColor(imgGpu, img1g, CV_BGR2GRAY, 0, stream);
+    // Find features using ORB/FAST
+    std::vector<cv::KeyPoint> keypoints;
+    cuda::GpuMat d_keypoints;
+    m_orbClassifier->detectAsync(img1g, d_keypoints, cv::noArray(), stream);
+    cudaStream_t copiedStream = cv::cuda::StreamAccessor::getStream(stream);
+    cudaStreamSynchronize(copiedStream);
+    m_orbClassifier->convert(d_keypoints, keypoints);
+
+    int numKP0;
+    latchGPU(img1g, m_pitch, m_hK1, m_dD1, &numKP0, m_maxKP, m_dK, &keypoints, m_dMask, copiedStream, m_latchFinished);
+    stream.enqueueHostCallback(callback, userData);
 }
 
 std::tuple<std::vector<cv::KeyPoint>, 
@@ -111,29 +146,48 @@ std::tuple<std::vector<cv::KeyPoint>,
     if (img2.cols != img1.cols || img2.rows != img2.rows)
         return std::make_tuple(goodMatches1, goodMatches2, goodMatches3);
 
+    cv::cuda::GpuMat imgGpu1;
+    cv::cuda::GpuMat imgGpu2;
+
+    imgGpu1.upload(img1, m_stream1);
+    imgGpu2.upload(img2, m_stream2);
+
     // Convert image to grayscale
-    cv::Mat img1g;
-    cv::Mat img2g;
+    cv::cuda::GpuMat img1g;
+    cv::cuda::GpuMat img2g;
     
-    cv::cvtColor(img1, img1g, CV_BGR2GRAY);
-    cv::cvtColor(img2, img2g, CV_BGR2GRAY);
+    cv::cuda::cvtColor(imgGpu1, img1g, CV_BGR2GRAY, 0, m_stream1);
+    cv::cuda::cvtColor(imgGpu2, img2g, CV_BGR2GRAY, 0, m_stream2);
     // Find features using ORB/FAST
     std::vector<cv::KeyPoint> keypoints0;
-    // cv::gpu::FAST_GPU gpuFast(10, true);
-    FAST(img1g, keypoints0, m_detectorThreshold);
-    // gpuFast(img1g, cv::gpu::GpuMat() keypoints0);
+    std::vector<cv::KeyPoint> keypoints1;
+    
+    cv::cuda::GpuMat d_keypoints0;
+    cv::cuda::GpuMat d_keypoints1;
+    
+    m_orbClassifier->detectAsync(img1g, d_keypoints0, cv::noArray(), m_stream1);
+    m_orbClassifier->detectAsync(img2g, d_keypoints1, cv::noArray(), m_stream2);
+    
+    m_stream1.waitForCompletion();
+    m_stream2.waitForCompletion();
+    
+    m_orbClassifier->convert(d_keypoints0, keypoints0);
+    m_orbClassifier->convert(d_keypoints1, keypoints1);
+
+    cudaStream_t copiedStream1 = cv::cuda::StreamAccessor::getStream(m_stream1);
+    cudaStream_t copiedStream2 = cv::cuda::StreamAccessor::getStream(m_stream2);
 
     int numKP0;
-    latch(img1g, m_dI, m_pitch, m_hK1, m_dD1, &numKP0, m_maxKP, m_dK, &keypoints0, m_dMask, m_latchFinished);
+    latchGPU(img1g, m_pitch, m_hK1, m_dD1, &numKP0, m_maxKP, m_dK, &keypoints0, m_dMask, copiedStream1, m_latchFinished);
 
-    std::vector<cv::KeyPoint> keypoints1;
-    // gpuFast(img2g, cv::gpu::GpuMat(), keypoints1);
-    FAST(img2g, keypoints1, m_detectorThreshold);
     int numKP1;
-    latch(img2g, m_dI, m_pitch, m_hK2, m_dD2, &numKP1, m_maxKP, m_dK, &keypoints1, m_dMask, m_latchFinished);
+    latchGPU(img2g, m_pitch, m_hK2, m_dD2, &numKP1, m_maxKP, m_dK, &keypoints1, m_dMask, copiedStream2, m_latchFinished);
 
-    bitMatcher(m_dD1, m_dD2, numKP0, numKP1, m_maxKP, m_dM1, m_matchThreshold, m_stream1, m_latchFinished);
-    bitMatcher(m_dD2, m_dD1, numKP1, numKP0, m_maxKP, m_dM2, m_matchThreshold, m_stream2, m_latchFinished);
+    bitMatcher(m_dD1, m_dD2, numKP0, numKP1, m_maxKP, m_dM1, m_matchThreshold, copiedStream1, m_latchFinished);
+    bitMatcher(m_dD2, m_dD1, numKP1, numKP0, m_maxKP, m_dM2, m_matchThreshold, copiedStream2, m_latchFinished);
+
+    cudaStreamSynchronize(copiedStream1);
+    cudaStreamSynchronize(copiedStream2);
 
     // Recombine to find intersecting features. Need to declare arrays as static due to size.
 //    int* h_M1, *h_M2;
@@ -159,8 +213,9 @@ std::tuple<std::vector<cv::KeyPoint>,
 }
 
 LatchClassifier::~LatchClassifier() {
-    cudaStreamDestroy(m_stream1);
-    cudaStreamDestroy(m_stream2);
+    cudaStreamDestroy(cv::cuda::StreamAccessor::getStream(m_stream));
+    cudaStreamDestroy(cv::cuda::StreamAccessor::getStream(m_stream1));
+    cudaStreamDestroy(cv::cuda::StreamAccessor::getStream(m_stream2));
     cudaFreeArray(m_patchTriplets);
     cudaFree(m_dK);
     cudaFree(m_dD1);

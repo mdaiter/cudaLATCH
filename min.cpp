@@ -65,10 +65,9 @@ int main( int argc, char** argv ) {
                             // The CPU can continue to do useful work while the GPU is thinking.
                             // If you put no code here, the CPU will stall until the GPU is done.
 
-                            auto keypointVectors = latchClass.identifyFeaturePointsBetweenImages(img1, img2);
-                            cout << "Gathering results took " << 1000*(clock() - t)/(float)CLOCKS_PER_SEC << " milliseconds." << endl;
-
-
+                            auto keypointsVector = latchClass.identifyFeaturePointsBetweenImages(img1, img2);
+                            cout << "Time taken: " << 1000*(clock() - t)/(float)CLOCKS_PER_SEC
+                                 << " with size: " << std::get<2>(keypointsVector).size() << endl;
                         }
                     }
                 }
