@@ -1,5 +1,8 @@
 #include "LatchClassifier.h"
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
 #include <iostream>
 #include "opencv2/core/cuda.hpp"
 #include "opencv2/core/cuda_stream_accessor.hpp"
@@ -62,6 +65,8 @@ LatchClassifier::LatchClassifier() :
 
     cudaMallocHost((void**) &m_hK1, sizeK);
     cudaMallocHost((void**) &m_hK2, sizeK);
+    cudaMallocHost((void**) &m_hD1, sizeD);
+    cudaMallocHost((void**) &m_hD2, sizeD);
 
     cudaCalloc((void**) &m_dK, sizeK);
     cudaCalloc((void**) &m_dD1, sizeD);
@@ -80,6 +85,9 @@ LatchClassifier::LatchClassifier() :
 
     m_orbClassifier = cv::cuda::ORB::create();
     m_orbClassifier->setBlurForDescriptor(true);
+
+    m_orbClassifierCPU = cv::ORB::create(10000);
+    m_latch = xfeatures2d::LATCH::create();
 }
 
 void LatchClassifier::setImageSize(int width, int height) {
@@ -87,6 +95,40 @@ void LatchClassifier::setImageSize(int width, int height) {
     cudaCalloc((void**) &m_dI, sizeI);
     initImage(&m_dI, width, height, &m_pitch);
     std::cout << "Finished setting image size: " << width << " " << height << std::endl;
+}
+
+std::vector<cv::KeyPoint> LatchClassifier::identifyFeaturePointsCPU(cv::Mat& img) {
+    // Convert image to grayscale
+    cv::Mat img1g;
+ 
+    cv::cvtColor(img, img1g, CV_BGR2GRAY);
+    // Find features using ORB/FAST
+    std::vector<cv::KeyPoint> keypoints;
+    
+    m_orbClassifierCPU->detect(img1g, keypoints);
+    Mat desc;
+    m_latch->compute(img1g, keypoints, desc);
+
+    return keypoints;
+}
+
+void LatchClassifier::writeSIFTFile(const std::string& filename, cv::Mat& img, std::vector<cv::KeyPoint>& keys) {
+   	FILE* f = fopen(filename.c_str(), "wb");
+
+    fprintf(f, "%d %d \n", img.rows, img.cols);
+
+    for(int i = 0; i < keys.size(); i++)
+    {
+      	fprintf(f, "%f %f %f %f \n", keys.at(i).pt.y, keys.at(i).pt.x, keys.at(i).size, (keys.at(i).angle*M_PI/180.0));
+       	for ( int j = 0; j < 128; j++) {
+	       	fprintf(f, "%d ", (int)img.at<float>(i,j));
+       		if ((j + 1) % 19 == 0) fprintf(f, "\n");
+       	}
+       	fprintf(f, "\n");
+    }
+
+    fclose(f);
+
 }
 
 std::vector<cv::KeyPoint> LatchClassifier::identifyFeaturePoints(cv::Mat& img) {
@@ -107,6 +149,10 @@ std::vector<cv::KeyPoint> LatchClassifier::identifyFeaturePoints(cv::Mat& img) {
 
     int numKP0;
     latchGPU(img1g, m_pitch, m_hK1, m_dD1, &numKP0, m_maxKP, m_dK, &keypoints, m_dMask, copiedStream, m_latchFinished);
+	
+    size_t sizeD = m_maxKP * (2048 / 32) * sizeof(unsigned int); // D for descriptor
+    cudaMemcpyAsync(m_hD1, m_dD1, sizeD, cudaMemcpyDeviceToHost, copiedStream);
+    
     m_stream.waitForCompletion();
     return keypoints;
 }
@@ -132,6 +178,10 @@ void LatchClassifier::identifyFeaturePointsAsync(cv::Mat& img,
 
     int numKP0;
     latchGPU(img1g, m_pitch, m_hK1, m_dD1, &numKP0, m_maxKP, m_dK, &keypoints, m_dMask, copiedStream, m_latchFinished);
+    
+    size_t sizeD = m_maxKP * (2048 / 32) * sizeof(unsigned int); // D for descriptor
+    cudaMemcpyAsync(m_hD1, m_dD1, sizeD, cudaMemcpyDeviceToHost, copiedStream);
+    
     stream.enqueueHostCallback(callback, userData);
 }
 
@@ -183,6 +233,10 @@ std::tuple<std::vector<cv::KeyPoint>,
     int numKP1;
     latchGPU(img2g, m_pitch, m_hK2, m_dD2, &numKP1, m_maxKP, m_dK, &keypoints1, m_dMask, copiedStream2, m_latchFinished);
 
+    size_t sizeD = m_maxKP * (2048 / 32) * sizeof(unsigned int); // D for descriptor
+    cudaMemcpyAsync(m_hD1, m_dD1, sizeD, cudaMemcpyDeviceToHost, copiedStream1);
+    cudaMemcpyAsync(m_hD2, m_dD2, sizeD, cudaMemcpyDeviceToHost, copiedStream2);
+    
     bitMatcher(m_dD1, m_dD2, numKP0, numKP1, m_maxKP, m_dM1, m_matchThreshold, copiedStream1, m_latchFinished);
     bitMatcher(m_dD2, m_dD1, numKP1, numKP0, m_maxKP, m_dM2, m_matchThreshold, copiedStream2, m_latchFinished);
 
@@ -190,9 +244,6 @@ std::tuple<std::vector<cv::KeyPoint>,
     cudaStreamSynchronize(copiedStream2);
 
     // Recombine to find intersecting features. Need to declare arrays as static due to size.
-//    int* h_M1, *h_M2;
-//    cudaMallocHost((void**) &h_M1, sizeof(int) * m_maxKP);
-//    cudaMallocHost((void**) &h_M2, sizeof(int) * m_maxKP);
     int h_M1[m_maxKP];
     int h_M2[m_maxKP];
     getMatches(m_maxKP, h_M1, m_dM1);
@@ -205,9 +256,6 @@ std::tuple<std::vector<cv::KeyPoint>,
             goodMatches3.push_back(cv::DMatch(i, h_M1[i], 0));
         }
     }
-
-//    cudaFree(h_M1);
-//    cudaFree(h_M2);
 
     return std::make_tuple(goodMatches1, goodMatches2, goodMatches3);
 }

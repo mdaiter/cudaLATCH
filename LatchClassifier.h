@@ -1,7 +1,7 @@
 #ifndef LATCH_CLASSIFIER_H
 #define LATCH_CLASSIFIER_H
 
-#define NUM_SM 5
+#define NUM_SM 3
 
 #include <tuple>
 #include <vector>
@@ -11,6 +11,9 @@
 #include "opencv2/opencv.hpp"
 #include "opencv2/core/cuda.hpp"
 #include "opencv2/cudafeatures2d.hpp"
+#include <opencv2/features2d.hpp>
+#include <opencv2/xfeatures2d.hpp>
+#include <opencv2/imgcodecs.hpp>
 
 using namespace cv;
 
@@ -22,6 +25,12 @@ class LatchClassifier {
         void identifyFeaturePointsAsync(Mat&, cv::cuda::Stream::StreamCallback, void*);
         std::vector<KeyPoint> identifyFeaturePoints(Mat&);
         std::tuple<std::vector<KeyPoint>, std::vector<KeyPoint>, std::vector<DMatch>> identifyFeaturePointsBetweenImages(Mat&, Mat&);
+        std::vector<KeyPoint> identifyFeaturePointsCPU(Mat&);
+        //std::tuple<std::vector<KeyPoint>, std::vector<KeyPoint>, std::vector<DMatch>> identifyFeaturePointsBetweenImagesCPU(Mat&, Mat&);
+        void writeSIFTFile(const std::string&, cv::Mat&, std::vector<cv::KeyPoint>&);
+        //void writeMatFile(const string&, cv::Mat&, std::vector<cv::KeyPoint>&);
+        unsigned int* getDescriptorSet1() { return m_hD1; };
+        unsigned int* getDescriptorSet2() { return m_hD2; };
         ~LatchClassifier();
     private:
         // For the main portions of our class
@@ -30,8 +39,12 @@ class LatchClassifier {
         size_t m_pitch;
 
         // For the CUDA/Host specific part of our class. m_h represents host vectors. m_d represents device vectors.
+        // Keypoints
         float* m_hK1;
         float* m_hK2;
+        // Descriptors
+        unsigned int* m_hD1;
+        unsigned int* m_hD2;
         
         unsigned char* m_dI;
         unsigned int* m_dD1;
@@ -56,6 +69,9 @@ class LatchClassifier {
         int m_detectorThreshold;
         int m_detectorTargetKP;
         int m_detectorTolerance;
+
+        cv::Ptr<cv::ORB> m_orbClassifierCPU;
+        cv::Ptr<cv::xfeatures2d::LATCH> m_latch;
 
         int m_width;
         int m_height;
