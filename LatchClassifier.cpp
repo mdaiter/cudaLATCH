@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include <limits>
 #include <iostream>
 #include "opencv2/core/cuda.hpp"
 #include "opencv2/core/cuda_stream_accessor.hpp"
@@ -112,20 +113,65 @@ std::vector<cv::KeyPoint> LatchClassifier::identifyFeaturePointsCPU(cv::Mat& img
     return keypoints;
 }
 
-void LatchClassifier::writeSIFTFile(const std::string& filename, cv::Mat& img, std::vector<cv::KeyPoint>& keys) {
+void LatchClassifier::writeSIFTFile(const std::string& filename, int width, int height, unsigned int* desc, std::vector<cv::KeyPoint>& keys) {
    	FILE* f = fopen(filename.c_str(), "wb");
 
-    fprintf(f, "%d %d \n", img.rows, img.cols);
+    fprintf(f, "%d %d \n", width, height);
+    int count = 0;
+    for (int i = 0; i < keys.size() * 64; i++) {
+        std::cout << "Desc[" << i << "]: " << static_cast<float>(static_cast<long>(desc[i])) << std::endl;
+        if (desc[i]) count++;
+    }
+//    std::cout << "Count: " << count << std::endl;
+//    std::cout << "Size: " << keys.size() << std::endl;
 
-    for(int i = 0; i < keys.size(); i++)
-    {
+    // Normalize descriptor
+    for (int i = 0; i < keys.size() ; i++) {
+        float norm = 0.0;
+        for (int j = 0; j < 64; j++) {
+            int index = i * 64 + j;
+            union {
+                unsigned int ui;
+                float f;
+            } conversion_union = { .ui = desc[index] };
+            float toBeAdded = conversion_union.f * conversion_union.f;
+            if (toBeAdded < std::numeric_limits<float>::max()) 
+                norm += toBeAdded;
+            else {
+                norm = std::numeric_limits<float>::max();
+                break;
+            }
+        }
+        norm = 512.0/std::max(std::sqrt(norm),1.19209290E-07F);
+//        std::cout << "Norm: " << norm << std::endl;
+        for (int j = 0; j < 64; j++) {
+            int index = i * 64 + j;
+            float tempFloat = static_cast<float>(static_cast<long>(desc[index])) * norm;
+//            std::cout << "New unsigned float : " << tempFloat << std::endl;
+        }
+
+        count++;
+
       	fprintf(f, "%f %f %f %f \n", keys.at(i).pt.y, keys.at(i).pt.x, keys.at(i).size, (keys.at(i).angle*M_PI/180.0));
-       	for ( int j = 0; j < 128; j++) {
-	       	fprintf(f, "%d ", (int)img.at<float>(i,j));
-       		if ((j + 1) % 19 == 0) fprintf(f, "\n");
+       	for ( int j = 0; j < 16; j++) {
+            unsigned int tempInt = desc[i * 64 + j];
+            float tempFloat = static_cast<float>(static_cast<long>(desc[i * 64 + j])) * norm;
+            unsigned char* x = reinterpret_cast<unsigned char*>(&tempFloat);
+            for (int k = 0; k < 4; k++) {
+                //int bitShiftVal = 32 - 8 * (k+1);
+                //unsigned char x = (tempFloat >> bitShiftVal) & 0xFF;
+                fprintf(f, "%u ", x[k]);
+       		    if ((j * 4 + k + 1) % 19 == 0) fprintf(f, "\n");
+            }
+            count++;
        	}
+        for ( int j = 64; j < 128; j++) {
+            fprintf(f, "0 ");
+            if ((j + 1) % 19 == 0) fprintf(f, "\n");
+        }
        	fprintf(f, "\n");
     }
+//    std::cout << "Count: " << count << std::endl;
 
     fclose(f);
 

@@ -19,7 +19,7 @@ using namespace cv;
     } while (0)
 
 std::string outputFilenameJPGString(int i, int j, int k) {
-    std::string filenameBase = "cam(";
+    std::string filenameBase = "./cam(";
     filenameBase += std::to_string(i);
     filenameBase += ",";
     filenameBase += std::to_string(j);
@@ -27,6 +27,23 @@ std::string outputFilenameJPGString(int i, int j, int k) {
     filenameBase += std::to_string(k);
     filenameBase += ".jpg";
     return filenameBase;
+}
+
+void writeNewMatchToFile(FILE* fileHandle, 
+                         std::string filename1,
+                         std::string filename2,
+                         std::vector<cv::DMatch> features) {
+    fprintf(fileHandle, "%s %s \n", filename1, filename2);
+    for (size_t i = 0; i < features.size(); i++) {
+        cv::DMatch currentFeature = features.at(i);
+        fprintf(fileHandle, "%d ", currentFeature.queryIdx);
+    }
+    fprintf(fileHandle, "\n");
+    for (size_t i = 0; i < features.size(); i++) {
+        cv::DMatch currentFeature = features.at(i);
+        fprintf(fileHandle, "%d ", currentFeature.trainIdx);
+    }
+    fprintf(fileHandle, "\n");
 }
 
 void* compare(void* data) {
@@ -38,6 +55,7 @@ void* compare(void* data) {
     const int index = *indexPtr;
     clock_t total_time_elapsed = clock();
     clock_t t;
+    FILE* matchesFile = fopen("matches.txt", "wb");
 
     Mat img1, img2, imgMatches;
  
@@ -47,16 +65,19 @@ void* compare(void* data) {
     latchClass.setImageSize(4000, 3000);
 
     // Loop over all images in directory. Create comparisons based on looping
-    for (size_t i = index; i < 10; i++) {
-        for (size_t j = 1; j < 10; j++) {
-            for (size_t k = 0; k < 19; k++) {
+    for (size_t i = index; i < 2; i++) {
+        for (size_t j = 1; j < 2; j++) {
+            for (size_t k = 0; k < 3; k++) {
                 std::string filename = outputFilenameJPGString(i, j, k);
                 img1 = imread(filename, IMREAD_COLOR);
+                auto keypoints = latchClass.identifyFeaturePoints(img1);
+                latchClass.writeSIFTFile(filename.substr(0, filename.length() - 4) + ".sift", img1.cols, img1.rows, latchClass.getDescriptorSet1(), keypoints);
                 // And now we start doing the main main loop
-                for (size_t a = i; a < 10; a++) {
-                    for (size_t b = j; b < 10; b++) {
-                        for (size_t c = k; c < 19; c++) {
-                            img2 = imread(outputFilenameJPGString(a, b, c), IMREAD_COLOR);
+                for (size_t a = i; a < 2; a++) {
+                    for (size_t b = j; b < 2; b++) {
+                        for (size_t c = k; c < 3; c++) {
+                            std::string filename2 = outputFilenameJPGString(a, b, c);
+                            img2 = imread(filename2, IMREAD_COLOR);
 
                             t = clock(); // Begin timing kernel launches.
                             
@@ -65,8 +86,7 @@ void* compare(void* data) {
                             // If you put no code here, the CPU will stall until the GPU is done.
 
                             auto keypointsVector = latchClass.identifyFeaturePointsBetweenImages(img1, img2);
-                            unsigned int* descriptorsForOne = latchClass.getDescriptorSet1();
-                            latchClass.writeSIFTFile(filename + ".sift", img1, std::get<0>(keypointsVector));
+                            writeNewMatchToFile(matchesFile, filename, filename2, std::get<2>(keypointsVector));
                             cout << "Time taken: " << 1000*(clock() - t)/(float)CLOCKS_PER_SEC
                                  << " with size: " << std::get<2>(keypointsVector).size() <<  endl;
                         }

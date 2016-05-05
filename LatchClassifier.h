@@ -27,7 +27,7 @@ class LatchClassifier {
         std::tuple<std::vector<KeyPoint>, std::vector<KeyPoint>, std::vector<DMatch>> identifyFeaturePointsBetweenImages(Mat&, Mat&);
         std::vector<KeyPoint> identifyFeaturePointsCPU(Mat&);
         //std::tuple<std::vector<KeyPoint>, std::vector<KeyPoint>, std::vector<DMatch>> identifyFeaturePointsBetweenImagesCPU(Mat&, Mat&);
-        void writeSIFTFile(const std::string&, cv::Mat&, std::vector<cv::KeyPoint>&);
+        void writeSIFTFile(const std::string&, int, int, unsigned int*, std::vector<cv::KeyPoint>&);
         //void writeMatFile(const string&, cv::Mat&, std::vector<cv::KeyPoint>&);
         unsigned int* getDescriptorSet1() { return m_hD1; };
         unsigned int* getDescriptorSet2() { return m_hD2; };
