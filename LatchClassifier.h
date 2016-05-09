@@ -17,6 +17,23 @@
 
 using namespace cv;
 
+struct LatchClassifierKeypoint {
+    LatchClassifierKeypoint() {
+       x = 0.0f;
+       y = 0.0f;
+       angle = 0.0f;
+       size = 0.0f;
+    }
+    LatchClassifierKeypoint(float _x, float _y, float _angle, float _size) 
+        : x(_x),
+          y(_y),
+          angle(_angle),
+          size(_size) {}
+    float x, y;
+    float angle;
+    float size;
+};
+
 class LatchClassifier {
     public:
         LatchClassifier();
@@ -24,6 +41,7 @@ class LatchClassifier {
         void setImageSize(int, int);
         void identifyFeaturePointsAsync(Mat&, cv::cuda::Stream::StreamCallback, void*);
         std::vector<KeyPoint> identifyFeaturePoints(Mat&);
+        std::vector<LatchClassifierKeypoint> identifyFeaturePointsOpenMVG(Mat&);
         std::tuple<std::vector<KeyPoint>, std::vector<KeyPoint>, std::vector<DMatch>> identifyFeaturePointsBetweenImages(Mat&, Mat&);
         std::vector<KeyPoint> identifyFeaturePointsCPU(Mat&);
         //std::tuple<std::vector<KeyPoint>, std::vector<KeyPoint>, std::vector<DMatch>> identifyFeaturePointsBetweenImagesCPU(Mat&, Mat&);

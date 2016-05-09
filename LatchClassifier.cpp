@@ -116,14 +116,10 @@ std::vector<cv::KeyPoint> LatchClassifier::identifyFeaturePointsCPU(cv::Mat& img
 void LatchClassifier::writeSIFTFile(const std::string& filename, int width, int height, unsigned int* desc, std::vector<cv::KeyPoint>& keys) {
    	FILE* f = fopen(filename.c_str(), "wb");
 
+    std::cout << "Total amount of matches for " << filename << " is " << keys.size() << std::endl;
+
     fprintf(f, "%d %d \n", width, height);
     int count = 0;
-    for (int i = 0; i < keys.size() * 64; i++) {
-        std::cout << "Desc[" << i << "]: " << static_cast<float>(static_cast<long>(desc[i])) << std::endl;
-        if (desc[i]) count++;
-    }
-//    std::cout << "Count: " << count << std::endl;
-//    std::cout << "Size: " << keys.size() << std::endl;
 
     // Normalize descriptor
     for (int i = 0; i < keys.size() ; i++) {
@@ -143,24 +139,19 @@ void LatchClassifier::writeSIFTFile(const std::string& filename, int width, int 
             }
         }
         norm = 512.0/std::max(std::sqrt(norm),1.19209290E-07F);
-//        std::cout << "Norm: " << norm << std::endl;
-        for (int j = 0; j < 64; j++) {
-            int index = i * 64 + j;
-            float tempFloat = static_cast<float>(static_cast<long>(desc[index])) * norm;
-//            std::cout << "New unsigned float : " << tempFloat << std::endl;
-        }
 
         count++;
 
       	fprintf(f, "%f %f %f %f \n", keys.at(i).pt.y, keys.at(i).pt.x, keys.at(i).size, (keys.at(i).angle*M_PI/180.0));
        	for ( int j = 0; j < 16; j++) {
             unsigned int tempInt = desc[i * 64 + j];
-            float tempFloat = static_cast<float>(static_cast<long>(desc[i * 64 + j])) * norm;
+            float tempFloat = static_cast<float>(static_cast<long>(tempInt)) * norm;
             unsigned char* x = reinterpret_cast<unsigned char*>(&tempFloat);
             for (int k = 0; k < 4; k++) {
                 //int bitShiftVal = 32 - 8 * (k+1);
                 //unsigned char x = (tempFloat >> bitShiftVal) & 0xFF;
-                fprintf(f, "%u ", x[k]);
+                fprintf(f, "0 ");
+//                fprintf(f, "%u ", x[k]);
        		    if ((j * 4 + k + 1) % 19 == 0) fprintf(f, "\n");
             }
             count++;
@@ -200,6 +191,21 @@ std::vector<cv::KeyPoint> LatchClassifier::identifyFeaturePoints(cv::Mat& img) {
     cudaMemcpyAsync(m_hD1, m_dD1, sizeD, cudaMemcpyDeviceToHost, copiedStream);
     
     m_stream.waitForCompletion();
+    return keypoints;
+}
+
+std::vector<LatchClassifierKeypoint> LatchClassifier::identifyFeaturePointsOpenMVG(cv::Mat& img) {
+    std::vector<cv::KeyPoint> keypointsCV = identifyFeaturePoints(img);
+    std::vector<LatchClassifierKeypoint> keypoints;
+    for (size_t i = 0; i < keypointsCV.size(); i++) {
+        LatchClassifierKeyPoint kp(
+            keypointsCV[i].pt.x,
+            keypointsCV[i].pt.y,
+            keypointsCV[i].angle,
+            keypointsCV[i].size
+        );
+        keypoints.push_back(kp);
+    }
     return keypoints;
 }
 

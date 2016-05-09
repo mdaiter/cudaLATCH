@@ -2,15 +2,15 @@
 #include <vector>
 #include <iostream>
 #include <time.h>
-#include "cuda.h"
-#include "cuda_runtime.h"
+#include <cuda.h>
+#include <cuda_runtime.h>
 #include "opencv2/xfeatures2d/nonfree.hpp"
 #include "opencv2/opencv.hpp"
 using namespace std;
 using namespace cv;
 #include "latch.h"
 #include "bitMatcher.h"
-#include "LatchClassifier.h"
+#include "LatchClassifier.hpp"
 
 #define cudaCalloc(A, B) \
     do { \
@@ -29,11 +29,11 @@ std::string outputFilenameJPGString(int i, int j, int k) {
     return filenameBase;
 }
 
-void writeNewMatchToFile(FILE* fileHandle, 
+void writeNewMatchToFile(FILE*& fileHandle, 
                          std::string filename1,
                          std::string filename2,
                          std::vector<cv::DMatch> features) {
-    fprintf(fileHandle, "%s %s \n", filename1, filename2);
+    fprintf(fileHandle, "%s %s %d\n", filename1.c_str(), filename2.c_str(), features.size());
     for (size_t i = 0; i < features.size(); i++) {
         cv::DMatch currentFeature = features.at(i);
         fprintf(fileHandle, "%d ", currentFeature.queryIdx);
@@ -67,7 +67,7 @@ void* compare(void* data) {
     // Loop over all images in directory. Create comparisons based on looping
     for (size_t i = index; i < 2; i++) {
         for (size_t j = 1; j < 2; j++) {
-            for (size_t k = 0; k < 3; k++) {
+            for (size_t k = 0; k < 4; k++) {
                 std::string filename = outputFilenameJPGString(i, j, k);
                 img1 = imread(filename, IMREAD_COLOR);
                 auto keypoints = latchClass.identifyFeaturePoints(img1);
@@ -75,7 +75,7 @@ void* compare(void* data) {
                 // And now we start doing the main main loop
                 for (size_t a = i; a < 2; a++) {
                     for (size_t b = j; b < 2; b++) {
-                        for (size_t c = k; c < 3; c++) {
+                        for (size_t c = k + 1; c < 4; c++) {
                             std::string filename2 = outputFilenameJPGString(a, b, c);
                             img2 = imread(filename2, IMREAD_COLOR);
 
@@ -95,6 +95,7 @@ void* compare(void* data) {
             }
         }
     }
+    fclose(matchesFile);
     cout << "Total time elapsed: " << 1000*(clock() - total_time_elapsed)/(float)CLOCKS_PER_SEC << endl;
 	waitKey(0);
 }
