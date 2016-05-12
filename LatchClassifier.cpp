@@ -194,11 +194,14 @@ std::vector<cv::KeyPoint> LatchClassifier::identifyFeaturePoints(cv::Mat& img) {
     return keypoints;
 }
 
-std::vector<LatchClassifierKeypoint> LatchClassifier::identifyFeaturePointsOpenMVG(cv::Mat& img) {
-    std::vector<cv::KeyPoint> keypointsCV = identifyFeaturePoints(img);
+std::vector<LatchClassifierKeypoint> LatchClassifier::identifyFeaturePointsOpenMVG(Eigen::Matrix<unsigned char, -1, -1,
+1 , -1, -1> img) {
+    cv::Mat imgConverted;
+    cv::eigen2cv(img, imgConverted);
+    std::vector<cv::KeyPoint> keypointsCV = identifyFeaturePoints(imgConverted);
     std::vector<LatchClassifierKeypoint> keypoints;
     for (size_t i = 0; i < keypointsCV.size(); i++) {
-        LatchClassifierKeyPoint kp(
+        LatchClassifierKeypoint kp(
             keypointsCV[i].pt.x,
             keypointsCV[i].pt.y,
             keypointsCV[i].angle,

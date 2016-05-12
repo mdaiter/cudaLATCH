@@ -6,10 +6,13 @@
 #include <tuple>
 #include <vector>
 
-#include "cuda.h"
-#include "cuda_runtime.h"
-#include "opencv2/opencv.hpp"
+#include <cuda.h>
+#include <cuda_runtime.h>
+#include <Eigen/Core>
+#include <opencv2/opencv.hpp>
+#include "opencv2/core.hpp"
 #include "opencv2/core/cuda.hpp"
+#include "opencv2/core/eigen.hpp"
 #include "opencv2/cudafeatures2d.hpp"
 #include <opencv2/features2d.hpp>
 #include <opencv2/xfeatures2d.hpp>
@@ -41,7 +44,7 @@ class LatchClassifier {
         void setImageSize(int, int);
         void identifyFeaturePointsAsync(Mat&, cv::cuda::Stream::StreamCallback, void*);
         std::vector<KeyPoint> identifyFeaturePoints(Mat&);
-        std::vector<LatchClassifierKeypoint> identifyFeaturePointsOpenMVG(Mat&);
+        std::vector<LatchClassifierKeypoint> identifyFeaturePointsOpenMVG(Eigen::Matrix<unsigned char, -1, -1, 1, -1, -1>);
         std::tuple<std::vector<KeyPoint>, std::vector<KeyPoint>, std::vector<DMatch>> identifyFeaturePointsBetweenImages(Mat&, Mat&);
         std::vector<KeyPoint> identifyFeaturePointsCPU(Mat&);
         //std::tuple<std::vector<KeyPoint>, std::vector<KeyPoint>, std::vector<DMatch>> identifyFeaturePointsBetweenImagesCPU(Mat&, Mat&);
