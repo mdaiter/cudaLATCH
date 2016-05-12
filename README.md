@@ -44,6 +44,7 @@ this framework after the setup.
 Prereqs: have a cv::Mat image
 ```c++
 // Import
+#import <tuple>
 #import "LatchClassifier.h"
 
 // Instantiate
