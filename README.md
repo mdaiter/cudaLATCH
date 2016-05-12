@@ -33,4 +33,42 @@ Approximate order of upcoming features:
 
 Multi-GPU support is not currently planned. Please contact me if you have a use case that requires it.
 
+## Running the tests
+min.cpp takes images named in the format of "cam(x,y)_z.jpg". x, y, and z stand for integers from which images came on
+the camera. You can modify this section of min.cpp
+(https://github.com/mdaiter/cudaLATCH/blob/APIRefactor/min.cpp#L68-L97) to determine which images are comapred with the
+framwork. The calls "identifyFeaturePoints" and "identifyFeaturePointsBetweenImages" are at the core of
+this framework after the setup.
+
+## How to use this framework (aka SHOW ME THE CODEZ)
+Prereqs: have a cv::Mat image
+```c++
+// Import
+#import "LatchClassifier.h"
+
+// Instantiate
+LatchClassifier latch;
+
+// Set up the internal memory in the class to be able to store and process your image
+latch.setImageSize(width, height);
+
+/* And now we can use the class completely */
+
+// Identify the feature points within an image
+latch.identifyFeaturePoints(image);
+
+// Indentify the points between two images
+auto data = latch.identifyFeaturePointsBetweenImages(image1, image2);
+
+// Grab the keypoints from image one
+std::vector<cv::Keypoint> keypoints1 = std::get<0>(data);
+
+// Grab the keypoints from image two
+std::vector<cv::Keypoint> keypoints2 = std::get<1>(data);
+
+// Grab the matches between both images
+std::vector<cv::DMatch> matches = std::get<2>(data);
+
+```
+
 This work is released under a Creative Commons Attribution-ShareAlike license. If you use this code in an academic work, please cite me by name (Christopher Parker) and link to this repository.
