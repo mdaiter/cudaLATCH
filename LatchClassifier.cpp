@@ -1,4 +1,4 @@
-#include "LatchClassifier.h"
+#include "LatchClassifier.hpp"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -88,7 +88,7 @@ LatchClassifier::LatchClassifier() :
     m_orbClassifier->setBlurForDescriptor(true);
 
     m_orbClassifierCPU = cv::ORB::create(10000);
-    m_latch = xfeatures2d::LATCH::create();
+    m_latch = cv::xfeatures2d::LATCH::create();
 }
 
 void LatchClassifier::setImageSize(int width, int height) {
@@ -107,7 +107,7 @@ std::vector<cv::KeyPoint> LatchClassifier::identifyFeaturePointsCPU(cv::Mat& img
     std::vector<cv::KeyPoint> keypoints;
     
     m_orbClassifierCPU->detect(img1g, keypoints);
-    Mat desc;
+    cv::Mat desc;
     m_latch->compute(img1g, keypoints, desc);
 
     return keypoints;
@@ -175,10 +175,10 @@ std::vector<cv::KeyPoint> LatchClassifier::identifyFeaturePoints(cv::Mat& img) {
     // Convert image to grayscale
     cv::cuda::GpuMat img1g;
  
-    cv::cuda::cvtColor(imgGpu, img1g, CV_BGR2GRAY, 0, m_stream);
+    img.channels() == 3 ? cv::cuda::cvtColor(imgGpu, img1g, CV_BGR2GRAY, 0, m_stream) : img1g.upload(img, m_stream);
     // Find features using ORB/FAST
     std::vector<cv::KeyPoint> keypoints;
-    cuda::GpuMat d_keypoints;
+    cv::cuda::GpuMat d_keypoints;
     m_orbClassifier->detectAsync(img1g, d_keypoints, cv::noArray(), m_stream);
     cudaStream_t copiedStream = cv::cuda::StreamAccessor::getStream(m_stream);
     cudaStreamSynchronize(copiedStream);
@@ -225,7 +225,7 @@ void LatchClassifier::identifyFeaturePointsAsync(cv::Mat& img,
     cv::cuda::cvtColor(imgGpu, img1g, CV_BGR2GRAY, 0, stream);
     // Find features using ORB/FAST
     std::vector<cv::KeyPoint> keypoints;
-    cuda::GpuMat d_keypoints;
+    cv::cuda::GpuMat d_keypoints;
     m_orbClassifier->detectAsync(img1g, d_keypoints, cv::noArray(), stream);
     cudaStream_t copiedStream = cv::cuda::StreamAccessor::getStream(stream);
     cudaStreamSynchronize(copiedStream);
