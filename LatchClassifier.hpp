@@ -9,7 +9,6 @@
 #include <cuda.h>
 #include <cuda_runtime.h>
 #include <Eigen/Core>
-#include <opencv2/opencv.hpp>
 #include "opencv2/core.hpp"
 #include "opencv2/core/cuda.hpp"
 #include "opencv2/core/eigen.hpp"

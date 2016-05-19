@@ -174,8 +174,9 @@ std::vector<cv::KeyPoint> LatchClassifier::identifyFeaturePoints(cv::Mat& img) {
 
     // Convert image to grayscale
     cv::cuda::GpuMat img1g;
- 
+
     img.channels() == 3 ? cv::cuda::cvtColor(imgGpu, img1g, CV_BGR2GRAY, 0, m_stream) : img1g.upload(img, m_stream);
+
     // Find features using ORB/FAST
     std::vector<cv::KeyPoint> keypoints;
     cv::cuda::GpuMat d_keypoints;
@@ -222,6 +223,9 @@ void LatchClassifier::identifyFeaturePointsAsync(cv::Mat& img,
     // Convert image to grayscale
     cv::cuda::GpuMat img1g;
  
+    img.channels() == 3 ? cv::cuda::cvtColor(imgGpu, img1g, CV_BGR2GRAY, 0, m_stream) : img1g.upload(img,
+    m_stream);
+
     cv::cuda::cvtColor(imgGpu, img1g, CV_BGR2GRAY, 0, stream);
     // Find features using ORB/FAST
     std::vector<cv::KeyPoint> keypoints;
