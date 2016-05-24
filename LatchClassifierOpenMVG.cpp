@@ -6,6 +6,7 @@
 #include <limits>
 #include <iostream>
 #include "opencv2/core/mat.hpp"
+#include "opencv2/core/eigen.hpp"
 #include "opencv2/core/cuda.hpp"
 #include "opencv2/core/cuda_stream_accessor.hpp"
 #include "opencv2/cudaimgproc.hpp"

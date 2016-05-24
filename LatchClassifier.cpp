@@ -50,7 +50,6 @@ do {                                                                  \
 /* Main class definition */
 
 LatchClassifier::LatchClassifier() :
-    m_bitMatcher(*(new LatchBitMatcher)),
     m_maxKP(512 * NUM_SM),
     m_matchThreshold(12),
     m_detectorThreshold(10),

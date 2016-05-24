@@ -6,10 +6,7 @@
 
 #include <cuda.h>
 #include <cuda_runtime.h>
-#include <Eigen/Core>
-#include "opencv2/core/mat.hpp"
 #include "opencv2/core/cuda.hpp"
-#include "opencv2/core/eigen.hpp"
 #include "opencv2/cudafeatures2d.hpp"
 #include <opencv2/features2d.hpp>
 #include <opencv2/xfeatures2d.hpp>
@@ -29,7 +26,6 @@ class LatchClassifier {
         unsigned int* getDescriptorSet2() { return m_hD2; };
         ~LatchClassifier();
     protected:
-        LatchBitMatcher& m_bitMatcher;
         // For the main portions of our class
         const int m_maxKP;
         const int m_matchThreshold;
