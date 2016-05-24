@@ -16,42 +16,19 @@
 #include <opencv2/imgcodecs.hpp>
 
 #include "LatchBitMatcher.hpp"
+#include "LatchClassifierKeypoint.hpp"
 #include "params.hpp"
-
-struct LatchClassifierKeypoint {
-    LatchClassifierKeypoint() {
-       x = 0.0f;
-       y = 0.0f;
-       angle = 0.0f;
-       size = 0.0f;
-    }
-    LatchClassifierKeypoint(float _x, float _y, float _angle, float _size) 
-        : x(_x),
-          y(_y),
-          angle(_angle),
-          size(_size) {}
-    float x, y;
-    float angle;
-    float size;
-};
 
 class LatchClassifier {
     public:
         LatchClassifier();
         // This *must* be called before identifyFeaturePoints is called
         void setImageSize(int, int);
-        void identifyFeaturePointsAsync(cv::Mat&, cv::cuda::Stream::StreamCallback, void*);
-        std::vector<LatchClassifierKeypoint> identifyFeaturePoints(cv::Mat&);
-        std::vector<LatchClassifierKeypoint> identifyFeaturePointsOpenMVG(Eigen::Matrix<unsigned char, -1, -1, 1, -1, -1>);
-        std::tuple<std::vector<LatchClassifierKeypoint>, std::vector<LatchClassifierKeypoint>, std::vector<LatchBitMatcherMatch>> identifyFeaturePointsBetweenImages(cv::Mat&, cv::Mat&);
-        std::vector<LatchClassifierKeypoint> identifyFeaturePointsCPU(cv::Mat&);
-        //std::tuple<std::vector<KeyPoint>, std::vector<KeyPoint>, std::vector<DMatch>> identifyFeaturePointsBetweenImagesCPU(Mat&, Mat&);
-        // void writeSIFTFile(const std::string&, int, int, unsigned int*, std::vector<cv::KeyPoint>&); DEPRACATED
-        // void writeMatFile(const string&, cv::Mat&, std::vector<cv::KeyPoint>&);
+
         unsigned int* getDescriptorSet1() { return m_hD1; };
         unsigned int* getDescriptorSet2() { return m_hD2; };
         ~LatchClassifier();
-    private:
+    protected:
         LatchBitMatcher& m_bitMatcher;
         // For the main portions of our class
         const int m_maxKP;
