@@ -50,6 +50,7 @@ do {                                                                  \
 /* Main class definition */
 
 LatchClassifier::LatchClassifier() :
+    m_bitMatcher(*(new LatchBitMatcher)),
     m_maxKP(512 * NUM_SM),
     m_matchThreshold(12),
     m_detectorThreshold(10),
@@ -98,7 +99,21 @@ void LatchClassifier::setImageSize(int width, int height) {
     std::cout << "Finished setting image size: " << width << " " << height << std::endl;
 }
 
-std::vector<cv::KeyPoint> LatchClassifier::identifyFeaturePointsCPU(cv::Mat& img) {
+std::vector<LatchClassifierKeypoint> convertCVKeypointsToCustom(std::vector<cv::KeyPoint>& keypointsCV) {
+    std::vector<LatchClassifierKeypoint> keypoints;
+    for (size_t i = 0; i < keypointsCV.size(); i++) {
+        LatchClassifierKeypoint kp(
+            keypointsCV[i].pt.x,
+            keypointsCV[i].pt.y,
+            keypointsCV[i].angle,
+            keypointsCV[i].size
+        );
+        keypoints.push_back(kp);
+    }
+    return keypoints;
+}
+
+std::vector<LatchClassifierKeypoint> LatchClassifier::identifyFeaturePointsCPU(cv::Mat& img) {
     // Convert image to grayscale
     cv::Mat img1g;
  
@@ -110,9 +125,9 @@ std::vector<cv::KeyPoint> LatchClassifier::identifyFeaturePointsCPU(cv::Mat& img
     cv::Mat desc;
     m_latch->compute(img1g, keypoints, desc);
 
-    return keypoints;
+    return convertCVKeypointsToCustom(keypoints);
 }
-
+/*
 void LatchClassifier::writeSIFTFile(const std::string& filename, int width, int height, unsigned int* desc, std::vector<cv::KeyPoint>& keys) {
    	FILE* f = fopen(filename.c_str(), "wb");
 
@@ -167,8 +182,8 @@ void LatchClassifier::writeSIFTFile(const std::string& filename, int width, int 
     fclose(f);
 
 }
-
-std::vector<cv::KeyPoint> LatchClassifier::identifyFeaturePoints(cv::Mat& img) {
+*/
+std::vector<LatchClassifierKeypoint> LatchClassifier::identifyFeaturePoints(cv::Mat& img) {
     cv::cuda::GpuMat imgGpu;
     imgGpu.upload(img, m_stream);
 
@@ -192,25 +207,16 @@ std::vector<cv::KeyPoint> LatchClassifier::identifyFeaturePoints(cv::Mat& img) {
     cudaMemcpyAsync(m_hD1, m_dD1, sizeD, cudaMemcpyDeviceToHost, copiedStream);
     
     m_stream.waitForCompletion();
-    return keypoints;
+    
+    return convertCVKeypointsToCustom(keypoints);
 }
 
 std::vector<LatchClassifierKeypoint> LatchClassifier::identifyFeaturePointsOpenMVG(Eigen::Matrix<unsigned char, -1, -1,
 1 , -1, -1> img) {
     cv::Mat imgConverted;
     cv::eigen2cv(img, imgConverted);
-    std::vector<cv::KeyPoint> keypointsCV = identifyFeaturePoints(imgConverted);
-    std::vector<LatchClassifierKeypoint> keypoints;
-    for (size_t i = 0; i < keypointsCV.size(); i++) {
-        LatchClassifierKeypoint kp(
-            keypointsCV[i].pt.x,
-            keypointsCV[i].pt.y,
-            keypointsCV[i].angle,
-            keypointsCV[i].size
-        );
-        keypoints.push_back(kp);
-    }
-    return keypoints;
+    std::vector<LatchClassifierKeypoint> keypointsCV = identifyFeaturePoints(imgConverted);
+    return keypointsCV;
 }
 
 void LatchClassifier::identifyFeaturePointsAsync(cv::Mat& img, 
@@ -244,16 +250,16 @@ void LatchClassifier::identifyFeaturePointsAsync(cv::Mat& img,
     stream.enqueueHostCallback(callback, userData);
 }
 
-std::tuple<std::vector<cv::KeyPoint>, 
-            std::vector<cv::KeyPoint>, 
-            std::vector<cv::DMatch>>
+std::tuple<std::vector<LatchClassifierKeypoint>, 
+            std::vector<LatchClassifierKeypoint>, 
+            std::vector<LatchBitMatcherMatch>>
             LatchClassifier::identifyFeaturePointsBetweenImages(cv::Mat& img1, cv::Mat& img2) {
     std::vector<cv::KeyPoint> goodMatches1;
     std::vector<cv::KeyPoint> goodMatches2;
-    std::vector<cv::DMatch> goodMatches3;
+    std::vector<LatchBitMatcherMatch> goodMatches3;
     // Images MUST match each other in width and height.
     if (img2.cols != img1.cols || img2.rows != img2.rows)
-        return std::make_tuple(goodMatches1, goodMatches2, goodMatches3);
+        return std::make_tuple(convertCVKeypointsToCustom(goodMatches1), convertCVKeypointsToCustom(goodMatches2), goodMatches3);
 
     cv::cuda::GpuMat imgGpu1;
     cv::cuda::GpuMat imgGpu2;
@@ -311,11 +317,11 @@ std::tuple<std::vector<cv::KeyPoint>,
         if (h_M1[i] >= 0 && h_M1[i] < numKP1 && h_M2[h_M1[i]] == i) {
             goodMatches1.push_back(keypoints0[i]);
             goodMatches2.push_back(keypoints1[h_M1[i]]);
-            goodMatches3.push_back(cv::DMatch(i, h_M1[i], 0));
+            goodMatches3.push_back(LatchBitMatcherMatch(i, h_M1[i], 0));
         }
     }
 
-    return std::make_tuple(goodMatches1, goodMatches2, goodMatches3);
+    return std::make_tuple(convertCVKeypointsToCustom(goodMatches1), convertCVKeypointsToCustom(goodMatches2), goodMatches3);
 }
 
 LatchClassifier::~LatchClassifier() {

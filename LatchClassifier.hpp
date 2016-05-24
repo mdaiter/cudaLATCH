@@ -7,7 +7,7 @@
 #include <cuda.h>
 #include <cuda_runtime.h>
 #include <Eigen/Core>
-#include "opencv2/core.hpp"
+#include "opencv2/core/mat.hpp"
 #include "opencv2/core/cuda.hpp"
 #include "opencv2/core/eigen.hpp"
 #include "opencv2/cudafeatures2d.hpp"
@@ -15,6 +15,7 @@
 #include <opencv2/xfeatures2d.hpp>
 #include <opencv2/imgcodecs.hpp>
 
+#include "LatchBitMatcher.hpp"
 #include "params.hpp"
 
 struct LatchClassifierKeypoint {
@@ -40,17 +41,18 @@ class LatchClassifier {
         // This *must* be called before identifyFeaturePoints is called
         void setImageSize(int, int);
         void identifyFeaturePointsAsync(cv::Mat&, cv::cuda::Stream::StreamCallback, void*);
-        std::vector<cv::KeyPoint> identifyFeaturePoints(cv::Mat&);
+        std::vector<LatchClassifierKeypoint> identifyFeaturePoints(cv::Mat&);
         std::vector<LatchClassifierKeypoint> identifyFeaturePointsOpenMVG(Eigen::Matrix<unsigned char, -1, -1, 1, -1, -1>);
-        std::tuple<std::vector<cv::KeyPoint>, std::vector<cv::KeyPoint>, std::vector<cv::DMatch>> identifyFeaturePointsBetweenImages(cv::Mat&, cv::Mat&);
-        std::vector<cv::KeyPoint> identifyFeaturePointsCPU(cv::Mat&);
+        std::tuple<std::vector<LatchClassifierKeypoint>, std::vector<LatchClassifierKeypoint>, std::vector<LatchBitMatcherMatch>> identifyFeaturePointsBetweenImages(cv::Mat&, cv::Mat&);
+        std::vector<LatchClassifierKeypoint> identifyFeaturePointsCPU(cv::Mat&);
         //std::tuple<std::vector<KeyPoint>, std::vector<KeyPoint>, std::vector<DMatch>> identifyFeaturePointsBetweenImagesCPU(Mat&, Mat&);
-        void writeSIFTFile(const std::string&, int, int, unsigned int*, std::vector<cv::KeyPoint>&);
-        //void writeMatFile(const string&, cv::Mat&, std::vector<cv::KeyPoint>&);
+        // void writeSIFTFile(const std::string&, int, int, unsigned int*, std::vector<cv::KeyPoint>&); DEPRACATED
+        // void writeMatFile(const string&, cv::Mat&, std::vector<cv::KeyPoint>&);
         unsigned int* getDescriptorSet1() { return m_hD1; };
         unsigned int* getDescriptorSet2() { return m_hD2; };
         ~LatchClassifier();
     private:
+        LatchBitMatcher& m_bitMatcher;
         // For the main portions of our class
         const int m_maxKP;
         const int m_matchThreshold;
