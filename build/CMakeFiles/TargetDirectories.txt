@@ -1,7 +1,0 @@
-/home/msd/Downloads/openMVG/src/openMVG/features/latch/build/CMakeFiles/install.dir
-/home/msd/Downloads/openMVG/src/openMVG/features/latch/build/CMakeFiles/list_install_components.dir
-/home/msd/Downloads/openMVG/src/openMVG/features/latch/build/CMakeFiles/rebuild_cache.dir
-/home/msd/Downloads/openMVG/src/openMVG/features/latch/build/CMakeFiles/latch_cuda.dir
-/home/msd/Downloads/openMVG/src/openMVG/features/latch/build/CMakeFiles/install/strip.dir
-/home/msd/Downloads/openMVG/src/openMVG/features/latch/build/CMakeFiles/install/local.dir
-/home/msd/Downloads/openMVG/src/openMVG/features/latch/build/CMakeFiles/edit_cache.dir
