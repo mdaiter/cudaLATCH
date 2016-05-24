@@ -1,8 +1,6 @@
 #ifndef LATCH_CLASSIFIER_H
 #define LATCH_CLASSIFIER_H
 
-#define NUM_SM 3
-
 #include <tuple>
 #include <vector>
 
@@ -16,6 +14,8 @@
 #include <opencv2/features2d.hpp>
 #include <opencv2/xfeatures2d.hpp>
 #include <opencv2/imgcodecs.hpp>
+
+#include "params.hpp"
 
 struct LatchClassifierKeypoint {
     LatchClassifierKeypoint() {

@@ -302,7 +302,6 @@ std::tuple<std::vector<cv::KeyPoint>,
     cudaStreamSynchronize(copiedStream1);
     cudaStreamSynchronize(copiedStream2);
 
-    // Recombine to find intersecting features. Need to declare arrays as static due to size.
     int h_M1[m_maxKP];
     int h_M2[m_maxKP];
     getMatches(m_maxKP, h_M1, m_dM1);
