@@ -98,6 +98,20 @@ void LatchClassifier::setImageSize(int width, int height) {
     std::cout << "Finished setting image size: " << width << " " << height << std::endl;
 }
 
+std::vector<LatchClassifierKeypoint> LatchClassifier::convertCVKeypointsToCustom(std::vector<cv::KeyPoint>& keypointsCV) {
+    std::vector<LatchClassifierKeypoint> keypoints;
+    for (size_t i = 0; i < keypointsCV.size(); i++) {
+        LatchClassifierKeypoint kp(
+            keypointsCV[i].pt.x,
+            keypointsCV[i].pt.y,
+            keypointsCV[i].angle,
+            keypointsCV[i].size
+        );
+        keypoints.push_back(kp);
+    }
+    return keypoints;
+}
+
 LatchClassifier::~LatchClassifier() {
     cudaStreamDestroy(cv::cuda::StreamAccessor::getStream(m_stream));
     cudaStreamDestroy(cv::cuda::StreamAccessor::getStream(m_stream1));

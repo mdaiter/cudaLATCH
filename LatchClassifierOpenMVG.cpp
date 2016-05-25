@@ -55,20 +55,6 @@ LatchClassifierOpenMVG::LatchClassifierOpenMVG() :
     LatchClassifier() {
 }
 
-std::vector<LatchClassifierKeypoint> convertCVKeypointsToCustom(std::vector<cv::KeyPoint>& keypointsCV) {
-    std::vector<LatchClassifierKeypoint> keypoints;
-    for (size_t i = 0; i < keypointsCV.size(); i++) {
-        LatchClassifierKeypoint kp(
-            keypointsCV[i].pt.x,
-            keypointsCV[i].pt.y,
-            keypointsCV[i].angle,
-            keypointsCV[i].size
-        );
-        keypoints.push_back(kp);
-    }
-    return keypoints;
-}
-
 std::vector<LatchClassifierKeypoint> LatchClassifierOpenMVG::identifyFeaturePointsOpenMVG(Eigen::Matrix<unsigned char, -1, -1, 1 , -1, -1> img) {
     cv::Mat imgConverted;
     cv::eigen2cv(img, imgConverted);

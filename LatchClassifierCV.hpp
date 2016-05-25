@@ -6,6 +6,7 @@
 
 #include <cuda.h>
 #include <cuda_runtime.h>
+#include <Eigen/Core>
 #include "opencv2/core/mat.hpp"
 #include "opencv2/core/cuda.hpp"
 #include "opencv2/core/eigen.hpp"

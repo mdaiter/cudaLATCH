@@ -4,7 +4,7 @@ FIND_PACKAGE(CUDA REQUIRED)
 FIND_PACKAGE(OpenCV REQUIRED)
 
 FILE(GLOB 
-    SOURCES "LatchClassifier.cpp" "LatchClassifierOpenMVG.cpp" "LatchBitMatcher.cpp" "*.c" "*.h" ".hpp")
+    SOURCES "LatchClassifier.cpp" "LatchClassifierOpenMVG.cpp" "LatchClassifierCV.cpp" "LatchBitMatcher.cpp" "*.c" "*.h" ".hpp")
 
 INCLUDE(FindCUDA)
 

@@ -1,4 +1,4 @@
-#include "LatchClassifier.hpp"
+#include "LatchClassifierCV.hpp"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -53,22 +53,7 @@ LatchClassifierCV::LatchClassifierCV() : LatchClassifier() {
 
 }
 
-
-std::vector<LatchClassifierKeypoint> convertCVKeypointsToCustom(std::vector<cv::KeyPoint>& keypointsCV) {
-    std::vector<LatchClassifierKeypoint> keypoints;
-    for (size_t i = 0; i < keypointsCV.size(); i++) {
-        LatchClassifierKeypoint kp(
-            keypointsCV[i].pt.x,
-            keypointsCV[i].pt.y,
-            keypointsCV[i].angle,
-            keypointsCV[i].size
-        );
-        keypoints.push_back(kp);
-    }
-    return keypoints;
-}
-
-std::vector<LatchClassifierKeypoint> LatchClassifier::identifyFeaturePointsCPU(cv::Mat& img) {
+std::vector<LatchClassifierKeypoint> LatchClassifierCV::identifyFeaturePointsCPU(cv::Mat& img) {
     // Convert image to grayscale
     cv::Mat img1g;
  
