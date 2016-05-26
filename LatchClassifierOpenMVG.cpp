@@ -79,8 +79,16 @@ std::vector<LatchClassifierKeypoint> LatchClassifierOpenMVG::identifyFeaturePoin
 	
     size_t sizeD = m_maxKP * (2048 / 32) * sizeof(unsigned int); // D for descriptor
     cudaMemcpyAsync(m_hD1, m_dD1, sizeD, cudaMemcpyDeviceToHost, copiedStream);
-    
-    m_stream.waitForCompletion();
+
+    cudaStreamSynchronize(copiedStream);
+   // m_stream.waitForCompletion();
+
+    std::cout << "Size fo keypoints: " << keypoints.size() << std::endl;
+
+    for (size_t i = 0; i < sizeD / sizeof(unsigned int); i++) {
+        if(m_hD1[i] != 0)
+            std::cout << "Host mem is: " << m_hD1[i] << std::endl;
+    }
 
     return convertCVKeypointsToCustom(keypoints);
 }

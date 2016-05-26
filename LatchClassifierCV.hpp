@@ -15,7 +15,7 @@
 #include <opencv2/xfeatures2d.hpp>
 #include <opencv2/imgcodecs.hpp>
 
-#include "LatchBitMatcher.hpp"
+#include "LatchBitMatcherMatch.hpp"
 #include "LatchClassifier.hpp"
 #include "LatchClassifierKeypoint.hpp"
 #include "params.hpp"
