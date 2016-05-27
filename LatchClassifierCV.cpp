@@ -58,9 +58,9 @@ std::vector<LatchClassifierKeypoint> LatchClassifierCV::identifyFeaturePointsCPU
     cv::Mat img1g;
 
     if (imgConverted.size().width != m_width || imgConverted.size().height != m_height) {
+        setImageSize(m_width, m_height);
         m_width = imgConverted.size().width;
         m_height = imgConveted.size().height;
-        setImageSize(m_width, m_height);
     }
  
     cv::cvtColor(img, img1g, CV_BGR2GRAY);
@@ -134,9 +134,9 @@ std::vector<LatchClassifierKeypoint> LatchClassifierCV::identifyFeaturePoints(cv
     imgGpu.upload(img, m_stream);
 
     if (imgConverted.size().width != m_width || imgConverted.size().height != m_height) {
+        setImageSize(m_width, m_height);
         m_width = imgConverted.size().width;
         m_height = imgConveted.size().height;
-        setImageSize(m_width, m_height);
     }
 
     // Convert image to grayscale
@@ -171,9 +171,9 @@ void LatchClassifierCV::identifyFeaturePointsAsync(cv::Mat& img,
     imgGpu.upload(img, stream);
 
     if (imgConverted.size().width != m_width || imgConverted.size().height != m_height) {
+        setImageSize(m_width, m_height);
         m_width = imgConverted.size().width;
         m_height = imgConveted.size().height;
-        setImageSize(m_width, m_height);
     }
 
     // Convert image to grayscale
@@ -218,9 +218,9 @@ std::tuple<std::vector<LatchClassifierKeypoint>,
     imgGpu2.upload(img2, m_stream2);
 
     if (imgConverted.size().width != m_width || imgConverted.size().height != m_height) {
+        setImageSize(m_width, m_height);
         m_width = imgConverted.size().width;
         m_height = imgConveted.size().height;
-        setImageSize(m_width, m_height);
     }
 
     // Convert image to grayscale

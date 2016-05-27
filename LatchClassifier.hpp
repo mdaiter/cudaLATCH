@@ -69,8 +69,8 @@ class LatchClassifier {
         // Used for storing and re-sizing the image feature descriptors. Re-set these WHENEVER doing any feature
         // identification. We can make these more optimized for scale (was thinking shorts or uint16_t's to save space)
         // but that'll come later
-        unsigned int m_width;
-        unsigned int m_height;
+        int m_width;
+        int m_height;
 
         // For the metrics.
         bool m_shouldBeTimed;

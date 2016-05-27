@@ -91,8 +91,11 @@ LatchClassifier::LatchClassifier() :
     m_latch = cv::xfeatures2d::LATCH::create();
 }
 
-void LatchClassifier::setImageSize(unsigned int width, unsigned int height) {
+void LatchClassifier::setImageSize(int width, int height) {
     size_t sizeI = width * height * sizeof(unsigned char);
+    // For first time, alloc. Otherwise, you need to release and alloc
+    if (m_width != 0 || m_height != 0)
+        cudaFree(m_dI);
     cudaCalloc((void**) &m_dI, sizeI);
     initImage(&m_dI, width, height, &m_pitch);
     std::cout << "Finished setting image size: " << width << " " << height << std::endl;
