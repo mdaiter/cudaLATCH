@@ -56,6 +56,12 @@ LatchClassifierCV::LatchClassifierCV() : LatchClassifier() {
 std::vector<LatchClassifierKeypoint> LatchClassifierCV::identifyFeaturePointsCPU(cv::Mat& img) {
     // Convert image to grayscale
     cv::Mat img1g;
+
+    if (imgConverted.size().width != m_width || imgConverted.size().height != m_height) {
+        m_width = imgConverted.size().width;
+        m_height = imgConveted.size().height;
+        setImageSize(m_width, m_height);
+    }
  
     cv::cvtColor(img, img1g, CV_BGR2GRAY);
     // Find features using ORB/FAST
@@ -127,6 +133,12 @@ std::vector<LatchClassifierKeypoint> LatchClassifierCV::identifyFeaturePoints(cv
     cv::cuda::GpuMat imgGpu;
     imgGpu.upload(img, m_stream);
 
+    if (imgConverted.size().width != m_width || imgConverted.size().height != m_height) {
+        m_width = imgConverted.size().width;
+        m_height = imgConveted.size().height;
+        setImageSize(m_width, m_height);
+    }
+
     // Convert image to grayscale
     cv::cuda::GpuMat img1g;
 
@@ -157,6 +169,12 @@ void LatchClassifierCV::identifyFeaturePointsAsync(cv::Mat& img,
     cv::cuda::Stream& stream = cv::cuda::Stream::Null();
     cv::cuda::GpuMat imgGpu;
     imgGpu.upload(img, stream);
+
+    if (imgConverted.size().width != m_width || imgConverted.size().height != m_height) {
+        m_width = imgConverted.size().width;
+        m_height = imgConveted.size().height;
+        setImageSize(m_width, m_height);
+    }
 
     // Convert image to grayscale
     cv::cuda::GpuMat img1g;
@@ -198,6 +216,12 @@ std::tuple<std::vector<LatchClassifierKeypoint>,
 
     imgGpu1.upload(img1, m_stream1);
     imgGpu2.upload(img2, m_stream2);
+
+    if (imgConverted.size().width != m_width || imgConverted.size().height != m_height) {
+        m_width = imgConverted.size().width;
+        m_height = imgConveted.size().height;
+        setImageSize(m_width, m_height);
+    }
 
     // Convert image to grayscale
     cv::cuda::GpuMat img1g;
