@@ -91,7 +91,7 @@ LatchClassifier::LatchClassifier() :
     m_latch = cv::xfeatures2d::LATCH::create();
 }
 
-void LatchClassifier::setImageSize(int width, int height) {
+void LatchClassifier::setImageSize(unsigned int width, unsigned int height) {
     size_t sizeI = width * height * sizeof(unsigned char);
     cudaCalloc((void**) &m_dI, sizeI);
     initImage(&m_dI, width, height, &m_pitch);

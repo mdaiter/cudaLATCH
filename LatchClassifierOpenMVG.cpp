@@ -58,6 +58,12 @@ LatchClassifierOpenMVG::LatchClassifierOpenMVG() :
 std::vector<LatchClassifierKeypoint> LatchClassifierOpenMVG::identifyFeaturePointsOpenMVG(Eigen::Matrix<unsigned char, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor> img) {
     cv::Mat imgConverted;
     cv::eigen2cv(img, imgConverted);
+    if (imgConverted.size().width != m_width || imgConverted.size().height != m_height) {
+        m_width = imgConverted.size().width;
+        m_height = imgConveted.size().height;
+        setImageSize(m_width, m_height);
+    }
+
     cv::cuda::GpuMat imgGpu;
     imgGpu.upload(imgConverted, m_stream);
 

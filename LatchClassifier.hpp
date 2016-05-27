@@ -19,7 +19,7 @@ class LatchClassifier {
     public:
         LatchClassifier();
         // This *must* be called before identifyFeaturePoints is called
-        void setImageSize(int, int);
+        void setImageSize(unsigned int, unsigned int);
         std::vector<LatchClassifierKeypoint> convertCVKeypointsToCustom(std::vector<cv::KeyPoint>&);
 
         unsigned int* getDescriptorSet1() { return m_hD1; };
