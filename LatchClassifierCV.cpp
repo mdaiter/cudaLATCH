@@ -57,10 +57,10 @@ std::vector<LatchClassifierKeypoint> LatchClassifierCV::identifyFeaturePointsCPU
     // Convert image to grayscale
     cv::Mat img1g;
 
-    if (imgConverted.size().width != m_width || imgConverted.size().height != m_height) {
+    if (img.size().width != m_width || img.size().height != m_height) {
         setImageSize(m_width, m_height);
-        m_width = imgConverted.size().width;
-        m_height = imgConveted.size().height;
+        m_width = img.size().width;
+        m_height = img.size().height;
     }
  
     cv::cvtColor(img, img1g, CV_BGR2GRAY);
@@ -133,10 +133,10 @@ std::vector<LatchClassifierKeypoint> LatchClassifierCV::identifyFeaturePoints(cv
     cv::cuda::GpuMat imgGpu;
     imgGpu.upload(img, m_stream);
 
-    if (imgConverted.size().width != m_width || imgConverted.size().height != m_height) {
+    if (img.size().width != m_width || img.size().height != m_height) {
         setImageSize(m_width, m_height);
-        m_width = imgConverted.size().width;
-        m_height = imgConveted.size().height;
+        m_width = img.size().width;
+        m_height = img.size().height;
     }
 
     // Convert image to grayscale
@@ -170,10 +170,10 @@ void LatchClassifierCV::identifyFeaturePointsAsync(cv::Mat& img,
     cv::cuda::GpuMat imgGpu;
     imgGpu.upload(img, stream);
 
-    if (imgConverted.size().width != m_width || imgConverted.size().height != m_height) {
+    if (img.size().width != m_width || img.size().height != m_height) {
         setImageSize(m_width, m_height);
-        m_width = imgConverted.size().width;
-        m_height = imgConveted.size().height;
+        m_width = img.size().width;
+        m_height = img.size().height;
     }
 
     // Convert image to grayscale
@@ -217,10 +217,10 @@ std::tuple<std::vector<LatchClassifierKeypoint>,
     imgGpu1.upload(img1, m_stream1);
     imgGpu2.upload(img2, m_stream2);
 
-    if (imgConverted.size().width != m_width || imgConverted.size().height != m_height) {
+    if (img1.size().width != m_width || img1.size().height != m_height) {
         setImageSize(m_width, m_height);
-        m_width = imgConverted.size().width;
-        m_height = imgConveted.size().height;
+        m_width = img1.size().width;
+        m_height = img1.size().height;
     }
 
     // Convert image to grayscale

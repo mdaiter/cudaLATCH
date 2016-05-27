@@ -61,7 +61,7 @@ std::vector<LatchClassifierKeypoint> LatchClassifierOpenMVG::identifyFeaturePoin
     if (imgConverted.size().width != m_width || imgConverted.size().height != m_height) {
         setImageSize(m_width, m_height);
         m_width = imgConverted.size().width;
-        m_height = imgConveted.size().height;
+        m_height = imgConverted.size().height;
     }
 
     cv::cuda::GpuMat imgGpu;
