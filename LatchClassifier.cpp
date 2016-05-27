@@ -57,6 +57,8 @@ LatchClassifier::LatchClassifier() :
     m_detectorTolerance(200),
     m_shouldBeTimed(false),
     m_defects(0.0),
+	m_width(0),
+	m_height(0),
     m_stream(cv::cuda::Stream::Null()),
     m_stream1(cv::cuda::Stream::Null()),
     m_stream2(cv::cuda::Stream::Null()) {
