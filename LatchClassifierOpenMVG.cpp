@@ -55,7 +55,7 @@ LatchClassifierOpenMVG::LatchClassifierOpenMVG() :
     LatchClassifier() {
 }
 
-std::vector<LatchClassifierKeypoint> LatchClassifierOpenMVG::identifyFeaturePointsOpenMVG(Eigen::Matrix<unsigned char, -1, -1, 1 , -1, -1> img) {
+std::vector<LatchClassifierKeypoint> LatchClassifierOpenMVG::identifyFeaturePointsOpenMVG(Eigen::Matrix<unsigned char, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor> img) {
     cv::Mat imgConverted;
     cv::eigen2cv(img, imgConverted);
     cv::cuda::GpuMat imgGpu;
@@ -80,15 +80,7 @@ std::vector<LatchClassifierKeypoint> LatchClassifierOpenMVG::identifyFeaturePoin
     size_t sizeD = m_maxKP * (2048 / 32) * sizeof(unsigned int); // D for descriptor
     cudaMemcpyAsync(m_hD1, m_dD1, sizeD, cudaMemcpyDeviceToHost, copiedStream);
 
-    cudaStreamSynchronize(copiedStream);
-   // m_stream.waitForCompletion();
-
-    std::cout << "Size fo keypoints: " << keypoints.size() << std::endl;
-
-    for (size_t i = 0; i < sizeD / sizeof(unsigned int); i++) {
-        if(m_hD1[i] != 0)
-            std::cout << "Host mem is: " << m_hD1[i] << std::endl;
-    }
+    m_stream.waitForCompletion();
 
     return convertCVKeypointsToCustom(keypoints);
 }

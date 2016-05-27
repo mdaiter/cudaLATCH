@@ -14,7 +14,8 @@ class LatchClassifierOpenMVG : public LatchClassifier {
     public:
         LatchClassifierOpenMVG();
         
-        std::vector<LatchClassifierKeypoint> identifyFeaturePointsOpenMVG(Eigen::Matrix<unsigned char, -1, -1, 1, -1, -1>);
+        std::vector<LatchClassifierKeypoint> identifyFeaturePointsOpenMVG(Eigen::Matrix<unsigned char, Eigen::Dynamic,
+        Eigen::Dynamic, Eigen::RowMajor>);
         
         ~LatchClassifierOpenMVG();
     private:

@@ -415,6 +415,7 @@ void latchGPU( cuda::GpuMat imgMat,
             float* d_mask,
             cudaStream_t stream,
             cudaEvent_t latchFinished) {
+    const unsigned char* d_I = imgMat.data;
     const int height = imgMat.rows;
     const int width = imgMat.cols;
 
