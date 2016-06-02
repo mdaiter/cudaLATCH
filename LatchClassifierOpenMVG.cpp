@@ -58,7 +58,7 @@ LatchClassifierOpenMVG::LatchClassifierOpenMVG() :
 std::vector<LatchClassifierKeypoint> LatchClassifierOpenMVG::identifyFeaturePointsOpenMVG(Eigen::Matrix<unsigned char, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor> img) {
     cv::Mat imgConverted;
     cv::eigen2cv(img, imgConverted);
-    if (imgConverted.size().width != m_width || imgConverted.size().height != m_height) {
+    if (m_width != imgConverted.size().width || m_height != imgConverted.size().height) {
         setImageSize(imgConverted.size().width, imgConverted.size().height);
         m_width = imgConverted.size().width;
         m_height = imgConverted.size().height;
@@ -81,7 +81,7 @@ std::vector<LatchClassifierKeypoint> LatchClassifierOpenMVG::identifyFeaturePoin
     m_orbClassifier->convert(d_keypoints, keypoints);
 
     int numKP0;
-    latchGPU(img1g, m_pitch, m_hK1, m_dD1, &numKP0, m_maxKP, m_dK, &keypoints, m_dMask, copiedStream, m_latchFinished);
+    latchGPU(img1g, m_dI, m_pitch, m_hK1, m_dD1, &numKP0, m_maxKP, m_dK, &keypoints, m_dMask, copiedStream, m_latchFinished);
 	
     size_t sizeD = m_maxKP * (2048 / 32) * sizeof(unsigned int); // D for descriptor
     cudaMemcpyAsync(m_hD1, m_dD1, sizeD, cudaMemcpyDeviceToHost, copiedStream);

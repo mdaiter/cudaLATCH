@@ -405,6 +405,7 @@ void latch( Mat imgMat,
 }
 
 void latchGPU( cuda::GpuMat imgMat,
+            unsigned char* d_I,
             size_t pitch,
             float* h_K,
             unsigned int* d_D,
@@ -424,6 +425,7 @@ void latchGPU( cuda::GpuMat imgMat,
     // All of these calls are non blocking but serialized.
     // cudaMemsetAsync(d_K, -1, maxKP * sizeof(int) * 4); // Negative one is represented by all '1' bits in both int32 and uchar8.
     // cudaMemsetAsync(d_D,  0, maxKP * (2048 / 32) * sizeof(unsigned int));
+    cudaMemcpy2DAsync(d_I, pitch, imgMat.data, width*sizeof(unsigned char), width*sizeof(unsigned char), height, cudaMemcpyDeviceToDevice);
 
     // Only prep up to maxKP for the GPU (as that is the most we have prepared the GPU to handle)
     *keypoints = ((*vectorKP).size() < maxKP) ? (*vectorKP).size() : maxKP;
@@ -431,7 +433,8 @@ void latchGPU( cuda::GpuMat imgMat,
         h_K[4*i  ] = (*vectorKP)[i].pt.x;
         h_K[4*i+1] = (*vectorKP)[i].pt.y;
         h_K[4*i+2] = 1.0f;/* (*vectorKP)[i].size;*/
-		((*vectorKP)[i].angle > 180) ? h_K[4*i+3] = ((*vectorKP)[i].angle - 360) * M_PI / 180.0 : h_K[4*i+3] = ((*vectorKP)[i].angle ) * M_PI / 180.0;
+		h_K[4*i+3] = ((*vectorKP)[i].angle > 180) ? ((*vectorKP)[i].angle - 360) : ((*vectorKP)[i].angle);
+        h_K[4*i+3] *= deg2rad;
     }
     for (int i=*keypoints; i<maxKP; i++) {
         h_K[4*i  ] = -1.0f;

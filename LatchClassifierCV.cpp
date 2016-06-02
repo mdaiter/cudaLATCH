@@ -153,7 +153,7 @@ std::vector<LatchClassifierKeypoint> LatchClassifierCV::identifyFeaturePoints(cv
     m_orbClassifier->convert(d_keypoints, keypoints);
 
     int numKP0;
-    latchGPU(img1g, m_pitch, m_hK1, m_dD1, &numKP0, m_maxKP, m_dK, &keypoints, m_dMask, copiedStream, m_latchFinished);
+    latchGPU(img1g, m_dI, m_pitch, m_hK1, m_dD1, &numKP0, m_maxKP, m_dK, &keypoints, m_dMask, copiedStream, m_latchFinished);
 	
     size_t sizeD = m_maxKP * (2048 / 32) * sizeof(unsigned int); // D for descriptor
     cudaMemcpyAsync(m_hD1, m_dD1, sizeD, cudaMemcpyDeviceToHost, copiedStream);
@@ -192,7 +192,7 @@ void LatchClassifierCV::identifyFeaturePointsAsync(cv::Mat& img,
     m_orbClassifier->convert(d_keypoints, keypoints);
 
     int numKP0;
-    latchGPU(img1g, m_pitch, m_hK1, m_dD1, &numKP0, m_maxKP, m_dK, &keypoints, m_dMask, copiedStream, m_latchFinished);
+    latchGPU(img1g, m_dI, m_pitch, m_hK1, m_dD1, &numKP0, m_maxKP, m_dK, &keypoints, m_dMask, copiedStream, m_latchFinished);
     
     size_t sizeD = m_maxKP * (2048 / 32) * sizeof(unsigned int); // D for descriptor
     cudaMemcpyAsync(m_hD1, m_dD1, sizeD, cudaMemcpyDeviceToHost, copiedStream);
@@ -249,10 +249,10 @@ std::tuple<std::vector<LatchClassifierKeypoint>,
     cudaStream_t copiedStream2 = cv::cuda::StreamAccessor::getStream(m_stream2);
 
     int numKP0;
-    latchGPU(img1g, m_pitch, m_hK1, m_dD1, &numKP0, m_maxKP, m_dK, &keypoints0, m_dMask, copiedStream1, m_latchFinished);
+    latchGPU(img1g, m_dI, m_pitch, m_hK1, m_dD1, &numKP0, m_maxKP, m_dK, &keypoints0, m_dMask, copiedStream1, m_latchFinished);
 
     int numKP1;
-    latchGPU(img2g, m_pitch, m_hK2, m_dD2, &numKP1, m_maxKP, m_dK, &keypoints1, m_dMask, copiedStream2, m_latchFinished);
+    latchGPU(img2g, m_dI, m_pitch, m_hK2, m_dD2, &numKP1, m_maxKP, m_dK, &keypoints1, m_dMask, copiedStream2, m_latchFinished);
 
     size_t sizeD = m_maxKP * (2048 / 32) * sizeof(unsigned int); // D for descriptor
     cudaMemcpyAsync(m_hD1, m_dD1, sizeD, cudaMemcpyDeviceToHost, copiedStream1);

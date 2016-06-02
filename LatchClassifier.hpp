@@ -39,7 +39,10 @@ class LatchClassifier {
         unsigned int* m_hD1;
         unsigned int* m_hD2;
         
+        // Device image
         unsigned char* m_dI;
+
+        // Device descriptors
         unsigned int* m_dD1;
         unsigned int* m_dD2;
         unsigned int* m_dUIntSwapPointer; // Only necessary as an aid when swapping m_dD1 and m_dD2.

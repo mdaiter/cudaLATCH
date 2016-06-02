@@ -6,6 +6,7 @@
 #include "cuda_runtime.h"
 
 void latchGPU(cv::cuda::GpuMat,
+            unsigned char*,
             size_t,
             float *,
             unsigned int *,
