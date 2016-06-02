@@ -59,7 +59,7 @@ std::vector<LatchClassifierKeypoint> LatchClassifierOpenMVG::identifyFeaturePoin
     cv::Mat imgConverted;
     cv::eigen2cv(img, imgConverted);
     if (imgConverted.size().width != m_width || imgConverted.size().height != m_height) {
-        setImageSize(m_width, m_height);
+        setImageSize(imgConverted.size().width, imgConverted.size().height);
         m_width = imgConverted.size().width;
         m_height = imgConverted.size().height;
     }
@@ -92,4 +92,5 @@ std::vector<LatchClassifierKeypoint> LatchClassifierOpenMVG::identifyFeaturePoin
 }
 
 LatchClassifierOpenMVG::~LatchClassifierOpenMVG() {
+
 }

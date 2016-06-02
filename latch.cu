@@ -415,7 +415,9 @@ void latchGPU( cuda::GpuMat imgMat,
             float* d_mask,
             cudaStream_t stream,
             cudaEvent_t latchFinished) {
-    const unsigned char* d_I = imgMat.data;
+	//cv::Mat h_Mat;
+	//imgMat.download(h_Mat);
+    //const unsigned char* h_I = h_Mat.data;
     const int height = imgMat.rows;
     const int width = imgMat.cols;
 
@@ -428,8 +430,8 @@ void latchGPU( cuda::GpuMat imgMat,
     for (int i=0; i<*keypoints; i+=1) {
         h_K[4*i  ] = (*vectorKP)[i].pt.x;
         h_K[4*i+1] = (*vectorKP)[i].pt.y;
-        h_K[4*i+2] = 1.0f; // (*vectorKP)[i].size);
-        h_K[4*i+3] = (*vectorKP)[i].angle;
+        h_K[4*i+2] = 1.0f;/* (*vectorKP)[i].size;*/
+		((*vectorKP)[i].angle > 180) ? h_K[4*i+3] = ((*vectorKP)[i].angle - 360) * M_PI / 180.0 : h_K[4*i+3] = ((*vectorKP)[i].angle ) * M_PI / 180.0;
     }
     for (int i=*keypoints; i<maxKP; i++) {
         h_K[4*i  ] = -1.0f;

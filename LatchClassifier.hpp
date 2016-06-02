@@ -58,7 +58,8 @@ class LatchClassifier {
 
         /* For the FAST/ORB detector. In the future, the detector input should be able to be changed to a general OpenCV
          abstract classifier class (or at least GPU::ORB). */
-        cv::Ptr<cv::cuda::ORB> m_orbClassifier;
+		//cv::Ptr<cv::cuda::FastFeatureDetector> m_orbClassifier;
+		cv::Ptr<cv::cuda::ORB> m_orbClassifier;
         int m_detectorThreshold;
         int m_detectorTargetKP;
         int m_detectorTolerance;

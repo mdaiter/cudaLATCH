@@ -62,6 +62,7 @@ LatchClassifier::LatchClassifier() :
     m_stream(cv::cuda::Stream::Null()),
     m_stream1(cv::cuda::Stream::Null()),
     m_stream2(cv::cuda::Stream::Null()) {
+
 	size_t sizeK = m_maxKP * sizeof(float) * 4; // K for keypoints
 	size_t sizeD = m_maxKP * (2048 / 32) * sizeof(unsigned int); // D for descriptor
 	size_t sizeM = m_maxKP * sizeof(int); // M for Matches
@@ -86,11 +87,13 @@ LatchClassifier::LatchClassifier() :
     for (size_t i = 0; i < 64; i++) { h_mask[i] = 1.0f; }
     initMask(&m_dMask, h_mask);
 
-    m_orbClassifier = cv::cuda::ORB::create();
+    m_orbClassifier = cv::cuda::ORB::create(m_maxKP);
     m_orbClassifier->setBlurForDescriptor(true);
 
-    m_orbClassifierCPU = cv::ORB::create(10000);
+    m_orbClassifierCPU = cv::ORB::create(m_maxKP);
     m_latch = cv::xfeatures2d::LATCH::create();
+
+	std::cout << "Using max kepoints: " << m_maxKP << std::endl;
 }
 
 void LatchClassifier::setImageSize(int width, int height) {
@@ -109,7 +112,7 @@ std::vector<LatchClassifierKeypoint> LatchClassifier::convertCVKeypointsToCustom
         LatchClassifierKeypoint kp(
             keypointsCV[i].pt.x,
             keypointsCV[i].pt.y,
-            keypointsCV[i].angle,
+            keypointsCV[i].angle * M_PI / 180.0,
             keypointsCV[i].size
         );
         keypoints.push_back(kp);

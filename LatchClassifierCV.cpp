@@ -58,7 +58,7 @@ std::vector<LatchClassifierKeypoint> LatchClassifierCV::identifyFeaturePointsCPU
     cv::Mat img1g;
 
     if (img.size().width != m_width || img.size().height != m_height) {
-        setImageSize(m_width, m_height);
+        setImageSize(img.size().width, img.size().height);
         m_width = img.size().width;
         m_height = img.size().height;
     }
@@ -134,7 +134,7 @@ std::vector<LatchClassifierKeypoint> LatchClassifierCV::identifyFeaturePoints(cv
     imgGpu.upload(img, m_stream);
 
     if (img.size().width != m_width || img.size().height != m_height) {
-        setImageSize(m_width, m_height);
+        setImageSize(img.size().width, img.size().height);
         m_width = img.size().width;
         m_height = img.size().height;
     }
@@ -171,7 +171,7 @@ void LatchClassifierCV::identifyFeaturePointsAsync(cv::Mat& img,
     imgGpu.upload(img, stream);
 
     if (img.size().width != m_width || img.size().height != m_height) {
-        setImageSize(m_width, m_height);
+        setImageSize(img.size().width, img.size().height);
         m_width = img.size().width;
         m_height = img.size().height;
     }
@@ -218,7 +218,7 @@ std::tuple<std::vector<LatchClassifierKeypoint>,
     imgGpu2.upload(img2, m_stream2);
 
     if (img1.size().width != m_width || img1.size().height != m_height) {
-        setImageSize(m_width, m_height);
+        setImageSize(img1.size().width, img1.size().height);
         m_width = img1.size().width;
         m_height = img1.size().height;
     }
