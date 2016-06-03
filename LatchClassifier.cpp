@@ -87,6 +87,7 @@ LatchClassifier::LatchClassifier() :
     for (size_t i = 0; i < 64; i++) { h_mask[i] = 1.0f; }
     initMask(&m_dMask, h_mask);
 
+//	m_orbClassifier = cv::cuda::FastFeatureDetector::create(8, true, cv::cuda::FastFeatureDetector::TYPE_9_16, m_maxKP);
     m_orbClassifier = cv::cuda::ORB::create(m_maxKP);
     m_orbClassifier->setBlurForDescriptor(true);
 
