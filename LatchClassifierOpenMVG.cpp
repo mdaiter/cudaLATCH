@@ -81,7 +81,7 @@ std::vector<LatchClassifierKeypoint> LatchClassifierOpenMVG::identifyFeaturePoin
     m_orbClassifier->convert(d_keypoints, keypoints);
 
     int numKP0;
-    latchGPU(img1g, m_dI, m_pitch, m_hK1, m_dD1, &numKP0, m_maxKP, m_dK, &keypoints, m_dMask, copiedStream, m_latchFinished);
+    latch(imgConverted, m_dI, m_pitch, m_hK1, m_dD1, &numKP0, m_maxKP, m_dK, &keypoints, m_dMask, m_latchFinished);
 	
     size_t sizeD = m_maxKP * (2048 / 32) * sizeof(unsigned int); // D for descriptor
     cudaMemcpyAsync(m_hD1, m_dD1, sizeD, cudaMemcpyDeviceToHost, copiedStream);
