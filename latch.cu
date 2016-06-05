@@ -384,9 +384,10 @@ void latch( Mat imgMat,
     for (int i=0; i<*keypoints; i+=1) {
         h_K[4*i  ] = (*vectorKP)[i].pt.x;
         h_K[4*i+1] = (*vectorKP)[i].pt.y;
-        h_K[4*i+2] = 1.0f; // (*vectorKP)[i].size);
-        // h_K[4*i+3] = (*vectorKP)[i].angle;
-        h_K[4*i+3] = computeGradient(h_I, width, h_K[4*i  ], h_K[4*i+1]);
+        h_K[4*i+2] = 1.0f; // ((*vectorKP)[i].size);
+		h_K[4*i+3] = ((*vectorKP)[i].angle > 180) ? ((*vectorKP)[i].angle - 360) : ((*vectorKP)[i].angle);
+        h_K[4*i+3] *= deg2rad;
+       // h_K[4*i+3] = computeGradient(h_I, width, h_K[4*i  ], h_K[4*i+1]);
     }
     for (int i=*keypoints; i<maxKP; i++) {
         h_K[4*i  ] = -1.0f;
