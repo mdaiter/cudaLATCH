@@ -32,6 +32,10 @@ class LatchClassifierCV : public LatchClassifier {
         unsigned int* getDescriptorSet1() { return m_hD1; };
         unsigned int* getDescriptorSet2() { return m_hD2; };
         ~LatchClassifierCV();
+	private:
+        cv::cuda::Stream m_stream1;
+        cv::cuda::Stream m_stream2;
+ 
 };
 
 #endif

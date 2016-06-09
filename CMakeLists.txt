@@ -15,7 +15,7 @@ SET(CUDASRCS
 
 #LIST(APPEND CMAKE_CXX_FLAGS "-std=c++11 -O3 -I/opt/cuda/include -L/opt/cuda/lib64 -lcuda -lcudart -gencode arch=compute_30,code=sm_30")
 #LIST(APPEND CMAKE_C_FLAGS "-std=c++11 -O3 -I/opt/cuda/include -L/opt/cuda/lib64 -lcuda -lcudart")
-LIST(APPEND CUDA_NVCC_FLAGS "-D_MWAITXINTRIN_H_INCLUDED -lineinfo -Xptxas -v -use_fast_math -O3 -gencode arch=compute_30,code=sm_30 -gencode arch=compute_35,code=sm_35 --default-stream per-thread")
+LIST(APPEND CUDA_NVCC_FLAGS "-D_MWAITXINTRIN_H_INCLUDED -lineinfo -Xptxas -v -Xcompiler -fopenmp -use_fast_math -O3 -gencode arch=compute_30,code=sm_30 -gencode arch=compute_35,code=sm_35 --default-stream per-thread")
 message("CUDA_NVCC_FLAGS: ${CUDA_NVCC_FLAGS}")
 
 SET(CUDA_PROPAGATE_HOST_FLAGS OFF)

@@ -29,6 +29,7 @@ void latch( cv::Mat,
             float *,
             std::vector<cv::KeyPoint>*,
             float*,
+			cudaStream_t,
             cudaEvent_t);
 
 void loadPatchTriplets(cudaArray*);

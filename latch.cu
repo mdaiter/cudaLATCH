@@ -11,6 +11,10 @@
 #include "opencv2/cudafeatures2d.hpp"
 #include "opencv2/core/cuda.hpp"
 
+#ifdef OPENMVG_USE_OPENMP
+#include <omp.h>
+#endif
+
 using namespace std;
 using namespace cv;
 
@@ -369,6 +373,7 @@ void latch( Mat imgMat,
             float* d_K,
             vector<KeyPoint>* vectorKP,
             float* d_mask,
+			cudaStream_t stream,
             cudaEvent_t latchFinished) {
     const unsigned char* h_I = imgMat.data;
     const int height = imgMat.rows;
@@ -377,17 +382,17 @@ void latch( Mat imgMat,
     // All of these calls are non blocking but serialized.
     // cudaMemsetAsync(d_K, -1, maxKP * sizeof(int) * 4); // Negative one is represented by all '1' bits in both int32 and uchar8.
     // cudaMemsetAsync(d_D,  0, maxKP * (2048 / 32) * sizeof(unsigned int));
-    cudaMemcpy2DAsync(d_I, pitch, h_I, width*sizeof(unsigned char), width*sizeof(unsigned char), height, cudaMemcpyHostToDevice);
+    cudaMemcpy2DAsync(d_I, pitch, h_I, width*sizeof(unsigned char), width*sizeof(unsigned char), height, cudaMemcpyHostToDevice, stream);
 
     // Only prep up to maxKP for the GPU (as that is the most we have prepared the GPU to handle)
     *keypoints = ((*vectorKP).size() < maxKP) ? (*vectorKP).size() : maxKP;
-    for (int i=0; i<*keypoints; i+=1) {
+	for (int i=0; i<*keypoints; i+=1) {
         h_K[4*i  ] = (*vectorKP)[i].pt.x;
         h_K[4*i+1] = (*vectorKP)[i].pt.y;
         h_K[4*i+2] = 1.0f; // ((*vectorKP)[i].size);
 		h_K[4*i+3] = ((*vectorKP)[i].angle > 180) ? ((*vectorKP)[i].angle - 360) : ((*vectorKP)[i].angle);
         h_K[4*i+3] *= deg2rad;
-       // h_K[4*i+3] = computeGradient(h_I, width, h_K[4*i  ], h_K[4*i+1]);
+//        h_K[4*i+3] = computeGradient(h_I, width, h_K[4*i  ], h_K[4*i+1]);
     }
     for (int i=*keypoints; i<maxKP; i++) {
         h_K[4*i  ] = -1.0f;
@@ -397,11 +402,11 @@ void latch( Mat imgMat,
     }
 
     size_t sizeK = *keypoints * sizeof(float) * 4;
-    cudaMemcpyAsync(d_K, h_K, sizeK, cudaMemcpyHostToDevice);
+    cudaMemcpyAsync(d_K, h_K, sizeK, cudaMemcpyHostToDevice, stream);
 
     dim3 threadsPerBlock(_warpSize, warpsPerBlock);
     dim3 blocksPerGrid(*keypoints, 1, 1);
-    latch<<<blocksPerGrid, threadsPerBlock>>>(d_K, d_D, width, height, d_mask);
+    latch<<<blocksPerGrid, threadsPerBlock, 0, stream>>>(d_K, d_D, width, height, d_mask);
     cudaEventRecord(latchFinished);
 }
 

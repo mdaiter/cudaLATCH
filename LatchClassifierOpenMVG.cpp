@@ -16,12 +16,6 @@
 
 /* Helper functions. */
 
-#define cudaCalloc(A, B) \
-    do { \
-        cudaError_t __cudaCalloc_err = cudaMalloc(A, B); \
-        if (__cudaCalloc_err == cudaSuccess) cudaMemset(*A, 0, B); \
-    } while (0)
-
 #define checkError(ans) { gpuAssert((ans), __FILE__, __LINE__); }
 inline void gpuAssert(cudaError_t code, const char *file, int line, bool abort=true) {
    if (code != cudaSuccess) {
@@ -75,15 +69,17 @@ std::vector<LatchClassifierKeypoint> LatchClassifierOpenMVG::identifyFeaturePoin
     // Find features using ORB/FAST
     std::vector<cv::KeyPoint> keypoints;
     cv::cuda::GpuMat d_keypoints;
+	
     m_orbClassifier->detectAsync(img1g, d_keypoints, cv::noArray(), m_stream);
     cudaStream_t copiedStream = cv::cuda::StreamAccessor::getStream(m_stream);
     cudaStreamSynchronize(copiedStream);
-    m_orbClassifier->convert(d_keypoints, keypoints);
-
-    int numKP0;
-    latch(imgConverted, m_dI, m_pitch, m_hK1, m_dD1, &numKP0, m_maxKP, m_dK, &keypoints, m_dMask, m_latchFinished);
 	
-    size_t sizeD = m_maxKP * (2048 / 32) * sizeof(unsigned int); // D for descriptor
+	m_orbClassifier->convert(d_keypoints, keypoints);
+ 
+    int numKP0;
+    latch(imgConverted, m_dI, m_pitch, m_hK1, m_dD1, &numKP0, m_maxKP, m_dK, &keypoints, m_dMask, copiedStream, m_latchFinished);
+    
+	size_t sizeD = m_maxKP * (2048 / 32) * sizeof(unsigned int); // D for descriptor
     cudaMemcpyAsync(m_hD1, m_dD1, sizeD, cudaMemcpyDeviceToHost, copiedStream);
 
     m_stream.waitForCompletion();

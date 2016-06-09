@@ -14,10 +14,10 @@
 
 /* Helper functions. */
 
-#define cudaCalloc(A, B) \
+#define cudaCalloc(A, B, STREAM) \
     do { \
         cudaError_t __cudaCalloc_err = cudaMalloc(A, B); \
-        if (__cudaCalloc_err == cudaSuccess) cudaMemset(*A, 0, B); \
+        if (__cudaCalloc_err == cudaSuccess) cudaMemsetAsync(*A, 0, B, STREAM); \
     } while (0)
 
 #define checkError(ans) { gpuAssert((ans), __FILE__, __LINE__); }
@@ -59,9 +59,7 @@ LatchClassifier::LatchClassifier() :
     m_defects(0.0),
 	m_width(0),
 	m_height(0),
-    m_stream(cv::cuda::Stream::Null()),
-    m_stream1(cv::cuda::Stream::Null()),
-    m_stream2(cv::cuda::Stream::Null()) {
+	m_stream(cv::cuda::Stream()) {
 
 	size_t sizeK = m_maxKP * sizeof(float) * 4; // K for keypoints
 	size_t sizeD = m_maxKP * (2048 / 32) * sizeof(unsigned int); // D for descriptor
@@ -72,12 +70,13 @@ LatchClassifier::LatchClassifier() :
     cudaMallocHost((void**) &m_hD1, sizeD);
     cudaMallocHost((void**) &m_hD2, sizeD);
 
-    cudaCalloc((void**) &m_dK, sizeK);
-    cudaCalloc((void**) &m_dD1, sizeD);
-    cudaCalloc((void**) &m_dD2, sizeD);
-    cudaCalloc((void**) &m_dM1, sizeM);
-    cudaCalloc((void**) &m_dM2, sizeM);
-    cudaCalloc((void**) &m_dMask, sizeM);
+	cudaStream_t callocStream = cv::cuda::StreamAccessor::getStream(m_stream);
+    cudaCalloc((void**) &m_dK, sizeK, callocStream);
+    cudaCalloc((void**) &m_dD1, sizeD, callocStream);
+    cudaCalloc((void**) &m_dD2, sizeD, callocStream);
+    cudaCalloc((void**) &m_dM1, sizeM, callocStream);
+    cudaCalloc((void**) &m_dM2, sizeM, callocStream);
+    cudaCalloc((void**) &m_dMask, sizeM, callocStream);
     cudaEventCreate(&m_latchFinished);
 
     // The patch triplet locations for LATCH fits in memory cache.
@@ -87,7 +86,8 @@ LatchClassifier::LatchClassifier() :
     for (size_t i = 0; i < 64; i++) { h_mask[i] = 1.0f; }
     initMask(&m_dMask, h_mask);
 
-//	m_orbClassifier = cv::cuda::FastFeatureDetector::create(8, true, cv::cuda::FastFeatureDetector::TYPE_9_16, m_maxKP);
+//	m_orbClassifier = cv::cuda::FastFeatureDetector::create(41, false, cv::cuda::FastFeatureDetector::TYPE_9_16, m_maxKP);
+//	m_orbClassifier->setMaxNumPoints(m_maxKP);
     m_orbClassifier = cv::cuda::ORB::create(m_maxKP);
     m_orbClassifier->setBlurForDescriptor(true);
 
@@ -102,7 +102,9 @@ void LatchClassifier::setImageSize(int width, int height) {
     // For first time, alloc. Otherwise, you need to release and alloc
     if (m_width != 0 || m_height != 0)
         cudaFree(m_dI);
-    cudaCalloc((void**) &m_dI, sizeI);
+	
+	cudaStream_t callocStream = cv::cuda::StreamAccessor::getStream(m_stream);
+    cudaCalloc((void**) &m_dI, sizeI, callocStream);
     initImage(&m_dI, width, height, &m_pitch);
     std::cout << "Finished setting image size: " << width << " " << height << std::endl;
 }
@@ -122,10 +124,7 @@ std::vector<LatchClassifierKeypoint> LatchClassifier::convertCVKeypointsToCustom
 }
 
 LatchClassifier::~LatchClassifier() {
-    cudaStreamDestroy(cv::cuda::StreamAccessor::getStream(m_stream));
-    cudaStreamDestroy(cv::cuda::StreamAccessor::getStream(m_stream1));
-    cudaStreamDestroy(cv::cuda::StreamAccessor::getStream(m_stream2));
-    cudaFreeArray(m_patchTriplets);
+    //cudaFreeArray(m_patchTriplets);
     cudaFree(m_dK);
     cudaFree(m_dD1);
     cudaFree(m_dD2);
@@ -133,4 +132,8 @@ LatchClassifier::~LatchClassifier() {
     cudaFree(m_dM2);
     cudaFreeHost(m_hK1);
     cudaFreeHost(m_hK2);
+
+	m_orbClassifier.release();
+	m_orbClassifierCPU.release();
+	m_latch.release();
 }

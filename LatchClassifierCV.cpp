@@ -49,7 +49,10 @@ do {                                                                  \
 
 /* Main class definition */
 
-LatchClassifierCV::LatchClassifierCV() : LatchClassifier() {
+LatchClassifierCV::LatchClassifierCV() : 
+	LatchClassifier(),
+	m_stream1(cv::cuda::Stream()),
+	m_stream2(cv::cuda::Stream()) {
 
 }
 
@@ -130,6 +133,7 @@ void LatchClassifier::writeSIFTFile(const std::string& filename, int width, int 
 }
 */
 std::vector<LatchClassifierKeypoint> LatchClassifierCV::identifyFeaturePoints(cv::Mat& img) {
+	cv::cuda::Stream m_stream;
     cv::cuda::GpuMat imgGpu;
     imgGpu.upload(img, m_stream);
 
@@ -166,7 +170,7 @@ std::vector<LatchClassifierKeypoint> LatchClassifierCV::identifyFeaturePoints(cv
 void LatchClassifierCV::identifyFeaturePointsAsync(cv::Mat& img, 
                                                  cv::cuda::Stream::StreamCallback callback, 
                                                   void* userData) {
-    cv::cuda::Stream& stream = cv::cuda::Stream::Null();
+    cv::cuda::Stream stream;
     cv::cuda::GpuMat imgGpu;
     imgGpu.upload(img, stream);
 
@@ -179,8 +183,8 @@ void LatchClassifierCV::identifyFeaturePointsAsync(cv::Mat& img,
     // Convert image to grayscale
     cv::cuda::GpuMat img1g;
  
-    img.channels() == 3 ? cv::cuda::cvtColor(imgGpu, img1g, CV_BGR2GRAY, 0, m_stream) : img1g.upload(img,
-    m_stream);
+    img.channels() == 3 ? cv::cuda::cvtColor(imgGpu, img1g, CV_BGR2GRAY, 0, stream) : img1g.upload(img,
+    stream);
 
     cv::cuda::cvtColor(imgGpu, img1g, CV_BGR2GRAY, 0, stream);
     // Find features using ORB/FAST
@@ -281,9 +285,6 @@ std::tuple<std::vector<LatchClassifierKeypoint>,
 }
 
 LatchClassifierCV::~LatchClassifierCV() {
-    cudaStreamDestroy(cv::cuda::StreamAccessor::getStream(m_stream));
-    cudaStreamDestroy(cv::cuda::StreamAccessor::getStream(m_stream1));
-    cudaStreamDestroy(cv::cuda::StreamAccessor::getStream(m_stream2));
     cudaFreeArray(m_patchTriplets);
     cudaFree(m_dK);
     cudaFree(m_dD1);

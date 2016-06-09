@@ -54,10 +54,8 @@ class LatchClassifier {
         cudaArray* m_patchTriplets;
         cudaEvent_t m_latchFinished;
         // Used for two image comparison
-        cv::cuda::Stream& m_stream1;
-        cv::cuda::Stream& m_stream2;
         // Used for one image comparison
-        cv::cuda::Stream& m_stream;
+        cv::cuda::Stream m_stream;
 
         /* For the FAST/ORB detector. In the future, the detector input should be able to be changed to a general OpenCV
          abstract classifier class (or at least GPU::ORB). */
@@ -67,8 +65,8 @@ class LatchClassifier {
         int m_detectorTargetKP;
         int m_detectorTolerance;
 
-        cv::Ptr<cv::ORB> m_orbClassifierCPU;
-        cv::Ptr<cv::xfeatures2d::LATCH> m_latch;
+		cv::Ptr<cv::ORB> m_orbClassifierCPU;
+		cv::Ptr<cv::xfeatures2d::LATCH> m_latch;
 
         // Used for storing and re-sizing the image feature descriptors. Re-set these WHENEVER doing any feature
         // identification. We can make these more optimized for scale (was thinking shorts or uint16_t's to save space)
