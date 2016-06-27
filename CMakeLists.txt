@@ -1,7 +1,7 @@
 PROJECT(latch_cuda)
 
 FIND_PACKAGE(CUDA REQUIRED)
-FIND_PACKAGE(OpenCV REQUIRED)
+FIND_PACKAGE(OpenCV 3 REQUIRED)
 
 FILE(GLOB 
     SOURCES "LatchClassifier.cpp" "LatchClassifierOpenMVG.cpp" "LatchClassifierCV.cpp" "LatchBitMatcher.cpp" "*.c" "*.h" ".hpp")
