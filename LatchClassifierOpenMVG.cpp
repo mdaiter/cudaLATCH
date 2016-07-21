@@ -48,7 +48,6 @@ do {                                                                  \
 
 LatchClassifierOpenMVG::LatchClassifierOpenMVG() :
     LatchClassifier() {
-	m_count = 0;
 }
 
 bool compareFunction(cv::KeyPoint p1, cv::KeyPoint p2) {return p1.response>p2.response;}
@@ -72,27 +71,8 @@ std::vector<LatchClassifierKeypoint> LatchClassifierOpenMVG::identifyFeaturePoin
         m_width = imgConverted.size().width;
         m_height = imgConverted.size().height;
     }
-		// 1. Find all keypoints
-		cv::Ptr<cv::BRISK> briskDetector = cv::BRISK::create();
-		std::vector<cv::KeyPoint> briefKeypoints;
-		briskDetector->detect(imgConverted, briefKeypoints, cv::noArray());
-		briskDetector.release();
-		const size_t briskSize = briefKeypoints.size();
-		std::cout << "Got brisk size: " << briskSize << std::endl;
-
-		// 2. Use BRIEF size to feed into SIFT
-		cv::Ptr<cv::xfeatures2d::SIFT> siftDetector = cv::xfeatures2d::SIFT::create(briskSize);
-		std::vector<cv::KeyPoint> siftKeypoints;
-		siftDetector->detect(imgConverted, siftKeypoints, cv::noArray());
-		RetainBestKeypoints(siftKeypoints, briskSize);
-		siftDetector.release();
 		
-		std::cout << "Got siftDetector. Size: " << siftKeypoints.size() << "vs brisk: " << briskSize << std::endl;
-		
-		std::vector<cv::KeyPoint> returnedKeypoints(siftKeypoints.begin(), siftKeypoints.begin() + m_testingArr[m_count]);
-		// 3. Run CLATCH across all keypoint descriptors
- 		
-    // Convert image to grayscale
+		// Convert image to grayscale
     cv::cuda::GpuMat img1g;
 		{
       cv::cuda::GpuMat imgGpu;
@@ -100,7 +80,7 @@ std::vector<LatchClassifierKeypoint> LatchClassifierOpenMVG::identifyFeaturePoin
 
       imgConverted.channels() == 3 ? cv::cuda::cvtColor(imgGpu, img1g, CV_BGR2GRAY, 0, m_stream) : img1g.upload(imgConverted, m_stream);
     }
-    
+		std::vector<cv::KeyPoint> returnedKeypoints;
 		cudaStream_t copiedStream = cv::cuda::StreamAccessor::getStream(m_stream);
  		
 		{
@@ -124,7 +104,6 @@ std::vector<LatchClassifierKeypoint> LatchClassifierOpenMVG::identifyFeaturePoin
 		std::cout << "Memory copied" << std::endl;
     m_stream.waitForCompletion();
 
-		m_count++;
     return convertCVKeypointsToCustom(returnedKeypoints);
 }
 
