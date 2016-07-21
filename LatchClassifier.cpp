@@ -124,14 +124,18 @@ std::vector<LatchClassifierKeypoint> LatchClassifier::convertCVKeypointsToCustom
 }
 
 LatchClassifier::~LatchClassifier() {
-    //cudaFreeArray(m_patchTriplets);
+//    cudaFreeArray(m_patchTriplets);
     cudaFree(m_dK);
     cudaFree(m_dD1);
     cudaFree(m_dD2);
     cudaFree(m_dM1);
     cudaFree(m_dM2);
+	cudaFree(m_dI);
+	cudaFree(m_dMask);
     cudaFreeHost(m_hK1);
     cudaFreeHost(m_hK2);
+    cudaFreeHost(m_hD1);
+    cudaFreeHost(m_hD2);
 
 	m_orbClassifier.release();
 	m_orbClassifierCPU.release();
