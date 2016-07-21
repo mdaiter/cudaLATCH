@@ -4,6 +4,7 @@
 #include <tuple>
 #include <vector>
 
+#include <opencv2/core/types.hpp>
 #include <Eigen/Core>
 
 #include "LatchClassifier.hpp"
@@ -17,6 +18,9 @@ class LatchClassifierOpenMVG : public LatchClassifier {
         std::vector<LatchClassifierKeypoint> identifyFeaturePointsOpenMVG(Eigen::Matrix<unsigned char, Eigen::Dynamic,
         Eigen::Dynamic, Eigen::RowMajor>);
         
+        unsigned int* describeOpenMVG(Eigen::Matrix<unsigned char, Eigen::Dynamic,
+        Eigen::Dynamic, Eigen::RowMajor>, std::vector<cv::KeyPoint>&);
+
         ~LatchClassifierOpenMVG();
     private:
 };

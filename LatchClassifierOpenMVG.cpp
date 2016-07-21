@@ -10,6 +10,7 @@
 #include "opencv2/core/cuda.hpp"
 #include "opencv2/core/cuda_stream_accessor.hpp"
 #include "opencv2/cudaimgproc.hpp"
+#include "opencv2/xfeatures2d.hpp"
 
 #include "bitMatcher.h"
 #include "latch.h"
@@ -57,35 +58,64 @@ std::vector<LatchClassifierKeypoint> LatchClassifierOpenMVG::identifyFeaturePoin
         m_width = imgConverted.size().width;
         m_height = imgConverted.size().height;
     }
-
+		// 1. Push back one keypoint: 32, 32
+		std::vector<cv::KeyPoint> kps;
+		cv::KeyPoint p;
+		p.pt.x=32;
+		p.pt.y=32;
+		p.size=19;
+		kps.push_back(p);
+    
     // Convert image to grayscale
     cv::cuda::GpuMat img1g;
-	{
-	  cv::cuda::GpuMat imgGpu;
+		{
+      cv::cuda::GpuMat imgGpu;
       imgGpu.upload(imgConverted, m_stream);
 
       imgConverted.channels() == 3 ? cv::cuda::cvtColor(imgGpu, img1g, CV_BGR2GRAY, 0, m_stream) : img1g.upload(imgConverted, m_stream);
-	}
-    // Find features using ORB/FAST
-    std::vector<cv::KeyPoint> keypoints;
-	cudaStream_t copiedStream = cv::cuda::StreamAccessor::getStream(m_stream);
-	{
-      cv::cuda::GpuMat d_keypoints;
-	
-      m_orbClassifier->detectAsync(img1g, d_keypoints, cv::noArray(), m_stream);
-      cudaStreamSynchronize(copiedStream);
-	
-	  m_orbClassifier->convert(d_keypoints, keypoints);
     }
-    int numKP0;
-    latch(imgConverted, m_dI, m_pitch, m_hK1, m_dD1, &numKP0, m_maxKP, m_dK, &keypoints, m_dMask, copiedStream, m_latchFinished);
     
-	size_t sizeD = m_maxKP * (2048 / 32) * sizeof(unsigned int); // D for descriptor
+		cudaStream_t copiedStream = cv::cuda::StreamAccessor::getStream(m_stream);
+    
+		int numKP0;
+    latch(imgConverted, m_dI, m_pitch, m_hK1, m_dD1, &numKP0, m_maxKP, m_dK, &kps, m_dMask, copiedStream, m_latchFinished);
+    
+    size_t sizeD = m_maxKP * (2048 / 32) * sizeof(unsigned int); // D for descriptor
     cudaMemcpyAsync(m_hD1, m_dD1, sizeD, cudaMemcpyDeviceToHost, copiedStream);
 
     m_stream.waitForCompletion();
 
-    return convertCVKeypointsToCustom(keypoints);
+    return convertCVKeypointsToCustom(kps);
+}
+
+unsigned int* LatchClassifierOpenMVG::describeOpenMVG(Eigen::Matrix<unsigned char, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor> img, 
+		std::vector<cv::KeyPoint>& keypoints) {
+    cv::Mat imgConverted;
+    cv::eigen2cv(img, imgConverted);
+    if (m_width != imgConverted.size().width || m_height != imgConverted.size().height) {
+        setImageSize(imgConverted.size().width, imgConverted.size().height);
+        m_width = imgConverted.size().width;
+        m_height = imgConverted.size().height;
+    }
+
+    // Convert image to grayscale
+    cv::cuda::GpuMat img1g;
+		{
+      cv::cuda::GpuMat imgGpu;
+      imgGpu.upload(imgConverted, m_stream);
+
+      imgConverted.channels() == 3 ? cv::cuda::cvtColor(imgGpu, img1g, CV_BGR2GRAY, 0, m_stream) : img1g.upload(imgConverted, m_stream);
+    }
+    cudaStream_t copiedStream = cv::cuda::StreamAccessor::getStream(m_stream);
+    int numKP0;
+    latch(imgConverted, m_dI, m_pitch, m_hK1, m_dD1, &numKP0, m_maxKP, m_dK, &keypoints, m_dMask, copiedStream, m_latchFinished);
+    
+    size_t sizeD = m_maxKP * (2048 / 32) * sizeof(unsigned int); // D for descriptor
+    cudaMemcpyAsync(m_hD1, m_dD1, sizeD, cudaMemcpyDeviceToHost, copiedStream);
+
+    m_stream.waitForCompletion();
+
+		return m_hD1;
 }
 
 LatchClassifierOpenMVG::~LatchClassifierOpenMVG() {
