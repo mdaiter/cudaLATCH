@@ -73,7 +73,7 @@ std::vector<LatchClassifierKeypoint> LatchClassifierOpenMVG::identifyFeaturePoin
         m_height = imgConverted.size().height;
     }
 		// 1. Find all keypoints
-		/*cv::Ptr<cv::BRISK> briskDetector = cv::BRISK::create();
+		cv::Ptr<cv::BRISK> briskDetector = cv::BRISK::create();
 		std::vector<cv::KeyPoint> briefKeypoints;
 		briskDetector->detect(imgConverted, briefKeypoints, cv::noArray());
 		briskDetector.release();
@@ -91,7 +91,7 @@ std::vector<LatchClassifierKeypoint> LatchClassifierOpenMVG::identifyFeaturePoin
 		
 		std::vector<cv::KeyPoint> returnedKeypoints(siftKeypoints.begin(), siftKeypoints.begin() + m_testingArr[m_count]);
 		// 3. Run CLATCH across all keypoint descriptors
- 		*/
+ 		
     // Convert image to grayscale
     cv::cuda::GpuMat img1g;
 		{
@@ -101,7 +101,6 @@ std::vector<LatchClassifierKeypoint> LatchClassifierOpenMVG::identifyFeaturePoin
       imgConverted.channels() == 3 ? cv::cuda::cvtColor(imgGpu, img1g, CV_BGR2GRAY, 0, m_stream) : img1g.upload(imgConverted, m_stream);
     }
     
-		std::vector<cv::KeyPoint> keypoints;
 		cudaStream_t copiedStream = cv::cuda::StreamAccessor::getStream(m_stream);
  		
 		{
@@ -110,13 +109,14 @@ std::vector<LatchClassifierKeypoint> LatchClassifierOpenMVG::identifyFeaturePoin
       m_orbClassifier->detectAsync(img1g, d_keypoints, cv::noArray(), m_stream);
       cudaStreamSynchronize(copiedStream);
 	
-		  m_orbClassifier->convert(d_keypoints, keypoints);
-			keypoints.resize(keypoints.size() - (keypoints.size() % 16));
+		  m_orbClassifier->convert(d_keypoints, returnedKeypoints);
+			// This MUST be a multiple of 16 to work with CLATCH.
+			returnedKeypoints.resize(returnedKeypoints.size() - (returnedKeypoints.size() % 16));
 		}
 
 		int numKP0;
 		std::cout << "Running latch" << std::endl;
-    latch(imgConverted, m_dI, m_pitch, m_hK1, m_dD1, &numKP0, m_maxKP, m_dK, /*&returnedKeypoints*/&keypoints, m_dMask, copiedStream, m_latchFinished);
+    latch(imgConverted, m_dI, m_pitch, m_hK1, m_dD1, &numKP0, m_maxKP, m_dK, &returnedKeypoints, m_dMask, copiedStream, m_latchFinished);
  		std::cout << "Ran latch" << std::endl;
     size_t sizeD = m_maxKP * (2048 / 32) * sizeof(unsigned int); // D for descriptor
 		std::cout << "Copying memory back" << std::endl;
@@ -125,7 +125,7 @@ std::vector<LatchClassifierKeypoint> LatchClassifierOpenMVG::identifyFeaturePoin
     m_stream.waitForCompletion();
 
 		m_count++;
-    return convertCVKeypointsToCustom(/*returnedKeypoints*/ keypoints);
+    return convertCVKeypointsToCustom(returnedKeypoints);
 }
 
 unsigned int* LatchClassifierOpenMVG::describeOpenMVG(Eigen::Matrix<unsigned char, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor> img, 
