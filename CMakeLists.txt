@@ -22,8 +22,6 @@ SET(CUDA_PROPAGATE_HOST_FLAGS OFF)
 
 cuda_add_library(latch_cuda ${CUDASRCS} ${SOURCES} SHARED)
 
-install(TARGETS latch_cuda DESTINATION lib EXPORT openMVG-targets)
-
 include_directories(${CUDA_INCLUDE_DIRS})
 
 include_directories(${OpenCV_INCLUDE_DIRS})
