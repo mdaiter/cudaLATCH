@@ -1,0 +1,600 @@
+The system is: Linux - 4.4.16 - x86_64
+Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+Compiler: /nix/store/4zq0szn8zb0lh569rchikpja7nr5z8mi-gcc-wrapper-4.9.3/bin/gcc 
+Build flags: 
+Id flags: 
+
+The output was:
+0
+
+
+Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "a.out"
+
+The C compiler identification is GNU, found in "/home/nomoko/Downloads/cudaLATCH/build/CMakeFiles/3.4.3/CompilerIdC/a.out"
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
+Compiler: /nix/store/4zq0szn8zb0lh569rchikpja7nr5z8mi-gcc-wrapper-4.9.3/bin/g++ 
+Build flags: 
+Id flags: 
+
+The output was:
+0
+
+
+Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "a.out"
+
+The CXX compiler identification is GNU, found in "/home/nomoko/Downloads/cudaLATCH/build/CMakeFiles/3.4.3/CompilerIdCXX/a.out"
+
+Determining if the C compiler works passed with the following output:
+Change Dir: /home/nomoko/Downloads/cudaLATCH/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/nix/store/5ypfn4kd8518d0qs094zk3bq8ma0gyzj-gnumake-4.2.1/bin/make" "cmTC_93d5e/fast"
+/nix/store/5ypfn4kd8518d0qs094zk3bq8ma0gyzj-gnumake-4.2.1/bin/make -f CMakeFiles/cmTC_93d5e.dir/build.make CMakeFiles/cmTC_93d5e.dir/build
+make[1]: Entering directory '/home/nomoko/Downloads/cudaLATCH/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_93d5e.dir/testCCompiler.c.o
+/nix/store/4zq0szn8zb0lh569rchikpja7nr5z8mi-gcc-wrapper-4.9.3/bin/gcc     -o CMakeFiles/cmTC_93d5e.dir/testCCompiler.c.o   -c /home/nomoko/Downloads/cudaLATCH/build/CMakeFiles/CMakeTmp/testCCompiler.c
+Linking C executable cmTC_93d5e
+/nix/store/d0f4k6wj0rg4vakrp3sldaqgf1yfkjr6-cmake-3.4.3/bin/cmake -E cmake_link_script CMakeFiles/cmTC_93d5e.dir/link.txt --verbose=1
+/nix/store/4zq0szn8zb0lh569rchikpja7nr5z8mi-gcc-wrapper-4.9.3/bin/gcc       CMakeFiles/cmTC_93d5e.dir/testCCompiler.c.o  -o cmTC_93d5e -rdynamic 
+make[1]: Leaving directory '/home/nomoko/Downloads/cudaLATCH/build/CMakeFiles/CMakeTmp'
+
+
+Detecting C compiler ABI info compiled with the following output:
+Change Dir: /home/nomoko/Downloads/cudaLATCH/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/nix/store/5ypfn4kd8518d0qs094zk3bq8ma0gyzj-gnumake-4.2.1/bin/make" "cmTC_eaa1a/fast"
+/nix/store/5ypfn4kd8518d0qs094zk3bq8ma0gyzj-gnumake-4.2.1/bin/make -f CMakeFiles/cmTC_eaa1a.dir/build.make CMakeFiles/cmTC_eaa1a.dir/build
+make[1]: Entering directory '/home/nomoko/Downloads/cudaLATCH/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_eaa1a.dir/CMakeCCompilerABI.c.o
+/nix/store/4zq0szn8zb0lh569rchikpja7nr5z8mi-gcc-wrapper-4.9.3/bin/gcc     -o CMakeFiles/cmTC_eaa1a.dir/CMakeCCompilerABI.c.o   -c /nix/store/d0f4k6wj0rg4vakrp3sldaqgf1yfkjr6-cmake-3.4.3/share/cmake-3.4/Modules/CMakeCCompilerABI.c
+Linking C executable cmTC_eaa1a
+/nix/store/d0f4k6wj0rg4vakrp3sldaqgf1yfkjr6-cmake-3.4.3/bin/cmake -E cmake_link_script CMakeFiles/cmTC_eaa1a.dir/link.txt --verbose=1
+/nix/store/4zq0szn8zb0lh569rchikpja7nr5z8mi-gcc-wrapper-4.9.3/bin/gcc      -v CMakeFiles/cmTC_eaa1a.dir/CMakeCCompilerABI.c.o  -o cmTC_eaa1a -rdynamic  
+Using built-in specs.
+COLLECT_GCC=/nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/bin/gcc
+COLLECT_LTO_WRAPPER=/nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/libexec/gcc/x86_64-unknown-linux-gnu/4.9.3/lto-wrapper
+Target: x86_64-unknown-linux-gnu
+Configured with: 
+Thread model: posix
+gcc version 4.9.3 (GCC) 
+COMPILER_PATH=/nix/store/c9kf299hxbkd7hib5jpskviw9r63gfsb-gcc-4.9.3-lib/lib/:/nix/store/98s2znxww6x7h2ch7cj1w5givahxmdna-glibc-2.23/lib/:/nix/store/4zq0szn8zb0lh569rchikpja7nr5z8mi-gcc-wrapper-4.9.3/bin/:/nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/libexec/gcc/x86_64-unknown-linux-gnu/4.9.3/:/nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/libexec/gcc/x86_64-unknown-linux-gnu/4.9.3/:/nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/libexec/gcc/x86_64-unknown-linux-gnu/:/nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/:/nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/
+LIBRARY_PATH=/nix/store/c9kf299hxbkd7hib5jpskviw9r63gfsb-gcc-4.9.3-lib/lib/:/nix/store/98s2znxww6x7h2ch7cj1w5givahxmdna-glibc-2.23/lib/:/nix/store/4zq0szn8zb0lh569rchikpja7nr5z8mi-gcc-wrapper-4.9.3/bin/:/nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/:/nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/../../../../lib64/:/nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/../../../
+COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_eaa1a' '-rdynamic' '-B' '/nix/store/c9kf299hxbkd7hib5jpskviw9r63gfsb-gcc-4.9.3-lib/lib' '-B' '/nix/store/98s2znxww6x7h2ch7cj1w5givahxmdna-glibc-2.23/lib/' '-idirafter' '/nix/store/zc3azgj5rlbjff8vyrl2jx1r5r0nlsv5-glibc-2.23-dev/include' '-idirafter' '/nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/include-fixed' '-B' '/nix/store/4zq0szn8zb0lh569rchikpja7nr5z8mi-gcc-wrapper-4.9.3/bin/' '-isystem' '/nix/store/s9s3anqhpaprjd2qc21pplx0w6pbzwc5-opencv-master/include' '-isystem' '/nix/store/s9s3anqhpaprjd2qc21pplx0w6pbzwc5-opencv-master/include' '-isystem' '/nix/store/v2749n5gr1lza7dzsgd3vdkan7jrp8si-cudatoolkit-8.0.27/include' '-isystem' '/nix/store/v2749n5gr1lza7dzsgd3vdkan7jrp8si-cudatoolkit-8.0.27/include' '-isystem' '/nix/store/5ypfn4kd8518d0qs094zk3bq8ma0gyzj-gnumake-4.2.1/include' '-isystem' '/nix/store/5ypfn4kd8518d0qs094zk3bq8ma0gyzj-gnumake-4.2.1/include' '-L/nix/store/s9s3anqhpaprjd2qc21pplx0w6pbzwc5-opencv-master/lib' '-L/nix/store/s9s3anqhpaprjd2qc21pplx0w6pbzwc5-opencv-master/lib' '-L/nix/store/v2749n5gr1lza7dzsgd3vdkan7jrp8si-cudatoolkit-8.0.27/lib' '-L/nix/store/v2749n5gr1lza7dzsgd3vdkan7jrp8si-cudatoolkit-8.0.27/lib' '-L/nix/store/98s2znxww6x7h2ch7cj1w5givahxmdna-glibc-2.23/lib' '-L/nix/store/c9kf299hxbkd7hib5jpskviw9r63gfsb-gcc-4.9.3-lib/lib' '-mtune=generic' '-march=x86-64'
+ /nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/libexec/gcc/x86_64-unknown-linux-gnu/4.9.3/collect2 -plugin /nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/libexec/gcc/x86_64-unknown-linux-gnu/4.9.3/liblto_plugin.so -plugin-opt=/nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/libexec/gcc/x86_64-unknown-linux-gnu/4.9.3/lto-wrapper -plugin-opt=-fresolution=/run/user/1000/cccEdN36.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s --eh-frame-hdr -m elf_x86_64 -export-dynamic -dynamic-linker /nix/store/98s2znxww6x7h2ch7cj1w5givahxmdna-glibc-2.23/lib64/ld-linux-x86-64.so.2 -o cmTC_eaa1a /nix/store/98s2znxww6x7h2ch7cj1w5givahxmdna-glibc-2.23/lib/crt1.o /nix/store/98s2znxww6x7h2ch7cj1w5givahxmdna-glibc-2.23/lib/crti.o /nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/crtbegin.o -L/nix/store/s9s3anqhpaprjd2qc21pplx0w6pbzwc5-opencv-master/lib -L/nix/store/s9s3anqhpaprjd2qc21pplx0w6pbzwc5-opencv-master/lib -L/nix/store/v2749n5gr1lza7dzsgd3vdkan7jrp8si-cudatoolkit-8.0.27/lib -L/nix/store/v2749n5gr1lza7dzsgd3vdkan7jrp8si-cudatoolkit-8.0.27/lib -L/nix/store/98s2znxww6x7h2ch7cj1w5givahxmdna-glibc-2.23/lib -L/nix/store/c9kf299hxbkd7hib5jpskviw9r63gfsb-gcc-4.9.3-lib/lib -L/nix/store/c9kf299hxbkd7hib5jpskviw9r63gfsb-gcc-4.9.3-lib/lib -L/nix/store/98s2znxww6x7h2ch7cj1w5givahxmdna-glibc-2.23/lib -L/nix/store/4zq0szn8zb0lh569rchikpja7nr5z8mi-gcc-wrapper-4.9.3/bin -L/nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3 -L/nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/../../../../lib64 -L/nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/../../.. -dynamic-linker /nix/store/98s2znxww6x7h2ch7cj1w5givahxmdna-glibc-2.23/lib/ld-linux-x86-64.so.2 CMakeFiles/cmTC_eaa1a.dir/CMakeCCompilerABI.c.o -rpath /nix/store/whyls7jw8azm9q7jfimyiqq054fm96pj-cuda-env/lib64 -rpath /nix/store/whyls7jw8azm9q7jfimyiqq054fm96pj-cuda-env/lib -lgcc --as-needed -lgcc_s --no-as-needed -lc -lgcc --as-needed -lgcc_s --no-as-needed /nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/crtend.o /nix/store/98s2znxww6x7h2ch7cj1w5givahxmdna-glibc-2.23/lib/crtn.o
+make[1]: Leaving directory '/home/nomoko/Downloads/cudaLATCH/build/CMakeFiles/CMakeTmp'
+
+
+Parsed C implicit link information from above output:
+  link line regex: [^( *|.*[/\])(ld|([^/\]+-)?ld|collect2)[^/\]*( |$)]
+  ignore line: [Change Dir: /home/nomoko/Downloads/cudaLATCH/build/CMakeFiles/CMakeTmp]
+  ignore line: []
+  ignore line: [Run Build Command:"/nix/store/5ypfn4kd8518d0qs094zk3bq8ma0gyzj-gnumake-4.2.1/bin/make" "cmTC_eaa1a/fast"]
+  ignore line: [/nix/store/5ypfn4kd8518d0qs094zk3bq8ma0gyzj-gnumake-4.2.1/bin/make -f CMakeFiles/cmTC_eaa1a.dir/build.make CMakeFiles/cmTC_eaa1a.dir/build]
+  ignore line: [make[1]: Entering directory '/home/nomoko/Downloads/cudaLATCH/build/CMakeFiles/CMakeTmp']
+  ignore line: [Building C object CMakeFiles/cmTC_eaa1a.dir/CMakeCCompilerABI.c.o]
+  ignore line: [/nix/store/4zq0szn8zb0lh569rchikpja7nr5z8mi-gcc-wrapper-4.9.3/bin/gcc     -o CMakeFiles/cmTC_eaa1a.dir/CMakeCCompilerABI.c.o   -c /nix/store/d0f4k6wj0rg4vakrp3sldaqgf1yfkjr6-cmake-3.4.3/share/cmake-3.4/Modules/CMakeCCompilerABI.c]
+  ignore line: [Linking C executable cmTC_eaa1a]
+  ignore line: [/nix/store/d0f4k6wj0rg4vakrp3sldaqgf1yfkjr6-cmake-3.4.3/bin/cmake -E cmake_link_script CMakeFiles/cmTC_eaa1a.dir/link.txt --verbose=1]
+  ignore line: [/nix/store/4zq0szn8zb0lh569rchikpja7nr5z8mi-gcc-wrapper-4.9.3/bin/gcc      -v CMakeFiles/cmTC_eaa1a.dir/CMakeCCompilerABI.c.o  -o cmTC_eaa1a -rdynamic  ]
+  ignore line: [Using built-in specs.]
+  ignore line: [COLLECT_GCC=/nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/bin/gcc]
+  ignore line: [COLLECT_LTO_WRAPPER=/nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/libexec/gcc/x86_64-unknown-linux-gnu/4.9.3/lto-wrapper]
+  ignore line: [Target: x86_64-unknown-linux-gnu]
+  ignore line: [Configured with: ]
+  ignore line: [Thread model: posix]
+  ignore line: [gcc version 4.9.3 (GCC) ]
+  ignore line: [COMPILER_PATH=/nix/store/c9kf299hxbkd7hib5jpskviw9r63gfsb-gcc-4.9.3-lib/lib/:/nix/store/98s2znxww6x7h2ch7cj1w5givahxmdna-glibc-2.23/lib/:/nix/store/4zq0szn8zb0lh569rchikpja7nr5z8mi-gcc-wrapper-4.9.3/bin/:/nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/libexec/gcc/x86_64-unknown-linux-gnu/4.9.3/:/nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/libexec/gcc/x86_64-unknown-linux-gnu/4.9.3/:/nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/libexec/gcc/x86_64-unknown-linux-gnu/:/nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/:/nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/]
+  ignore line: [LIBRARY_PATH=/nix/store/c9kf299hxbkd7hib5jpskviw9r63gfsb-gcc-4.9.3-lib/lib/:/nix/store/98s2znxww6x7h2ch7cj1w5givahxmdna-glibc-2.23/lib/:/nix/store/4zq0szn8zb0lh569rchikpja7nr5z8mi-gcc-wrapper-4.9.3/bin/:/nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/:/nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/../../../../lib64/:/nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/../../../]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_eaa1a' '-rdynamic' '-B' '/nix/store/c9kf299hxbkd7hib5jpskviw9r63gfsb-gcc-4.9.3-lib/lib' '-B' '/nix/store/98s2znxww6x7h2ch7cj1w5givahxmdna-glibc-2.23/lib/' '-idirafter' '/nix/store/zc3azgj5rlbjff8vyrl2jx1r5r0nlsv5-glibc-2.23-dev/include' '-idirafter' '/nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/include-fixed' '-B' '/nix/store/4zq0szn8zb0lh569rchikpja7nr5z8mi-gcc-wrapper-4.9.3/bin/' '-isystem' '/nix/store/s9s3anqhpaprjd2qc21pplx0w6pbzwc5-opencv-master/include' '-isystem' '/nix/store/s9s3anqhpaprjd2qc21pplx0w6pbzwc5-opencv-master/include' '-isystem' '/nix/store/v2749n5gr1lza7dzsgd3vdkan7jrp8si-cudatoolkit-8.0.27/include' '-isystem' '/nix/store/v2749n5gr1lza7dzsgd3vdkan7jrp8si-cudatoolkit-8.0.27/include' '-isystem' '/nix/store/5ypfn4kd8518d0qs094zk3bq8ma0gyzj-gnumake-4.2.1/include' '-isystem' '/nix/store/5ypfn4kd8518d0qs094zk3bq8ma0gyzj-gnumake-4.2.1/include' '-L/nix/store/s9s3anqhpaprjd2qc21pplx0w6pbzwc5-opencv-master/lib' '-L/nix/store/s9s3anqhpaprjd2qc21pplx0w6pbzwc5-opencv-master/lib' '-L/nix/store/v2749n5gr1lza7dzsgd3vdkan7jrp8si-cudatoolkit-8.0.27/lib' '-L/nix/store/v2749n5gr1lza7dzsgd3vdkan7jrp8si-cudatoolkit-8.0.27/lib' '-L/nix/store/98s2znxww6x7h2ch7cj1w5givahxmdna-glibc-2.23/lib' '-L/nix/store/c9kf299hxbkd7hib5jpskviw9r63gfsb-gcc-4.9.3-lib/lib' '-mtune=generic' '-march=x86-64']
+  link line: [ /nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/libexec/gcc/x86_64-unknown-linux-gnu/4.9.3/collect2 -plugin /nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/libexec/gcc/x86_64-unknown-linux-gnu/4.9.3/liblto_plugin.so -plugin-opt=/nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/libexec/gcc/x86_64-unknown-linux-gnu/4.9.3/lto-wrapper -plugin-opt=-fresolution=/run/user/1000/cccEdN36.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s --eh-frame-hdr -m elf_x86_64 -export-dynamic -dynamic-linker /nix/store/98s2znxww6x7h2ch7cj1w5givahxmdna-glibc-2.23/lib64/ld-linux-x86-64.so.2 -o cmTC_eaa1a /nix/store/98s2znxww6x7h2ch7cj1w5givahxmdna-glibc-2.23/lib/crt1.o /nix/store/98s2znxww6x7h2ch7cj1w5givahxmdna-glibc-2.23/lib/crti.o /nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/crtbegin.o -L/nix/store/s9s3anqhpaprjd2qc21pplx0w6pbzwc5-opencv-master/lib -L/nix/store/s9s3anqhpaprjd2qc21pplx0w6pbzwc5-opencv-master/lib -L/nix/store/v2749n5gr1lza7dzsgd3vdkan7jrp8si-cudatoolkit-8.0.27/lib -L/nix/store/v2749n5gr1lza7dzsgd3vdkan7jrp8si-cudatoolkit-8.0.27/lib -L/nix/store/98s2znxww6x7h2ch7cj1w5givahxmdna-glibc-2.23/lib -L/nix/store/c9kf299hxbkd7hib5jpskviw9r63gfsb-gcc-4.9.3-lib/lib -L/nix/store/c9kf299hxbkd7hib5jpskviw9r63gfsb-gcc-4.9.3-lib/lib -L/nix/store/98s2znxww6x7h2ch7cj1w5givahxmdna-glibc-2.23/lib -L/nix/store/4zq0szn8zb0lh569rchikpja7nr5z8mi-gcc-wrapper-4.9.3/bin -L/nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3 -L/nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/../../../../lib64 -L/nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/../../.. -dynamic-linker /nix/store/98s2znxww6x7h2ch7cj1w5givahxmdna-glibc-2.23/lib/ld-linux-x86-64.so.2 CMakeFiles/cmTC_eaa1a.dir/CMakeCCompilerABI.c.o -rpath /nix/store/whyls7jw8azm9q7jfimyiqq054fm96pj-cuda-env/lib64 -rpath /nix/store/whyls7jw8azm9q7jfimyiqq054fm96pj-cuda-env/lib -lgcc --as-needed -lgcc_s --no-as-needed -lc -lgcc --as-needed -lgcc_s --no-as-needed /nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/crtend.o /nix/store/98s2znxww6x7h2ch7cj1w5givahxmdna-glibc-2.23/lib/crtn.o]
+    arg [/nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/libexec/gcc/x86_64-unknown-linux-gnu/4.9.3/collect2] ==> ignore
+    arg [-plugin] ==> ignore
+    arg [/nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/libexec/gcc/x86_64-unknown-linux-gnu/4.9.3/liblto_plugin.so] ==> ignore
+    arg [-plugin-opt=/nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/libexec/gcc/x86_64-unknown-linux-gnu/4.9.3/lto-wrapper] ==> ignore
+    arg [-plugin-opt=-fresolution=/run/user/1000/cccEdN36.res] ==> ignore
+    arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+    arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
+    arg [-plugin-opt=-pass-through=-lc] ==> ignore
+    arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+    arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
+    arg [--eh-frame-hdr] ==> ignore
+    arg [-m] ==> ignore
+    arg [elf_x86_64] ==> ignore
+    arg [-export-dynamic] ==> ignore
+    arg [-dynamic-linker] ==> ignore
+    arg [/nix/store/98s2znxww6x7h2ch7cj1w5givahxmdna-glibc-2.23/lib64/ld-linux-x86-64.so.2] ==> ignore
+    arg [-o] ==> ignore
+    arg [cmTC_eaa1a] ==> ignore
+    arg [/nix/store/98s2znxww6x7h2ch7cj1w5givahxmdna-glibc-2.23/lib/crt1.o] ==> ignore
+    arg [/nix/store/98s2znxww6x7h2ch7cj1w5givahxmdna-glibc-2.23/lib/crti.o] ==> ignore
+    arg [/nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/crtbegin.o] ==> ignore
+    arg [-L/nix/store/s9s3anqhpaprjd2qc21pplx0w6pbzwc5-opencv-master/lib] ==> dir [/nix/store/s9s3anqhpaprjd2qc21pplx0w6pbzwc5-opencv-master/lib]
+    arg [-L/nix/store/s9s3anqhpaprjd2qc21pplx0w6pbzwc5-opencv-master/lib] ==> dir [/nix/store/s9s3anqhpaprjd2qc21pplx0w6pbzwc5-opencv-master/lib]
+    arg [-L/nix/store/v2749n5gr1lza7dzsgd3vdkan7jrp8si-cudatoolkit-8.0.27/lib] ==> dir [/nix/store/v2749n5gr1lza7dzsgd3vdkan7jrp8si-cudatoolkit-8.0.27/lib]
+    arg [-L/nix/store/v2749n5gr1lza7dzsgd3vdkan7jrp8si-cudatoolkit-8.0.27/lib] ==> dir [/nix/store/v2749n5gr1lza7dzsgd3vdkan7jrp8si-cudatoolkit-8.0.27/lib]
+    arg [-L/nix/store/98s2znxww6x7h2ch7cj1w5givahxmdna-glibc-2.23/lib] ==> dir [/nix/store/98s2znxww6x7h2ch7cj1w5givahxmdna-glibc-2.23/lib]
+    arg [-L/nix/store/c9kf299hxbkd7hib5jpskviw9r63gfsb-gcc-4.9.3-lib/lib] ==> dir [/nix/store/c9kf299hxbkd7hib5jpskviw9r63gfsb-gcc-4.9.3-lib/lib]
+    arg [-L/nix/store/c9kf299hxbkd7hib5jpskviw9r63gfsb-gcc-4.9.3-lib/lib] ==> dir [/nix/store/c9kf299hxbkd7hib5jpskviw9r63gfsb-gcc-4.9.3-lib/lib]
+    arg [-L/nix/store/98s2znxww6x7h2ch7cj1w5givahxmdna-glibc-2.23/lib] ==> dir [/nix/store/98s2znxww6x7h2ch7cj1w5givahxmdna-glibc-2.23/lib]
+    arg [-L/nix/store/4zq0szn8zb0lh569rchikpja7nr5z8mi-gcc-wrapper-4.9.3/bin] ==> dir [/nix/store/4zq0szn8zb0lh569rchikpja7nr5z8mi-gcc-wrapper-4.9.3/bin]
+    arg [-L/nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3] ==> dir [/nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3]
+    arg [-L/nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/../../../../lib64] ==> dir [/nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/../../../../lib64]
+    arg [-L/nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/../../..] ==> dir [/nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/../../..]
+    arg [-dynamic-linker] ==> ignore
+    arg [/nix/store/98s2znxww6x7h2ch7cj1w5givahxmdna-glibc-2.23/lib/ld-linux-x86-64.so.2] ==> ignore
+    arg [CMakeFiles/cmTC_eaa1a.dir/CMakeCCompilerABI.c.o] ==> ignore
+    arg [-rpath] ==> ignore
+    arg [/nix/store/whyls7jw8azm9q7jfimyiqq054fm96pj-cuda-env/lib64] ==> ignore
+    arg [-rpath] ==> ignore
+    arg [/nix/store/whyls7jw8azm9q7jfimyiqq054fm96pj-cuda-env/lib] ==> ignore
+    arg [-lgcc] ==> lib [gcc]
+    arg [--as-needed] ==> ignore
+    arg [-lgcc_s] ==> lib [gcc_s]
+    arg [--no-as-needed] ==> ignore
+    arg [-lc] ==> lib [c]
+    arg [-lgcc] ==> lib [gcc]
+    arg [--as-needed] ==> ignore
+    arg [-lgcc_s] ==> lib [gcc_s]
+    arg [--no-as-needed] ==> ignore
+    arg [/nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/crtend.o] ==> ignore
+    arg [/nix/store/98s2znxww6x7h2ch7cj1w5givahxmdna-glibc-2.23/lib/crtn.o] ==> ignore
+  remove lib [gcc]
+  remove lib [gcc_s]
+  remove lib [gcc]
+  remove lib [gcc_s]
+  collapse library dir [/nix/store/s9s3anqhpaprjd2qc21pplx0w6pbzwc5-opencv-master/lib] ==> [/nix/store/s9s3anqhpaprjd2qc21pplx0w6pbzwc5-opencv-master/lib]
+  collapse library dir [/nix/store/s9s3anqhpaprjd2qc21pplx0w6pbzwc5-opencv-master/lib] ==> [/nix/store/s9s3anqhpaprjd2qc21pplx0w6pbzwc5-opencv-master/lib]
+  collapse library dir [/nix/store/v2749n5gr1lza7dzsgd3vdkan7jrp8si-cudatoolkit-8.0.27/lib] ==> [/nix/store/v2749n5gr1lza7dzsgd3vdkan7jrp8si-cudatoolkit-8.0.27/lib]
+  collapse library dir [/nix/store/v2749n5gr1lza7dzsgd3vdkan7jrp8si-cudatoolkit-8.0.27/lib] ==> [/nix/store/v2749n5gr1lza7dzsgd3vdkan7jrp8si-cudatoolkit-8.0.27/lib]
+  collapse library dir [/nix/store/98s2znxww6x7h2ch7cj1w5givahxmdna-glibc-2.23/lib] ==> [/nix/store/98s2znxww6x7h2ch7cj1w5givahxmdna-glibc-2.23/lib]
+  collapse library dir [/nix/store/c9kf299hxbkd7hib5jpskviw9r63gfsb-gcc-4.9.3-lib/lib] ==> [/nix/store/c9kf299hxbkd7hib5jpskviw9r63gfsb-gcc-4.9.3-lib/lib]
+  collapse library dir [/nix/store/c9kf299hxbkd7hib5jpskviw9r63gfsb-gcc-4.9.3-lib/lib] ==> [/nix/store/c9kf299hxbkd7hib5jpskviw9r63gfsb-gcc-4.9.3-lib/lib]
+  collapse library dir [/nix/store/98s2znxww6x7h2ch7cj1w5givahxmdna-glibc-2.23/lib] ==> [/nix/store/98s2znxww6x7h2ch7cj1w5givahxmdna-glibc-2.23/lib]
+  collapse library dir [/nix/store/4zq0szn8zb0lh569rchikpja7nr5z8mi-gcc-wrapper-4.9.3/bin] ==> [/nix/store/4zq0szn8zb0lh569rchikpja7nr5z8mi-gcc-wrapper-4.9.3/bin]
+  collapse library dir [/nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3] ==> [/nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3]
+  collapse library dir [/nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/../../../../lib64] ==> [/nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/lib64]
+  collapse library dir [/nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/../../..] ==> [/nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/lib]
+  implicit libs: [c]
+  implicit dirs: [/nix/store/s9s3anqhpaprjd2qc21pplx0w6pbzwc5-opencv-master/lib;/nix/store/v2749n5gr1lza7dzsgd3vdkan7jrp8si-cudatoolkit-8.0.27/lib;/nix/store/98s2znxww6x7h2ch7cj1w5givahxmdna-glibc-2.23/lib;/nix/store/c9kf299hxbkd7hib5jpskviw9r63gfsb-gcc-4.9.3-lib/lib;/nix/store/4zq0szn8zb0lh569rchikpja7nr5z8mi-gcc-wrapper-4.9.3/bin;/nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3;/nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/lib64;/nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/lib]
+  implicit fwks: []
+
+
+
+
+Detecting C [-std=c11] compiler features compiled with the following output:
+Change Dir: /home/nomoko/Downloads/cudaLATCH/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/nix/store/5ypfn4kd8518d0qs094zk3bq8ma0gyzj-gnumake-4.2.1/bin/make" "cmTC_2bca4/fast"
+/nix/store/5ypfn4kd8518d0qs094zk3bq8ma0gyzj-gnumake-4.2.1/bin/make -f CMakeFiles/cmTC_2bca4.dir/build.make CMakeFiles/cmTC_2bca4.dir/build
+make[1]: Entering directory '/home/nomoko/Downloads/cudaLATCH/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_2bca4.dir/feature_tests.c.o
+/nix/store/4zq0szn8zb0lh569rchikpja7nr5z8mi-gcc-wrapper-4.9.3/bin/gcc    -std=c11 -o CMakeFiles/cmTC_2bca4.dir/feature_tests.c.o   -c /home/nomoko/Downloads/cudaLATCH/build/CMakeFiles/feature_tests.c
+Linking C executable cmTC_2bca4
+/nix/store/d0f4k6wj0rg4vakrp3sldaqgf1yfkjr6-cmake-3.4.3/bin/cmake -E cmake_link_script CMakeFiles/cmTC_2bca4.dir/link.txt --verbose=1
+/nix/store/4zq0szn8zb0lh569rchikpja7nr5z8mi-gcc-wrapper-4.9.3/bin/gcc       CMakeFiles/cmTC_2bca4.dir/feature_tests.c.o  -o cmTC_2bca4 -rdynamic 
+make[1]: Leaving directory '/home/nomoko/Downloads/cudaLATCH/build/CMakeFiles/CMakeTmp'
+
+
+    Feature record: C_FEATURE:1c_function_prototypes
+    Feature record: C_FEATURE:1c_restrict
+    Feature record: C_FEATURE:1c_static_assert
+    Feature record: C_FEATURE:1c_variadic_macros
+
+
+Detecting C [-std=c99] compiler features compiled with the following output:
+Change Dir: /home/nomoko/Downloads/cudaLATCH/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/nix/store/5ypfn4kd8518d0qs094zk3bq8ma0gyzj-gnumake-4.2.1/bin/make" "cmTC_608d0/fast"
+/nix/store/5ypfn4kd8518d0qs094zk3bq8ma0gyzj-gnumake-4.2.1/bin/make -f CMakeFiles/cmTC_608d0.dir/build.make CMakeFiles/cmTC_608d0.dir/build
+make[1]: Entering directory '/home/nomoko/Downloads/cudaLATCH/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_608d0.dir/feature_tests.c.o
+/nix/store/4zq0szn8zb0lh569rchikpja7nr5z8mi-gcc-wrapper-4.9.3/bin/gcc    -std=c99 -o CMakeFiles/cmTC_608d0.dir/feature_tests.c.o   -c /home/nomoko/Downloads/cudaLATCH/build/CMakeFiles/feature_tests.c
+Linking C executable cmTC_608d0
+/nix/store/d0f4k6wj0rg4vakrp3sldaqgf1yfkjr6-cmake-3.4.3/bin/cmake -E cmake_link_script CMakeFiles/cmTC_608d0.dir/link.txt --verbose=1
+/nix/store/4zq0szn8zb0lh569rchikpja7nr5z8mi-gcc-wrapper-4.9.3/bin/gcc       CMakeFiles/cmTC_608d0.dir/feature_tests.c.o  -o cmTC_608d0 -rdynamic 
+make[1]: Leaving directory '/home/nomoko/Downloads/cudaLATCH/build/CMakeFiles/CMakeTmp'
+
+
+    Feature record: C_FEATURE:1c_function_prototypes
+    Feature record: C_FEATURE:1c_restrict
+    Feature record: C_FEATURE:0c_static_assert
+    Feature record: C_FEATURE:1c_variadic_macros
+
+
+Detecting C [-std=c90] compiler features compiled with the following output:
+Change Dir: /home/nomoko/Downloads/cudaLATCH/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/nix/store/5ypfn4kd8518d0qs094zk3bq8ma0gyzj-gnumake-4.2.1/bin/make" "cmTC_ab20e/fast"
+/nix/store/5ypfn4kd8518d0qs094zk3bq8ma0gyzj-gnumake-4.2.1/bin/make -f CMakeFiles/cmTC_ab20e.dir/build.make CMakeFiles/cmTC_ab20e.dir/build
+make[1]: Entering directory '/home/nomoko/Downloads/cudaLATCH/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_ab20e.dir/feature_tests.c.o
+/nix/store/4zq0szn8zb0lh569rchikpja7nr5z8mi-gcc-wrapper-4.9.3/bin/gcc    -std=c90 -o CMakeFiles/cmTC_ab20e.dir/feature_tests.c.o   -c /home/nomoko/Downloads/cudaLATCH/build/CMakeFiles/feature_tests.c
+Linking C executable cmTC_ab20e
+/nix/store/d0f4k6wj0rg4vakrp3sldaqgf1yfkjr6-cmake-3.4.3/bin/cmake -E cmake_link_script CMakeFiles/cmTC_ab20e.dir/link.txt --verbose=1
+/nix/store/4zq0szn8zb0lh569rchikpja7nr5z8mi-gcc-wrapper-4.9.3/bin/gcc       CMakeFiles/cmTC_ab20e.dir/feature_tests.c.o  -o cmTC_ab20e -rdynamic 
+make[1]: Leaving directory '/home/nomoko/Downloads/cudaLATCH/build/CMakeFiles/CMakeTmp'
+
+
+    Feature record: C_FEATURE:1c_function_prototypes
+    Feature record: C_FEATURE:0c_restrict
+    Feature record: C_FEATURE:0c_static_assert
+    Feature record: C_FEATURE:0c_variadic_macros
+Determining if the CXX compiler works passed with the following output:
+Change Dir: /home/nomoko/Downloads/cudaLATCH/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/nix/store/5ypfn4kd8518d0qs094zk3bq8ma0gyzj-gnumake-4.2.1/bin/make" "cmTC_36d1c/fast"
+/nix/store/5ypfn4kd8518d0qs094zk3bq8ma0gyzj-gnumake-4.2.1/bin/make -f CMakeFiles/cmTC_36d1c.dir/build.make CMakeFiles/cmTC_36d1c.dir/build
+make[1]: Entering directory '/home/nomoko/Downloads/cudaLATCH/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_36d1c.dir/testCXXCompiler.cxx.o
+/nix/store/4zq0szn8zb0lh569rchikpja7nr5z8mi-gcc-wrapper-4.9.3/bin/g++      -o CMakeFiles/cmTC_36d1c.dir/testCXXCompiler.cxx.o -c /home/nomoko/Downloads/cudaLATCH/build/CMakeFiles/CMakeTmp/testCXXCompiler.cxx
+Linking CXX executable cmTC_36d1c
+/nix/store/d0f4k6wj0rg4vakrp3sldaqgf1yfkjr6-cmake-3.4.3/bin/cmake -E cmake_link_script CMakeFiles/cmTC_36d1c.dir/link.txt --verbose=1
+/nix/store/4zq0szn8zb0lh569rchikpja7nr5z8mi-gcc-wrapper-4.9.3/bin/g++        CMakeFiles/cmTC_36d1c.dir/testCXXCompiler.cxx.o  -o cmTC_36d1c -rdynamic 
+make[1]: Leaving directory '/home/nomoko/Downloads/cudaLATCH/build/CMakeFiles/CMakeTmp'
+
+
+Detecting CXX compiler ABI info compiled with the following output:
+Change Dir: /home/nomoko/Downloads/cudaLATCH/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/nix/store/5ypfn4kd8518d0qs094zk3bq8ma0gyzj-gnumake-4.2.1/bin/make" "cmTC_b560b/fast"
+/nix/store/5ypfn4kd8518d0qs094zk3bq8ma0gyzj-gnumake-4.2.1/bin/make -f CMakeFiles/cmTC_b560b.dir/build.make CMakeFiles/cmTC_b560b.dir/build
+make[1]: Entering directory '/home/nomoko/Downloads/cudaLATCH/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_b560b.dir/CMakeCXXCompilerABI.cpp.o
+/nix/store/4zq0szn8zb0lh569rchikpja7nr5z8mi-gcc-wrapper-4.9.3/bin/g++      -o CMakeFiles/cmTC_b560b.dir/CMakeCXXCompilerABI.cpp.o -c /nix/store/d0f4k6wj0rg4vakrp3sldaqgf1yfkjr6-cmake-3.4.3/share/cmake-3.4/Modules/CMakeCXXCompilerABI.cpp
+Linking CXX executable cmTC_b560b
+/nix/store/d0f4k6wj0rg4vakrp3sldaqgf1yfkjr6-cmake-3.4.3/bin/cmake -E cmake_link_script CMakeFiles/cmTC_b560b.dir/link.txt --verbose=1
+/nix/store/4zq0szn8zb0lh569rchikpja7nr5z8mi-gcc-wrapper-4.9.3/bin/g++       -v CMakeFiles/cmTC_b560b.dir/CMakeCXXCompilerABI.cpp.o  -o cmTC_b560b -rdynamic  
+Using built-in specs.
+COLLECT_GCC=/nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/bin/g++
+COLLECT_LTO_WRAPPER=/nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/libexec/gcc/x86_64-unknown-linux-gnu/4.9.3/lto-wrapper
+Target: x86_64-unknown-linux-gnu
+Configured with: 
+Thread model: posix
+gcc version 4.9.3 (GCC) 
+COMPILER_PATH=/nix/store/c9kf299hxbkd7hib5jpskviw9r63gfsb-gcc-4.9.3-lib/lib/:/nix/store/98s2znxww6x7h2ch7cj1w5givahxmdna-glibc-2.23/lib/:/nix/store/4zq0szn8zb0lh569rchikpja7nr5z8mi-gcc-wrapper-4.9.3/bin/:/nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/libexec/gcc/x86_64-unknown-linux-gnu/4.9.3/:/nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/libexec/gcc/x86_64-unknown-linux-gnu/4.9.3/:/nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/libexec/gcc/x86_64-unknown-linux-gnu/:/nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/:/nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/
+LIBRARY_PATH=/nix/store/c9kf299hxbkd7hib5jpskviw9r63gfsb-gcc-4.9.3-lib/lib/:/nix/store/98s2znxww6x7h2ch7cj1w5givahxmdna-glibc-2.23/lib/:/nix/store/4zq0szn8zb0lh569rchikpja7nr5z8mi-gcc-wrapper-4.9.3/bin/:/nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/:/nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/../../../../lib64/:/nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/../../../
+COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_b560b' '-rdynamic' '-B' '/nix/store/c9kf299hxbkd7hib5jpskviw9r63gfsb-gcc-4.9.3-lib/lib' '-B' '/nix/store/98s2znxww6x7h2ch7cj1w5givahxmdna-glibc-2.23/lib/' '-idirafter' '/nix/store/zc3azgj5rlbjff8vyrl2jx1r5r0nlsv5-glibc-2.23-dev/include' '-idirafter' '/nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/include-fixed' '-B' '/nix/store/4zq0szn8zb0lh569rchikpja7nr5z8mi-gcc-wrapper-4.9.3/bin/' '-isystem' '/nix/store/s9s3anqhpaprjd2qc21pplx0w6pbzwc5-opencv-master/include' '-isystem' '/nix/store/s9s3anqhpaprjd2qc21pplx0w6pbzwc5-opencv-master/include' '-isystem' '/nix/store/v2749n5gr1lza7dzsgd3vdkan7jrp8si-cudatoolkit-8.0.27/include' '-isystem' '/nix/store/v2749n5gr1lza7dzsgd3vdkan7jrp8si-cudatoolkit-8.0.27/include' '-isystem' '/nix/store/5ypfn4kd8518d0qs094zk3bq8ma0gyzj-gnumake-4.2.1/include' '-isystem' '/nix/store/5ypfn4kd8518d0qs094zk3bq8ma0gyzj-gnumake-4.2.1/include' '-L/nix/store/s9s3anqhpaprjd2qc21pplx0w6pbzwc5-opencv-master/lib' '-L/nix/store/s9s3anqhpaprjd2qc21pplx0w6pbzwc5-opencv-master/lib' '-L/nix/store/v2749n5gr1lza7dzsgd3vdkan7jrp8si-cudatoolkit-8.0.27/lib' '-L/nix/store/v2749n5gr1lza7dzsgd3vdkan7jrp8si-cudatoolkit-8.0.27/lib' '-L/nix/store/98s2znxww6x7h2ch7cj1w5givahxmdna-glibc-2.23/lib' '-L/nix/store/c9kf299hxbkd7hib5jpskviw9r63gfsb-gcc-4.9.3-lib/lib' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+ /nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/libexec/gcc/x86_64-unknown-linux-gnu/4.9.3/collect2 -plugin /nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/libexec/gcc/x86_64-unknown-linux-gnu/4.9.3/liblto_plugin.so -plugin-opt=/nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/libexec/gcc/x86_64-unknown-linux-gnu/4.9.3/lto-wrapper -plugin-opt=-fresolution=/run/user/1000/ccIxGyor.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --eh-frame-hdr -m elf_x86_64 -export-dynamic -dynamic-linker /nix/store/98s2znxww6x7h2ch7cj1w5givahxmdna-glibc-2.23/lib64/ld-linux-x86-64.so.2 -o cmTC_b560b /nix/store/98s2znxww6x7h2ch7cj1w5givahxmdna-glibc-2.23/lib/crt1.o /nix/store/98s2znxww6x7h2ch7cj1w5givahxmdna-glibc-2.23/lib/crti.o /nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/crtbegin.o -L/nix/store/s9s3anqhpaprjd2qc21pplx0w6pbzwc5-opencv-master/lib -L/nix/store/s9s3anqhpaprjd2qc21pplx0w6pbzwc5-opencv-master/lib -L/nix/store/v2749n5gr1lza7dzsgd3vdkan7jrp8si-cudatoolkit-8.0.27/lib -L/nix/store/v2749n5gr1lza7dzsgd3vdkan7jrp8si-cudatoolkit-8.0.27/lib -L/nix/store/98s2znxww6x7h2ch7cj1w5givahxmdna-glibc-2.23/lib -L/nix/store/c9kf299hxbkd7hib5jpskviw9r63gfsb-gcc-4.9.3-lib/lib -L/nix/store/c9kf299hxbkd7hib5jpskviw9r63gfsb-gcc-4.9.3-lib/lib -L/nix/store/98s2znxww6x7h2ch7cj1w5givahxmdna-glibc-2.23/lib -L/nix/store/4zq0szn8zb0lh569rchikpja7nr5z8mi-gcc-wrapper-4.9.3/bin -L/nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3 -L/nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/../../../../lib64 -L/nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/../../.. -dynamic-linker /nix/store/98s2znxww6x7h2ch7cj1w5givahxmdna-glibc-2.23/lib/ld-linux-x86-64.so.2 CMakeFiles/cmTC_b560b.dir/CMakeCXXCompilerABI.cpp.o -rpath /nix/store/whyls7jw8azm9q7jfimyiqq054fm96pj-cuda-env/lib64 -rpath /nix/store/whyls7jw8azm9q7jfimyiqq054fm96pj-cuda-env/lib -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/crtend.o /nix/store/98s2znxww6x7h2ch7cj1w5givahxmdna-glibc-2.23/lib/crtn.o
+make[1]: Leaving directory '/home/nomoko/Downloads/cudaLATCH/build/CMakeFiles/CMakeTmp'
+
+
+Parsed CXX implicit link information from above output:
+  link line regex: [^( *|.*[/\])(ld|([^/\]+-)?ld|collect2)[^/\]*( |$)]
+  ignore line: [Change Dir: /home/nomoko/Downloads/cudaLATCH/build/CMakeFiles/CMakeTmp]
+  ignore line: []
+  ignore line: [Run Build Command:"/nix/store/5ypfn4kd8518d0qs094zk3bq8ma0gyzj-gnumake-4.2.1/bin/make" "cmTC_b560b/fast"]
+  ignore line: [/nix/store/5ypfn4kd8518d0qs094zk3bq8ma0gyzj-gnumake-4.2.1/bin/make -f CMakeFiles/cmTC_b560b.dir/build.make CMakeFiles/cmTC_b560b.dir/build]
+  ignore line: [make[1]: Entering directory '/home/nomoko/Downloads/cudaLATCH/build/CMakeFiles/CMakeTmp']
+  ignore line: [Building CXX object CMakeFiles/cmTC_b560b.dir/CMakeCXXCompilerABI.cpp.o]
+  ignore line: [/nix/store/4zq0szn8zb0lh569rchikpja7nr5z8mi-gcc-wrapper-4.9.3/bin/g++      -o CMakeFiles/cmTC_b560b.dir/CMakeCXXCompilerABI.cpp.o -c /nix/store/d0f4k6wj0rg4vakrp3sldaqgf1yfkjr6-cmake-3.4.3/share/cmake-3.4/Modules/CMakeCXXCompilerABI.cpp]
+  ignore line: [Linking CXX executable cmTC_b560b]
+  ignore line: [/nix/store/d0f4k6wj0rg4vakrp3sldaqgf1yfkjr6-cmake-3.4.3/bin/cmake -E cmake_link_script CMakeFiles/cmTC_b560b.dir/link.txt --verbose=1]
+  ignore line: [/nix/store/4zq0szn8zb0lh569rchikpja7nr5z8mi-gcc-wrapper-4.9.3/bin/g++       -v CMakeFiles/cmTC_b560b.dir/CMakeCXXCompilerABI.cpp.o  -o cmTC_b560b -rdynamic  ]
+  ignore line: [Using built-in specs.]
+  ignore line: [COLLECT_GCC=/nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/bin/g++]
+  ignore line: [COLLECT_LTO_WRAPPER=/nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/libexec/gcc/x86_64-unknown-linux-gnu/4.9.3/lto-wrapper]
+  ignore line: [Target: x86_64-unknown-linux-gnu]
+  ignore line: [Configured with: ]
+  ignore line: [Thread model: posix]
+  ignore line: [gcc version 4.9.3 (GCC) ]
+  ignore line: [COMPILER_PATH=/nix/store/c9kf299hxbkd7hib5jpskviw9r63gfsb-gcc-4.9.3-lib/lib/:/nix/store/98s2znxww6x7h2ch7cj1w5givahxmdna-glibc-2.23/lib/:/nix/store/4zq0szn8zb0lh569rchikpja7nr5z8mi-gcc-wrapper-4.9.3/bin/:/nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/libexec/gcc/x86_64-unknown-linux-gnu/4.9.3/:/nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/libexec/gcc/x86_64-unknown-linux-gnu/4.9.3/:/nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/libexec/gcc/x86_64-unknown-linux-gnu/:/nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/:/nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/]
+  ignore line: [LIBRARY_PATH=/nix/store/c9kf299hxbkd7hib5jpskviw9r63gfsb-gcc-4.9.3-lib/lib/:/nix/store/98s2znxww6x7h2ch7cj1w5givahxmdna-glibc-2.23/lib/:/nix/store/4zq0szn8zb0lh569rchikpja7nr5z8mi-gcc-wrapper-4.9.3/bin/:/nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/:/nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/../../../../lib64/:/nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/../../../]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_b560b' '-rdynamic' '-B' '/nix/store/c9kf299hxbkd7hib5jpskviw9r63gfsb-gcc-4.9.3-lib/lib' '-B' '/nix/store/98s2znxww6x7h2ch7cj1w5givahxmdna-glibc-2.23/lib/' '-idirafter' '/nix/store/zc3azgj5rlbjff8vyrl2jx1r5r0nlsv5-glibc-2.23-dev/include' '-idirafter' '/nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/include-fixed' '-B' '/nix/store/4zq0szn8zb0lh569rchikpja7nr5z8mi-gcc-wrapper-4.9.3/bin/' '-isystem' '/nix/store/s9s3anqhpaprjd2qc21pplx0w6pbzwc5-opencv-master/include' '-isystem' '/nix/store/s9s3anqhpaprjd2qc21pplx0w6pbzwc5-opencv-master/include' '-isystem' '/nix/store/v2749n5gr1lza7dzsgd3vdkan7jrp8si-cudatoolkit-8.0.27/include' '-isystem' '/nix/store/v2749n5gr1lza7dzsgd3vdkan7jrp8si-cudatoolkit-8.0.27/include' '-isystem' '/nix/store/5ypfn4kd8518d0qs094zk3bq8ma0gyzj-gnumake-4.2.1/include' '-isystem' '/nix/store/5ypfn4kd8518d0qs094zk3bq8ma0gyzj-gnumake-4.2.1/include' '-L/nix/store/s9s3anqhpaprjd2qc21pplx0w6pbzwc5-opencv-master/lib' '-L/nix/store/s9s3anqhpaprjd2qc21pplx0w6pbzwc5-opencv-master/lib' '-L/nix/store/v2749n5gr1lza7dzsgd3vdkan7jrp8si-cudatoolkit-8.0.27/lib' '-L/nix/store/v2749n5gr1lza7dzsgd3vdkan7jrp8si-cudatoolkit-8.0.27/lib' '-L/nix/store/98s2znxww6x7h2ch7cj1w5givahxmdna-glibc-2.23/lib' '-L/nix/store/c9kf299hxbkd7hib5jpskviw9r63gfsb-gcc-4.9.3-lib/lib' '-shared-libgcc' '-mtune=generic' '-march=x86-64']
+  link line: [ /nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/libexec/gcc/x86_64-unknown-linux-gnu/4.9.3/collect2 -plugin /nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/libexec/gcc/x86_64-unknown-linux-gnu/4.9.3/liblto_plugin.so -plugin-opt=/nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/libexec/gcc/x86_64-unknown-linux-gnu/4.9.3/lto-wrapper -plugin-opt=-fresolution=/run/user/1000/ccIxGyor.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --eh-frame-hdr -m elf_x86_64 -export-dynamic -dynamic-linker /nix/store/98s2znxww6x7h2ch7cj1w5givahxmdna-glibc-2.23/lib64/ld-linux-x86-64.so.2 -o cmTC_b560b /nix/store/98s2znxww6x7h2ch7cj1w5givahxmdna-glibc-2.23/lib/crt1.o /nix/store/98s2znxww6x7h2ch7cj1w5givahxmdna-glibc-2.23/lib/crti.o /nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/crtbegin.o -L/nix/store/s9s3anqhpaprjd2qc21pplx0w6pbzwc5-opencv-master/lib -L/nix/store/s9s3anqhpaprjd2qc21pplx0w6pbzwc5-opencv-master/lib -L/nix/store/v2749n5gr1lza7dzsgd3vdkan7jrp8si-cudatoolkit-8.0.27/lib -L/nix/store/v2749n5gr1lza7dzsgd3vdkan7jrp8si-cudatoolkit-8.0.27/lib -L/nix/store/98s2znxww6x7h2ch7cj1w5givahxmdna-glibc-2.23/lib -L/nix/store/c9kf299hxbkd7hib5jpskviw9r63gfsb-gcc-4.9.3-lib/lib -L/nix/store/c9kf299hxbkd7hib5jpskviw9r63gfsb-gcc-4.9.3-lib/lib -L/nix/store/98s2znxww6x7h2ch7cj1w5givahxmdna-glibc-2.23/lib -L/nix/store/4zq0szn8zb0lh569rchikpja7nr5z8mi-gcc-wrapper-4.9.3/bin -L/nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3 -L/nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/../../../../lib64 -L/nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/../../.. -dynamic-linker /nix/store/98s2znxww6x7h2ch7cj1w5givahxmdna-glibc-2.23/lib/ld-linux-x86-64.so.2 CMakeFiles/cmTC_b560b.dir/CMakeCXXCompilerABI.cpp.o -rpath /nix/store/whyls7jw8azm9q7jfimyiqq054fm96pj-cuda-env/lib64 -rpath /nix/store/whyls7jw8azm9q7jfimyiqq054fm96pj-cuda-env/lib -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/crtend.o /nix/store/98s2znxww6x7h2ch7cj1w5givahxmdna-glibc-2.23/lib/crtn.o]
+    arg [/nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/libexec/gcc/x86_64-unknown-linux-gnu/4.9.3/collect2] ==> ignore
+    arg [-plugin] ==> ignore
+    arg [/nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/libexec/gcc/x86_64-unknown-linux-gnu/4.9.3/liblto_plugin.so] ==> ignore
+    arg [-plugin-opt=/nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/libexec/gcc/x86_64-unknown-linux-gnu/4.9.3/lto-wrapper] ==> ignore
+    arg [-plugin-opt=-fresolution=/run/user/1000/ccIxGyor.res] ==> ignore
+    arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
+    arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+    arg [-plugin-opt=-pass-through=-lc] ==> ignore
+    arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
+    arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+    arg [--eh-frame-hdr] ==> ignore
+    arg [-m] ==> ignore
+    arg [elf_x86_64] ==> ignore
+    arg [-export-dynamic] ==> ignore
+    arg [-dynamic-linker] ==> ignore
+    arg [/nix/store/98s2znxww6x7h2ch7cj1w5givahxmdna-glibc-2.23/lib64/ld-linux-x86-64.so.2] ==> ignore
+    arg [-o] ==> ignore
+    arg [cmTC_b560b] ==> ignore
+    arg [/nix/store/98s2znxww6x7h2ch7cj1w5givahxmdna-glibc-2.23/lib/crt1.o] ==> ignore
+    arg [/nix/store/98s2znxww6x7h2ch7cj1w5givahxmdna-glibc-2.23/lib/crti.o] ==> ignore
+    arg [/nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/crtbegin.o] ==> ignore
+    arg [-L/nix/store/s9s3anqhpaprjd2qc21pplx0w6pbzwc5-opencv-master/lib] ==> dir [/nix/store/s9s3anqhpaprjd2qc21pplx0w6pbzwc5-opencv-master/lib]
+    arg [-L/nix/store/s9s3anqhpaprjd2qc21pplx0w6pbzwc5-opencv-master/lib] ==> dir [/nix/store/s9s3anqhpaprjd2qc21pplx0w6pbzwc5-opencv-master/lib]
+    arg [-L/nix/store/v2749n5gr1lza7dzsgd3vdkan7jrp8si-cudatoolkit-8.0.27/lib] ==> dir [/nix/store/v2749n5gr1lza7dzsgd3vdkan7jrp8si-cudatoolkit-8.0.27/lib]
+    arg [-L/nix/store/v2749n5gr1lza7dzsgd3vdkan7jrp8si-cudatoolkit-8.0.27/lib] ==> dir [/nix/store/v2749n5gr1lza7dzsgd3vdkan7jrp8si-cudatoolkit-8.0.27/lib]
+    arg [-L/nix/store/98s2znxww6x7h2ch7cj1w5givahxmdna-glibc-2.23/lib] ==> dir [/nix/store/98s2znxww6x7h2ch7cj1w5givahxmdna-glibc-2.23/lib]
+    arg [-L/nix/store/c9kf299hxbkd7hib5jpskviw9r63gfsb-gcc-4.9.3-lib/lib] ==> dir [/nix/store/c9kf299hxbkd7hib5jpskviw9r63gfsb-gcc-4.9.3-lib/lib]
+    arg [-L/nix/store/c9kf299hxbkd7hib5jpskviw9r63gfsb-gcc-4.9.3-lib/lib] ==> dir [/nix/store/c9kf299hxbkd7hib5jpskviw9r63gfsb-gcc-4.9.3-lib/lib]
+    arg [-L/nix/store/98s2znxww6x7h2ch7cj1w5givahxmdna-glibc-2.23/lib] ==> dir [/nix/store/98s2znxww6x7h2ch7cj1w5givahxmdna-glibc-2.23/lib]
+    arg [-L/nix/store/4zq0szn8zb0lh569rchikpja7nr5z8mi-gcc-wrapper-4.9.3/bin] ==> dir [/nix/store/4zq0szn8zb0lh569rchikpja7nr5z8mi-gcc-wrapper-4.9.3/bin]
+    arg [-L/nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3] ==> dir [/nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3]
+    arg [-L/nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/../../../../lib64] ==> dir [/nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/../../../../lib64]
+    arg [-L/nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/../../..] ==> dir [/nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/../../..]
+    arg [-dynamic-linker] ==> ignore
+    arg [/nix/store/98s2znxww6x7h2ch7cj1w5givahxmdna-glibc-2.23/lib/ld-linux-x86-64.so.2] ==> ignore
+    arg [CMakeFiles/cmTC_b560b.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
+    arg [-rpath] ==> ignore
+    arg [/nix/store/whyls7jw8azm9q7jfimyiqq054fm96pj-cuda-env/lib64] ==> ignore
+    arg [-rpath] ==> ignore
+    arg [/nix/store/whyls7jw8azm9q7jfimyiqq054fm96pj-cuda-env/lib] ==> ignore
+    arg [-lstdc++] ==> lib [stdc++]
+    arg [-lm] ==> lib [m]
+    arg [-lgcc_s] ==> lib [gcc_s]
+    arg [-lgcc] ==> lib [gcc]
+    arg [-lc] ==> lib [c]
+    arg [-lgcc_s] ==> lib [gcc_s]
+    arg [-lgcc] ==> lib [gcc]
+    arg [/nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/crtend.o] ==> ignore
+    arg [/nix/store/98s2znxww6x7h2ch7cj1w5givahxmdna-glibc-2.23/lib/crtn.o] ==> ignore
+  remove lib [gcc_s]
+  remove lib [gcc]
+  remove lib [gcc_s]
+  remove lib [gcc]
+  collapse library dir [/nix/store/s9s3anqhpaprjd2qc21pplx0w6pbzwc5-opencv-master/lib] ==> [/nix/store/s9s3anqhpaprjd2qc21pplx0w6pbzwc5-opencv-master/lib]
+  collapse library dir [/nix/store/s9s3anqhpaprjd2qc21pplx0w6pbzwc5-opencv-master/lib] ==> [/nix/store/s9s3anqhpaprjd2qc21pplx0w6pbzwc5-opencv-master/lib]
+  collapse library dir [/nix/store/v2749n5gr1lza7dzsgd3vdkan7jrp8si-cudatoolkit-8.0.27/lib] ==> [/nix/store/v2749n5gr1lza7dzsgd3vdkan7jrp8si-cudatoolkit-8.0.27/lib]
+  collapse library dir [/nix/store/v2749n5gr1lza7dzsgd3vdkan7jrp8si-cudatoolkit-8.0.27/lib] ==> [/nix/store/v2749n5gr1lza7dzsgd3vdkan7jrp8si-cudatoolkit-8.0.27/lib]
+  collapse library dir [/nix/store/98s2znxww6x7h2ch7cj1w5givahxmdna-glibc-2.23/lib] ==> [/nix/store/98s2znxww6x7h2ch7cj1w5givahxmdna-glibc-2.23/lib]
+  collapse library dir [/nix/store/c9kf299hxbkd7hib5jpskviw9r63gfsb-gcc-4.9.3-lib/lib] ==> [/nix/store/c9kf299hxbkd7hib5jpskviw9r63gfsb-gcc-4.9.3-lib/lib]
+  collapse library dir [/nix/store/c9kf299hxbkd7hib5jpskviw9r63gfsb-gcc-4.9.3-lib/lib] ==> [/nix/store/c9kf299hxbkd7hib5jpskviw9r63gfsb-gcc-4.9.3-lib/lib]
+  collapse library dir [/nix/store/98s2znxww6x7h2ch7cj1w5givahxmdna-glibc-2.23/lib] ==> [/nix/store/98s2znxww6x7h2ch7cj1w5givahxmdna-glibc-2.23/lib]
+  collapse library dir [/nix/store/4zq0szn8zb0lh569rchikpja7nr5z8mi-gcc-wrapper-4.9.3/bin] ==> [/nix/store/4zq0szn8zb0lh569rchikpja7nr5z8mi-gcc-wrapper-4.9.3/bin]
+  collapse library dir [/nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3] ==> [/nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3]
+  collapse library dir [/nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/../../../../lib64] ==> [/nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/lib64]
+  collapse library dir [/nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/../../..] ==> [/nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/lib]
+  implicit libs: [stdc++;m;c]
+  implicit dirs: [/nix/store/s9s3anqhpaprjd2qc21pplx0w6pbzwc5-opencv-master/lib;/nix/store/v2749n5gr1lza7dzsgd3vdkan7jrp8si-cudatoolkit-8.0.27/lib;/nix/store/98s2znxww6x7h2ch7cj1w5givahxmdna-glibc-2.23/lib;/nix/store/c9kf299hxbkd7hib5jpskviw9r63gfsb-gcc-4.9.3-lib/lib;/nix/store/4zq0szn8zb0lh569rchikpja7nr5z8mi-gcc-wrapper-4.9.3/bin;/nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3;/nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/lib64;/nix/store/343cddsf6lkp7l4yzn9zys0v893rlb0p-gcc-4.9.3/lib]
+  implicit fwks: []
+
+
+
+
+Detecting CXX [-std=c++14] compiler features compiled with the following output:
+Change Dir: /home/nomoko/Downloads/cudaLATCH/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/nix/store/5ypfn4kd8518d0qs094zk3bq8ma0gyzj-gnumake-4.2.1/bin/make" "cmTC_aa4de/fast"
+/nix/store/5ypfn4kd8518d0qs094zk3bq8ma0gyzj-gnumake-4.2.1/bin/make -f CMakeFiles/cmTC_aa4de.dir/build.make CMakeFiles/cmTC_aa4de.dir/build
+make[1]: Entering directory '/home/nomoko/Downloads/cudaLATCH/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_aa4de.dir/feature_tests.cxx.o
+/nix/store/4zq0szn8zb0lh569rchikpja7nr5z8mi-gcc-wrapper-4.9.3/bin/g++     -std=c++14 -o CMakeFiles/cmTC_aa4de.dir/feature_tests.cxx.o -c /home/nomoko/Downloads/cudaLATCH/build/CMakeFiles/feature_tests.cxx
+Linking CXX executable cmTC_aa4de
+/nix/store/d0f4k6wj0rg4vakrp3sldaqgf1yfkjr6-cmake-3.4.3/bin/cmake -E cmake_link_script CMakeFiles/cmTC_aa4de.dir/link.txt --verbose=1
+/nix/store/4zq0szn8zb0lh569rchikpja7nr5z8mi-gcc-wrapper-4.9.3/bin/g++        CMakeFiles/cmTC_aa4de.dir/feature_tests.cxx.o  -o cmTC_aa4de -rdynamic 
+make[1]: Leaving directory '/home/nomoko/Downloads/cudaLATCH/build/CMakeFiles/CMakeTmp'
+
+
+    Feature record: CXX_FEATURE:0cxx_aggregate_default_initializers
+    Feature record: CXX_FEATURE:1cxx_alias_templates
+    Feature record: CXX_FEATURE:1cxx_alignas
+    Feature record: CXX_FEATURE:1cxx_alignof
+    Feature record: CXX_FEATURE:1cxx_attributes
+    Feature record: CXX_FEATURE:1cxx_attribute_deprecated
+    Feature record: CXX_FEATURE:1cxx_auto_type
+    Feature record: CXX_FEATURE:1cxx_binary_literals
+    Feature record: CXX_FEATURE:1cxx_constexpr
+    Feature record: CXX_FEATURE:1cxx_contextual_conversions
+    Feature record: CXX_FEATURE:1cxx_decltype
+    Feature record: CXX_FEATURE:1cxx_decltype_auto
+    Feature record: CXX_FEATURE:1cxx_decltype_incomplete_return_types
+    Feature record: CXX_FEATURE:1cxx_default_function_template_args
+    Feature record: CXX_FEATURE:1cxx_defaulted_functions
+    Feature record: CXX_FEATURE:1cxx_defaulted_move_initializers
+    Feature record: CXX_FEATURE:1cxx_delegating_constructors
+    Feature record: CXX_FEATURE:1cxx_deleted_functions
+    Feature record: CXX_FEATURE:1cxx_digit_separators
+    Feature record: CXX_FEATURE:1cxx_enum_forward_declarations
+    Feature record: CXX_FEATURE:1cxx_explicit_conversions
+    Feature record: CXX_FEATURE:1cxx_extended_friend_declarations
+    Feature record: CXX_FEATURE:1cxx_extern_templates
+    Feature record: CXX_FEATURE:1cxx_final
+    Feature record: CXX_FEATURE:1cxx_func_identifier
+    Feature record: CXX_FEATURE:1cxx_generalized_initializers
+    Feature record: CXX_FEATURE:1cxx_generic_lambdas
+    Feature record: CXX_FEATURE:1cxx_inheriting_constructors
+    Feature record: CXX_FEATURE:1cxx_inline_namespaces
+    Feature record: CXX_FEATURE:1cxx_lambdas
+    Feature record: CXX_FEATURE:1cxx_lambda_init_captures
+    Feature record: CXX_FEATURE:1cxx_local_type_template_args
+    Feature record: CXX_FEATURE:1cxx_long_long_type
+    Feature record: CXX_FEATURE:1cxx_noexcept
+    Feature record: CXX_FEATURE:1cxx_nonstatic_member_init
+    Feature record: CXX_FEATURE:1cxx_nullptr
+    Feature record: CXX_FEATURE:1cxx_override
+    Feature record: CXX_FEATURE:1cxx_range_for
+    Feature record: CXX_FEATURE:1cxx_raw_string_literals
+    Feature record: CXX_FEATURE:1cxx_reference_qualified_functions
+    Feature record: CXX_FEATURE:0cxx_relaxed_constexpr
+    Feature record: CXX_FEATURE:1cxx_return_type_deduction
+    Feature record: CXX_FEATURE:1cxx_right_angle_brackets
+    Feature record: CXX_FEATURE:1cxx_rvalue_references
+    Feature record: CXX_FEATURE:1cxx_sizeof_member
+    Feature record: CXX_FEATURE:1cxx_static_assert
+    Feature record: CXX_FEATURE:1cxx_strong_enums
+    Feature record: CXX_FEATURE:1cxx_template_template_parameters
+    Feature record: CXX_FEATURE:1cxx_thread_local
+    Feature record: CXX_FEATURE:1cxx_trailing_return_types
+    Feature record: CXX_FEATURE:1cxx_unicode_literals
+    Feature record: CXX_FEATURE:1cxx_uniform_initialization
+    Feature record: CXX_FEATURE:1cxx_unrestricted_unions
+    Feature record: CXX_FEATURE:1cxx_user_literals
+    Feature record: CXX_FEATURE:0cxx_variable_templates
+    Feature record: CXX_FEATURE:1cxx_variadic_macros
+    Feature record: CXX_FEATURE:1cxx_variadic_templates
+
+
+Detecting CXX [-std=c++11] compiler features compiled with the following output:
+Change Dir: /home/nomoko/Downloads/cudaLATCH/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/nix/store/5ypfn4kd8518d0qs094zk3bq8ma0gyzj-gnumake-4.2.1/bin/make" "cmTC_05ac4/fast"
+/nix/store/5ypfn4kd8518d0qs094zk3bq8ma0gyzj-gnumake-4.2.1/bin/make -f CMakeFiles/cmTC_05ac4.dir/build.make CMakeFiles/cmTC_05ac4.dir/build
+make[1]: Entering directory '/home/nomoko/Downloads/cudaLATCH/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_05ac4.dir/feature_tests.cxx.o
+/nix/store/4zq0szn8zb0lh569rchikpja7nr5z8mi-gcc-wrapper-4.9.3/bin/g++     -std=c++11 -o CMakeFiles/cmTC_05ac4.dir/feature_tests.cxx.o -c /home/nomoko/Downloads/cudaLATCH/build/CMakeFiles/feature_tests.cxx
+Linking CXX executable cmTC_05ac4
+/nix/store/d0f4k6wj0rg4vakrp3sldaqgf1yfkjr6-cmake-3.4.3/bin/cmake -E cmake_link_script CMakeFiles/cmTC_05ac4.dir/link.txt --verbose=1
+/nix/store/4zq0szn8zb0lh569rchikpja7nr5z8mi-gcc-wrapper-4.9.3/bin/g++        CMakeFiles/cmTC_05ac4.dir/feature_tests.cxx.o  -o cmTC_05ac4 -rdynamic 
+make[1]: Leaving directory '/home/nomoko/Downloads/cudaLATCH/build/CMakeFiles/CMakeTmp'
+
+
+    Feature record: CXX_FEATURE:0cxx_aggregate_default_initializers
+    Feature record: CXX_FEATURE:1cxx_alias_templates
+    Feature record: CXX_FEATURE:1cxx_alignas
+    Feature record: CXX_FEATURE:1cxx_alignof
+    Feature record: CXX_FEATURE:1cxx_attributes
+    Feature record: CXX_FEATURE:0cxx_attribute_deprecated
+    Feature record: CXX_FEATURE:1cxx_auto_type
+    Feature record: CXX_FEATURE:0cxx_binary_literals
+    Feature record: CXX_FEATURE:1cxx_constexpr
+    Feature record: CXX_FEATURE:0cxx_contextual_conversions
+    Feature record: CXX_FEATURE:1cxx_decltype
+    Feature record: CXX_FEATURE:0cxx_decltype_auto
+    Feature record: CXX_FEATURE:1cxx_decltype_incomplete_return_types
+    Feature record: CXX_FEATURE:1cxx_default_function_template_args
+    Feature record: CXX_FEATURE:1cxx_defaulted_functions
+    Feature record: CXX_FEATURE:1cxx_defaulted_move_initializers
+    Feature record: CXX_FEATURE:1cxx_delegating_constructors
+    Feature record: CXX_FEATURE:1cxx_deleted_functions
+    Feature record: CXX_FEATURE:0cxx_digit_separators
+    Feature record: CXX_FEATURE:1cxx_enum_forward_declarations
+    Feature record: CXX_FEATURE:1cxx_explicit_conversions
+    Feature record: CXX_FEATURE:1cxx_extended_friend_declarations
+    Feature record: CXX_FEATURE:1cxx_extern_templates
+    Feature record: CXX_FEATURE:1cxx_final
+    Feature record: CXX_FEATURE:1cxx_func_identifier
+    Feature record: CXX_FEATURE:1cxx_generalized_initializers
+    Feature record: CXX_FEATURE:0cxx_generic_lambdas
+    Feature record: CXX_FEATURE:1cxx_inheriting_constructors
+    Feature record: CXX_FEATURE:1cxx_inline_namespaces
+    Feature record: CXX_FEATURE:1cxx_lambdas
+    Feature record: CXX_FEATURE:0cxx_lambda_init_captures
+    Feature record: CXX_FEATURE:1cxx_local_type_template_args
+    Feature record: CXX_FEATURE:1cxx_long_long_type
+    Feature record: CXX_FEATURE:1cxx_noexcept
+    Feature record: CXX_FEATURE:1cxx_nonstatic_member_init
+    Feature record: CXX_FEATURE:1cxx_nullptr
+    Feature record: CXX_FEATURE:1cxx_override
+    Feature record: CXX_FEATURE:1cxx_range_for
+    Feature record: CXX_FEATURE:1cxx_raw_string_literals
+    Feature record: CXX_FEATURE:1cxx_reference_qualified_functions
+    Feature record: CXX_FEATURE:0cxx_relaxed_constexpr
+    Feature record: CXX_FEATURE:0cxx_return_type_deduction
+    Feature record: CXX_FEATURE:1cxx_right_angle_brackets
+    Feature record: CXX_FEATURE:1cxx_rvalue_references
+    Feature record: CXX_FEATURE:1cxx_sizeof_member
+    Feature record: CXX_FEATURE:1cxx_static_assert
+    Feature record: CXX_FEATURE:1cxx_strong_enums
+    Feature record: CXX_FEATURE:1cxx_template_template_parameters
+    Feature record: CXX_FEATURE:1cxx_thread_local
+    Feature record: CXX_FEATURE:1cxx_trailing_return_types
+    Feature record: CXX_FEATURE:1cxx_unicode_literals
+    Feature record: CXX_FEATURE:1cxx_uniform_initialization
+    Feature record: CXX_FEATURE:1cxx_unrestricted_unions
+    Feature record: CXX_FEATURE:1cxx_user_literals
+    Feature record: CXX_FEATURE:0cxx_variable_templates
+    Feature record: CXX_FEATURE:1cxx_variadic_macros
+    Feature record: CXX_FEATURE:1cxx_variadic_templates
+
+
+Detecting CXX [-std=c++98] compiler features compiled with the following output:
+Change Dir: /home/nomoko/Downloads/cudaLATCH/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/nix/store/5ypfn4kd8518d0qs094zk3bq8ma0gyzj-gnumake-4.2.1/bin/make" "cmTC_24532/fast"
+/nix/store/5ypfn4kd8518d0qs094zk3bq8ma0gyzj-gnumake-4.2.1/bin/make -f CMakeFiles/cmTC_24532.dir/build.make CMakeFiles/cmTC_24532.dir/build
+make[1]: Entering directory '/home/nomoko/Downloads/cudaLATCH/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_24532.dir/feature_tests.cxx.o
+/nix/store/4zq0szn8zb0lh569rchikpja7nr5z8mi-gcc-wrapper-4.9.3/bin/g++     -std=c++98 -o CMakeFiles/cmTC_24532.dir/feature_tests.cxx.o -c /home/nomoko/Downloads/cudaLATCH/build/CMakeFiles/feature_tests.cxx
+Linking CXX executable cmTC_24532
+/nix/store/d0f4k6wj0rg4vakrp3sldaqgf1yfkjr6-cmake-3.4.3/bin/cmake -E cmake_link_script CMakeFiles/cmTC_24532.dir/link.txt --verbose=1
+/nix/store/4zq0szn8zb0lh569rchikpja7nr5z8mi-gcc-wrapper-4.9.3/bin/g++        CMakeFiles/cmTC_24532.dir/feature_tests.cxx.o  -o cmTC_24532 -rdynamic 
+make[1]: Leaving directory '/home/nomoko/Downloads/cudaLATCH/build/CMakeFiles/CMakeTmp'
+
+
+    Feature record: CXX_FEATURE:0cxx_aggregate_default_initializers
+    Feature record: CXX_FEATURE:0cxx_alias_templates
+    Feature record: CXX_FEATURE:0cxx_alignas
+    Feature record: CXX_FEATURE:0cxx_alignof
+    Feature record: CXX_FEATURE:0cxx_attributes
+    Feature record: CXX_FEATURE:0cxx_attribute_deprecated
+    Feature record: CXX_FEATURE:0cxx_auto_type
+    Feature record: CXX_FEATURE:0cxx_binary_literals
+    Feature record: CXX_FEATURE:0cxx_constexpr
+    Feature record: CXX_FEATURE:0cxx_contextual_conversions
+    Feature record: CXX_FEATURE:0cxx_decltype
+    Feature record: CXX_FEATURE:0cxx_decltype_auto
+    Feature record: CXX_FEATURE:0cxx_decltype_incomplete_return_types
+    Feature record: CXX_FEATURE:0cxx_default_function_template_args
+    Feature record: CXX_FEATURE:0cxx_defaulted_functions
+    Feature record: CXX_FEATURE:0cxx_defaulted_move_initializers
+    Feature record: CXX_FEATURE:0cxx_delegating_constructors
+    Feature record: CXX_FEATURE:0cxx_deleted_functions
+    Feature record: CXX_FEATURE:0cxx_digit_separators
+    Feature record: CXX_FEATURE:0cxx_enum_forward_declarations
+    Feature record: CXX_FEATURE:0cxx_explicit_conversions
+    Feature record: CXX_FEATURE:0cxx_extended_friend_declarations
+    Feature record: CXX_FEATURE:0cxx_extern_templates
+    Feature record: CXX_FEATURE:0cxx_final
+    Feature record: CXX_FEATURE:0cxx_func_identifier
+    Feature record: CXX_FEATURE:0cxx_generalized_initializers
+    Feature record: CXX_FEATURE:0cxx_generic_lambdas
+    Feature record: CXX_FEATURE:0cxx_inheriting_constructors
+    Feature record: CXX_FEATURE:0cxx_inline_namespaces
+    Feature record: CXX_FEATURE:0cxx_lambdas
+    Feature record: CXX_FEATURE:0cxx_lambda_init_captures
+    Feature record: CXX_FEATURE:0cxx_local_type_template_args
+    Feature record: CXX_FEATURE:0cxx_long_long_type
+    Feature record: CXX_FEATURE:0cxx_noexcept
+    Feature record: CXX_FEATURE:0cxx_nonstatic_member_init
+    Feature record: CXX_FEATURE:0cxx_nullptr
+    Feature record: CXX_FEATURE:0cxx_override
+    Feature record: CXX_FEATURE:0cxx_range_for
+    Feature record: CXX_FEATURE:0cxx_raw_string_literals
+    Feature record: CXX_FEATURE:0cxx_reference_qualified_functions
+    Feature record: CXX_FEATURE:0cxx_relaxed_constexpr
+    Feature record: CXX_FEATURE:0cxx_return_type_deduction
+    Feature record: CXX_FEATURE:0cxx_right_angle_brackets
+    Feature record: CXX_FEATURE:0cxx_rvalue_references
+    Feature record: CXX_FEATURE:0cxx_sizeof_member
+    Feature record: CXX_FEATURE:0cxx_static_assert
+    Feature record: CXX_FEATURE:0cxx_strong_enums
+    Feature record: CXX_FEATURE:1cxx_template_template_parameters
+    Feature record: CXX_FEATURE:0cxx_thread_local
+    Feature record: CXX_FEATURE:0cxx_trailing_return_types
+    Feature record: CXX_FEATURE:0cxx_unicode_literals
+    Feature record: CXX_FEATURE:0cxx_uniform_initialization
+    Feature record: CXX_FEATURE:0cxx_unrestricted_unions
+    Feature record: CXX_FEATURE:0cxx_user_literals
+    Feature record: CXX_FEATURE:0cxx_variable_templates
+    Feature record: CXX_FEATURE:0cxx_variadic_macros
+    Feature record: CXX_FEATURE:0cxx_variadic_templates
+Determining if the include file pthread.h exists passed with the following output:
+Change Dir: /home/nomoko/Downloads/cudaLATCH/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/nix/store/5ypfn4kd8518d0qs094zk3bq8ma0gyzj-gnumake-4.2.1/bin/make" "cmTC_01c79/fast"
+/nix/store/5ypfn4kd8518d0qs094zk3bq8ma0gyzj-gnumake-4.2.1/bin/make -f CMakeFiles/cmTC_01c79.dir/build.make CMakeFiles/cmTC_01c79.dir/build
+make[1]: Entering directory '/home/nomoko/Downloads/cudaLATCH/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_01c79.dir/CheckIncludeFile.c.o
+/nix/store/4zq0szn8zb0lh569rchikpja7nr5z8mi-gcc-wrapper-4.9.3/bin/gcc    -fPIC    -o CMakeFiles/cmTC_01c79.dir/CheckIncludeFile.c.o   -c /home/nomoko/Downloads/cudaLATCH/build/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTC_01c79
+/nix/store/d0f4k6wj0rg4vakrp3sldaqgf1yfkjr6-cmake-3.4.3/bin/cmake -E cmake_link_script CMakeFiles/cmTC_01c79.dir/link.txt --verbose=1
+/nix/store/4zq0szn8zb0lh569rchikpja7nr5z8mi-gcc-wrapper-4.9.3/bin/gcc  -fPIC     CMakeFiles/cmTC_01c79.dir/CheckIncludeFile.c.o  -o cmTC_01c79 -rdynamic 
+make[1]: Leaving directory '/home/nomoko/Downloads/cudaLATCH/build/CMakeFiles/CMakeTmp'
+
+
+Determining if the function pthread_create exists in the pthread passed with the following output:
+Change Dir: /home/nomoko/Downloads/cudaLATCH/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/nix/store/5ypfn4kd8518d0qs094zk3bq8ma0gyzj-gnumake-4.2.1/bin/make" "cmTC_a316e/fast"
+/nix/store/5ypfn4kd8518d0qs094zk3bq8ma0gyzj-gnumake-4.2.1/bin/make -f CMakeFiles/cmTC_a316e.dir/build.make CMakeFiles/cmTC_a316e.dir/build
+make[1]: Entering directory '/home/nomoko/Downloads/cudaLATCH/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_a316e.dir/CheckFunctionExists.c.o
+/nix/store/4zq0szn8zb0lh569rchikpja7nr5z8mi-gcc-wrapper-4.9.3/bin/gcc    -fPIC -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_a316e.dir/CheckFunctionExists.c.o   -c /nix/store/d0f4k6wj0rg4vakrp3sldaqgf1yfkjr6-cmake-3.4.3/share/cmake-3.4/Modules/CheckFunctionExists.c
+Linking C executable cmTC_a316e
+/nix/store/d0f4k6wj0rg4vakrp3sldaqgf1yfkjr6-cmake-3.4.3/bin/cmake -E cmake_link_script CMakeFiles/cmTC_a316e.dir/link.txt --verbose=1
+/nix/store/4zq0szn8zb0lh569rchikpja7nr5z8mi-gcc-wrapper-4.9.3/bin/gcc  -fPIC -DCHECK_FUNCTION_EXISTS=pthread_create    CMakeFiles/cmTC_a316e.dir/CheckFunctionExists.c.o  -o cmTC_a316e -rdynamic -lpthread 
+make[1]: Leaving directory '/home/nomoko/Downloads/cudaLATCH/build/CMakeFiles/CMakeTmp'
+
+

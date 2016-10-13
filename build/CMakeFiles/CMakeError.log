@@ -1,0 +1,51 @@
+Determining if the pthread_create exist failed with the following output:
+Change Dir: /home/nomoko/Downloads/cudaLATCH/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/nix/store/5ypfn4kd8518d0qs094zk3bq8ma0gyzj-gnumake-4.2.1/bin/make" "cmTC_d05e2/fast"
+/nix/store/5ypfn4kd8518d0qs094zk3bq8ma0gyzj-gnumake-4.2.1/bin/make -f CMakeFiles/cmTC_d05e2.dir/build.make CMakeFiles/cmTC_d05e2.dir/build
+make[1]: Entering directory '/home/nomoko/Downloads/cudaLATCH/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_d05e2.dir/CheckSymbolExists.c.o
+/nix/store/4zq0szn8zb0lh569rchikpja7nr5z8mi-gcc-wrapper-4.9.3/bin/gcc    -fPIC    -o CMakeFiles/cmTC_d05e2.dir/CheckSymbolExists.c.o   -c /home/nomoko/Downloads/cudaLATCH/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_d05e2
+/nix/store/d0f4k6wj0rg4vakrp3sldaqgf1yfkjr6-cmake-3.4.3/bin/cmake -E cmake_link_script CMakeFiles/cmTC_d05e2.dir/link.txt --verbose=1
+/nix/store/4zq0szn8zb0lh569rchikpja7nr5z8mi-gcc-wrapper-4.9.3/bin/gcc  -fPIC     CMakeFiles/cmTC_d05e2.dir/CheckSymbolExists.c.o  -o cmTC_d05e2 -rdynamic 
+CMakeFiles/cmTC_d05e2.dir/CheckSymbolExists.c.o: In function `main':
+CheckSymbolExists.c:(.text+0x1b): undefined reference to `pthread_create'
+collect2: error: ld returned 1 exit status
+make[1]: *** [CMakeFiles/cmTC_d05e2.dir/build.make:98: cmTC_d05e2] Error 1
+make[1]: Leaving directory '/home/nomoko/Downloads/cudaLATCH/build/CMakeFiles/CMakeTmp'
+make: *** [Makefile:126: cmTC_d05e2/fast] Error 2
+
+File /home/nomoko/Downloads/cudaLATCH/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <pthread.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef pthread_create
+  return ((int*)(&pthread_create))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /home/nomoko/Downloads/cudaLATCH/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/nix/store/5ypfn4kd8518d0qs094zk3bq8ma0gyzj-gnumake-4.2.1/bin/make" "cmTC_d231b/fast"
+/nix/store/5ypfn4kd8518d0qs094zk3bq8ma0gyzj-gnumake-4.2.1/bin/make -f CMakeFiles/cmTC_d231b.dir/build.make CMakeFiles/cmTC_d231b.dir/build
+make[1]: Entering directory '/home/nomoko/Downloads/cudaLATCH/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_d231b.dir/CheckFunctionExists.c.o
+/nix/store/4zq0szn8zb0lh569rchikpja7nr5z8mi-gcc-wrapper-4.9.3/bin/gcc    -fPIC -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_d231b.dir/CheckFunctionExists.c.o   -c /nix/store/d0f4k6wj0rg4vakrp3sldaqgf1yfkjr6-cmake-3.4.3/share/cmake-3.4/Modules/CheckFunctionExists.c
+Linking C executable cmTC_d231b
+/nix/store/d0f4k6wj0rg4vakrp3sldaqgf1yfkjr6-cmake-3.4.3/bin/cmake -E cmake_link_script CMakeFiles/cmTC_d231b.dir/link.txt --verbose=1
+/nix/store/4zq0szn8zb0lh569rchikpja7nr5z8mi-gcc-wrapper-4.9.3/bin/gcc  -fPIC -DCHECK_FUNCTION_EXISTS=pthread_create    CMakeFiles/cmTC_d231b.dir/CheckFunctionExists.c.o  -o cmTC_d231b -rdynamic -lpthreads 
+/nix/store/lfvkcv5kvcpjlmsxcn9nv0lhcg5h2zyp-binutils-2.26.1/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+make[1]: Leaving directory '/home/nomoko/Downloads/cudaLATCH/build/CMakeFiles/CMakeTmp'
+make[1]: *** [CMakeFiles/cmTC_d231b.dir/build.make:98: cmTC_d231b] Error 1
+make: *** [Makefile:126: cmTC_d231b/fast] Error 2
+
+
